@@ -1,4 +1,4 @@
-package com.cos.jwt.domain.person;
+package com.cos.jwt.domain.dog;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,19 +11,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Data
 @Entity
-public class Person {
+public class Dog {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column(unique = true)
-	private String username; 
-	private String password;
-	private String email;
-	private String place;
-}
+	private String catagory;
+	private String name;
+	private String age;
+	private String sex;
+	private String image;
 
+
+}

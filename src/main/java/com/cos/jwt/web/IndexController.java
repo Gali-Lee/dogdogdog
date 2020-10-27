@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cos.jwt.domain.dog.Dog;
+import com.cos.jwt.domain.dog.DogRepository;
 import com.cos.jwt.domain.person.Person;
 import com.cos.jwt.domain.person.PersonRepository;
 
@@ -21,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class IndexController {
 	
 	private final PersonRepository personRepository;
+	private final DogRepository dogRepository;
 	
 	@GetMapping({"", "/"})
 	public String index() {
@@ -29,9 +32,10 @@ public class IndexController {
 	
 	
 	@PostMapping("/joinProc")
-	public String 회원가입(@RequestBody Person person) {
+	public String 회원가입(@RequestBody Person person, Dog dog) {
 		
 		personRepository.save(person);
+		dogRepository.save(dog);
 		return "ok";
 	}
 	
