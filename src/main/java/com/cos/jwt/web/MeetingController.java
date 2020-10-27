@@ -2,6 +2,7 @@ package com.cos.jwt.web;
 
 
 
+import java.io.Console;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,11 +48,21 @@ public class MeetingController {
 	@PutMapping("/board2/{id}")
 	public void mtMember(@PathVariable int id) {
 		Meeting mt = mtRepository.findById(id).get();
-//		mt.setMtList("테스트참가자");
-		
+//		List<MeetingMember> mtList;
+//		mtmRepository.save(entity)
+//		mt.setMtList(mtList);
 		
 	}
 	
-	
+	@GetMapping("/board2/{id}")
+	public Meeting mtMemberList(@PathVariable int id) {
+		System.out.println("이거 아이  ㅇㅇ!!" + id);
+		return mtRepository.findById(id).get();
+	}
+	@GetMapping("/board2/mList/{id}")
+	public List<String> mtmList(@PathVariable int id) {
+		System.out.println("mem리스트");
+		return mtmRepository.mList(id);
+	}
 
 }

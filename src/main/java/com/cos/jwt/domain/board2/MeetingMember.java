@@ -13,7 +13,9 @@ import lombok.NoArgsConstructor;
 
 
 
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Data
 @Entity
 public class MeetingMember { //Meeting과 N:1관계를 맺는 테이블. 참가인원 리스트 표시.
@@ -24,4 +26,6 @@ public class MeetingMember { //Meeting과 N:1관계를 맺는 테이블. 참가�
 	
 	@ManyToOne
 	private Meeting mt;
+	
+	
 }
