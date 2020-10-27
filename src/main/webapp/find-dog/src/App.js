@@ -9,9 +9,9 @@ import Login from './pages/login/Login';
 import Map from './pages/map/Map'
 import Join from './pages/join/Join';
 import PetJoin from './pages/join/PetJoin';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { login } from './store';
+import { useDispatch } from 'react-redux';
 /* 건들지 마시오!
 **************************
 ***************************
