@@ -31,7 +31,7 @@ public class FilterConfig {
 		System.out.println("JwtAuthenticationFilter 필터 등록");
 		FilterRegistrationBean<JwtAuthenticationFilter> bean = 
 				new FilterRegistrationBean<>(new JwtAuthenticationFilter(personRepository));
-		bean.addUrlPatterns("/loginProc");
+		bean.addUrlPatterns("/login");
 		bean.setOrder(1); // 낮은 번호부터 실행됨.
 		return bean;
 	}

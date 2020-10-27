@@ -1,6 +1,9 @@
 
 import './App.css';
 import Header from './components/Header';
+import React, { useEffect } from 'react';
+import { login } from './store';
+import { useDispatch } from 'react-redux';
 import Main from './components/Main';
 import Footer from './components/Footer';
 import Lside from './components/Lside';
@@ -23,6 +26,17 @@ display : grid;
   grid-template-columns: auto auto auto;
 `;
 function App() {
+
+  //로그인 상태관리
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let jwtToken = localStorage.getItem("Authorization");
+    if (jwtToken !== null) {
+      dispatch(login());
+    }
+  }, []);
+
   return (
     <div>
       <Header />
