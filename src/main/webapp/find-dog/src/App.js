@@ -11,7 +11,17 @@ import Join from './pages/join/Join';
 import PetJoin from './pages/join/PetJoin';
 import React, { useEffect } from 'react';
 import { login } from './store';
+<<<<<<< HEAD
 import { useDispatch } from 'react-redux';
+=======
+import Main from './components/Main';
+import Footer from './components/Footer';
+import Lside from './components/Lside';
+import Rside from './components/Rside';
+import styled from 'styled-components';
+
+
+>>>>>>> ff8e6961c3a48804ce6c1fae05f4c93a25c896cf
 /* 건들지 마시오!
 **************************
 ***************************
@@ -23,7 +33,10 @@ import { useDispatch } from 'react-redux';
 ***********************
 ************************
 */
-
+const MainListStyle = styled.div`
+display : grid;
+  grid-template-columns: auto auto auto;
+`;
 function App() {
 
   //로그인 상태관리
@@ -39,14 +52,12 @@ function App() {
   return (
     <div>
       <Header />
-      <Route path="/login" exact={true} component={Login} />
-      <Route path="/join" exact={true} component={Join} />
-      <Route path="/petjoin" exact={true} component={PetJoin} />
-      <Route path="/board1" exact={true} component={Board1} />
-      <Route path="/board2" exact={true} component={Board2} />
-      <Route path="/board3" exact={true} component={Board3} />
-      <Route path="/map" exact={true} component={Map} />
-
+      <MainListStyle>
+        <Lside />
+        <Main />
+        <Rside />
+      </MainListStyle>
+      <Footer />
     </div>
   );
 }
