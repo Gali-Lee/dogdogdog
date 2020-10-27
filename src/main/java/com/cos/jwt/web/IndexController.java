@@ -32,9 +32,13 @@ public class IndexController {
 	
 	
 	@PostMapping("/joinProc")
-	public String 회원가입(@RequestBody Person person, Dog dog) {
+	public String 회원가입(@RequestBody Person person) {
 		
 		personRepository.save(person);
+		return "ok";
+	}
+	@PostMapping("/petJoinProc")
+	public String 펫등록(@RequestBody Dog dog) {
 		dogRepository.save(dog);
 		return "ok";
 	}
@@ -44,8 +48,10 @@ public class IndexController {
 	public ResponseEntity<?> 회원정보(@PathVariable int id,
 			HttpServletRequest request) {
 		HttpSession session = request.getSession();
+		System.out.println("회원정보 조회");
 		if(session.getAttribute("principal") != null) {
 			Person personEntity = personRepository.findById(id).get();
+			System.out.println(personEntity);
 			return new ResponseEntity<Person>(personEntity,HttpStatus.OK);
 		}
 		return new ResponseEntity<String>("You don't have authorization",HttpStatus.FORBIDDEN);
