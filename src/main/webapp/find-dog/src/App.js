@@ -9,9 +9,11 @@ import Login from './pages/login/Login';
 import Map from './pages/map/Map'
 import Join from './pages/join/Join';
 import PetJoin from './pages/join/PetJoin';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { login } from './store';
+<<<<<<< HEAD
+import { useDispatch } from 'react-redux';
+=======
 import Main from './components/Main';
 import Footer from './components/Footer';
 import Lside from './components/Lside';
@@ -19,6 +21,7 @@ import Rside from './components/Rside';
 import styled from 'styled-components';
 
 
+>>>>>>> ff8e6961c3a48804ce6c1fae05f4c93a25c896cf
 /* 건들지 마시오!
 **************************
 ***************************

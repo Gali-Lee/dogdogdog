@@ -41,7 +41,7 @@ const Login = (props) => {
 					alert("로그인성공");
 					//로그인 상태 값 리덕스에 저장
 					dispatch(login());
-				props.histroy.push("/")
+				props.histroy.push("/");
 				} else {
 					alert("로그인실패");
 				}
