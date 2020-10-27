@@ -3,7 +3,7 @@ import ItemBoard3 from '../../components/ItemBoard3';
 
 const ListBoard3 = () => {
 
-	const [posts, setPosts] = useState([]);
+	const [board3s, setBoard3s] = useState([]);
 
 	useEffect(() => {
 
@@ -14,7 +14,7 @@ const ListBoard3 = () => {
 
 		}).then((res) => res.json())
 			.then((res) => {
-				setPosts(res);
+				setBoard3s(res);
 			});
 	}, []);
 
@@ -31,8 +31,8 @@ const ListBoard3 = () => {
 				<th>이미지</th>
 				<th>내용</th>
 			</tr>
-			{posts.map((post) => (
-				<ItemBoard3 key={post.id} post={post} />
+			{board3s.map((board3) => (
+				<ItemBoard3 key={board3.id} post={board3} />
 			))}
 		</table>
 	);
