@@ -27,7 +27,7 @@ public class MeetingController {
 	private final MeetingRepository mtRepository;
 	private final MeetingMemberRepository mtmRepository;
 	
-	//리스트출력 추후 페이징추가해서 그걸로 바꿀거.
+	//리스트출력
 	@GetMapping("/board2") 
 	public List<Meeting> mtList() {
 		return mtRepository.findAll();
@@ -56,11 +56,12 @@ public class MeetingController {
 	
 	@GetMapping("/board2/{id}")
 	public Meeting mtMemberList(@PathVariable int id) {
+		System.out.println("이거 아이  ㅇㅇ!!" + id);
 		return mtRepository.findById(id).get();
 	}
-	
 	@GetMapping("/board2/mList/{id}")
 	public List<String> mtmList(@PathVariable int id) {
+		System.out.println("mem리스트");
 		return mtmRepository.mList(id);
 	}
 
