@@ -9,10 +9,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
 
-public class CorsFilter implements Filter{
+public class CorsFilter implements Filter {
 
 	public static final String TAG = "MyFilter1 : ";
-	
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -20,17 +20,18 @@ public class CorsFilter implements Filter{
 		HttpServletResponse resp = (HttpServletResponse) response;
 		resp.setHeader("Access-Control-Allow-Origin", "*");
 		resp.setHeader("Access-Control-Allow-Headers", "*");
+
 		resp.setHeader("Access-Control-Allow-Methods", "*");
-		// 해당 헤더가 없으면 아래 7가지의 header값만 응답할 수 있다. 
+		// 해당 헤더가 없으면 아래 7가지의 header값만 응답할 수 있다.
 		// Cache-Control
-		//Content-Language
-		//Content-Length
-		//Content-Type
-		//Expires
-		//Last-Modified
-		//Pragma
-		resp.setHeader("Access-Control-Expose-Headers", "*");
-		
+		// Content-Language
+		// Content-Length
+		// Content-Type
+		// Expires
+		// Last-Modified
+		// Pragma
+
+
 		chain.doFilter(request, response);
 	}
 
