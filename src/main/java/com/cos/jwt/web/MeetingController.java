@@ -2,6 +2,7 @@ package com.cos.jwt.web;
 
 
 
+import java.io.Console;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,7 @@ public class MeetingController {
 	private final MeetingRepository mtRepository;
 	private final MeetingMemberRepository mtmRepository;
 	
-	//리스트출력
+	//리스트출력 추후 페이징추가해서 그걸로 바꿀거.
 	@GetMapping("/board2") 
 	public List<Meeting> mtList() {
 		return mtRepository.findAll();
@@ -47,11 +48,20 @@ public class MeetingController {
 	@PutMapping("/board2/{id}")
 	public void mtMember(@PathVariable int id) {
 		Meeting mt = mtRepository.findById(id).get();
-//		mt.setMtList("테스트참가자");
-		
+//		List<MeetingMember> mtList;
+//		mtmRepository.save(entity)
+//		mt.setMtList(mtList);
 		
 	}
 	
+	@GetMapping("/board2/{id}")
+	public Meeting mtMemberList(@PathVariable int id) {
+		return mtRepository.findById(id).get();
+	}
 	
+	@GetMapping("/board2/mList/{id}")
+	public List<String> mtmList(@PathVariable int id) {
+		return mtmRepository.mList(id);
+	}
 
 }
