@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-public class MeetingMember {
+public class MeetingMember { //Meeting과 N:1관계를 맺는 테이블. 참가인원 리스트 표시.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int mtmId;
