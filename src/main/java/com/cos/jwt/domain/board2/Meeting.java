@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Entity
-public class Meeting {
+public class Meeting { //Board2 테이블 객체.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int mtId;
