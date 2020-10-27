@@ -7,8 +7,8 @@ const ItemBoard3 = (props) => {
 	return (
 		<tr>
 			<th>{id}</th>
-			<th><Link to={"/Board3/" + id}>{catagory}</Link></th>
-			<th>{name}</th>
+			<th>{catagory}</th>
+			<th><Link to={"/board3/detail/" + id}>{name}</Link></th>
 			<th>{bread}</th>
 			<th>{age}</th>
 			<th>{sex}</th>

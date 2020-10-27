@@ -7,6 +7,17 @@ import Board2 from './pages/Board2/Board2';
 import Board3 from './pages/Board3/Board3';
 import Login from './pages/login/Login';
 import Map from './pages/map/Map'
+import Join from './pages/join/Join';
+import PetJoin from './pages/join/PetJoin';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { login } from './store';
+import Main from './components/Main';
+import Footer from './components/Footer';
+import Lside from './components/Lside';
+import Rside from './components/Rside';
+import styled from 'styled-components';
+
 
 /* 건들지 마시오!
 **************************
@@ -19,17 +30,31 @@ import Map from './pages/map/Map'
 ***********************
 ************************
 */
-
+const MainListStyle = styled.div`
+display : grid;
+  grid-template-columns: auto auto auto;
+`;
 function App() {
+
+  //로그인 상태관리
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let jwtToken = localStorage.getItem("Authorization");
+    if (jwtToken !== null) {
+      dispatch(login());
+    }
+  }, []);
+
   return (
     <div>
       <Header />
-      <Route path="/login" exact={true} component={Login} />
-      <Route path="/board1" exact={true} component={Board1} />
-      <Route path="/board2" exact={true} component={Board2} />
-      <Route path="/board3" exact={true} component={Board3} />
-      <Route path="/map" exact={true} component={Map} />
-
+      <MainListStyle>
+        <Lside />
+        <Main />
+        <Rside />
+      </MainListStyle>
+      <Footer />
     </div>
   );
 }
