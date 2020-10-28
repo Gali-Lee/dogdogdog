@@ -1,6 +1,8 @@
 import React from 'react';
+
 import {Link} from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 const Header = () => {
 
 	const isLogin = useSelector((store)=>store.isLogin);
@@ -10,7 +12,6 @@ const Header = () => {
 			<Link to="/board1">게시판1</Link>
 			<Link to="/board2">게시판2</Link>
 			<Link to="/board3">게시판3</Link>
-
 
 {isLogin ?
 				(
@@ -27,6 +28,7 @@ const Header = () => {
 				)
 				}
 		</div>
+
 	);
 };
 
