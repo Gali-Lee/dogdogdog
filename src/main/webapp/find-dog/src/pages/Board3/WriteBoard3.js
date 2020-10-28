@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const WriteBoard3 = () => {
@@ -12,14 +12,35 @@ const WriteBoard3 = () => {
 		age: "",
 		sex: "",
 		place: "",
-		image: "",
 		content: ""
 	});
+	const [board3Image, setBoard3Image]= useState({
+		id: "",
+		image: ""
+	})
 
-	function onSeletedImg(e) {
-		console.log(e.target.files);
+	const uploadImg = async (e) => {
+		//console.log(e.target.files);
+		const file=e.target.files[0];
+		const base64= await convertBase64(file);
+		console.log(1,base64);
+		setBoard3Image({image : base64});
 	}
+	const convertBase64=(file)=>{
 
+		return new Promise((resolve,reject)=>{
+
+			const fileReader = new FileReader();
+			fileReader.readAsDataURL(file);
+
+			fileReader.onload = ()=>{
+				resolve(fileReader.result);
+			};
+			fileReader.onerror= (error)=>{
+				reject(error);
+			};
+		})
+	}
 	function inputHandle(e) {
 		setBoard3({
 			...board3,
@@ -37,7 +58,10 @@ const WriteBoard3 = () => {
 			},
 			body: JSON.stringify(board3)
 		})
-			.then(res => res.text())
+			.then(res => {
+				console.log("res :",res);
+				res.text();
+			})
 			.then(res => {
 				if (res === "ok") {
 					alert("글이 등록되었습니다.");
@@ -72,7 +96,7 @@ const WriteBoard3 = () => {
 					value={board3.bread}
 					placeholder="견종을 입력하세요"
 				/>
-				<br />
+				<br /> 
 				<input
 					type="text"
 					onChange={inputHandle}
@@ -98,12 +122,31 @@ const WriteBoard3 = () => {
 				/>
 				<br />
 				<input
-					type="file" multiple
-					accept="image/jpeg, image/jpg"
-					onChange={onSeletedImg}
-					name="image"
-					value={board3.image}
-					placeholder="사진을 입력하세요"
+					type="file" 
+					// multiple
+					// accept="image/jpeg, image/jpg"
+					 onChange={(e)=>{uploadImg(e);
+					}}
+					// name="image"
+					// value={board3.image}
+				/>
+				<input
+					type="file" 
+					// multiple
+					// accept="image/jpeg, image/jpg"
+					 onChange={(e)=>{uploadImg(e);
+					}}
+					// name="image"
+					// value={board3.image}
+				/>
+				<input
+					type="file" 
+					// multiple
+					// accept="image/jpeg, image/jpg"
+					 onChange={(e)=>{uploadImg(e);
+					}}
+					// name="image"
+					// value={board3.image}
 				/>
 				<br />
 				<input

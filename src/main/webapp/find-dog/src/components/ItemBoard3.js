@@ -13,7 +13,9 @@ const ItemBoard3 = (props) => {
 			<th>{age}</th>
 			<th>{sex}</th>
 			<th>{place}</th>
-			<th>{image}</th>
+			<th>
+			<img src={image} height="200px"/>
+			</th>
 			<th>{content}</th>
 		</tr>
 	);
