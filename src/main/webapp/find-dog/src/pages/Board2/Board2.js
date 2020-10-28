@@ -32,17 +32,17 @@ const Board2 = () => {
 			하단.
 			생성버튼,조회,페이징.
 			<br />
-			{/* <div>
+			<div>
 				{meetings.map(
 					meeting =>
-						<ListItem Id={meeting.mtId} Title={meeting.mtTitle} />
+						<ListItem meeting={meeting} />
 					// <ListItem key={meeting.mtId} id={meeting.mtId} title={meeting.mtTitle}/>
 				)}
-			</div> */}
+			</div>
 
 			<div>
-				{/* <TestItem/> */}
-				<Original/>
+				<TestItem/>
+				{/* <Original/> */}
 			</div>
 
 		</div>
