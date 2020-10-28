@@ -8,7 +8,6 @@ const ListItem = ({meeting}) => {
 	return (
 		<div>
 			<Card style={{ width: '18rem' }}>
-				{/* <Card.Img variant="top" src="holder.js/100px180" /> */}
 				<Card.Body>
 					<Card.Title>{meeting.mtTitle}</Card.Title>
 					<Card.Text>
@@ -21,13 +20,6 @@ const ListItem = ({meeting}) => {
 					<Button variant="success">상세</Button>
 				</Card.Body>
 			</Card>
-
-			{/* <h1>{Id}</h1>
-			<h1>{Title}</h1> */}
-
-			{/* <Card.Body>
-				<Card.Title>{Title}</Card.Title>
-			</Card.Body> */}
 		</div>
 	);
 };

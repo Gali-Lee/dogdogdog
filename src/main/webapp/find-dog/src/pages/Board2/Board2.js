@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ListItem from './item/ListItem';
-import TestItem from './item/TestItem';
-import Original from './item/Original';
+import TestCard from './item/TestCard.js';
 
 
 
@@ -20,30 +19,20 @@ const Board2 = () => {
 		);
 	}, [])
 
-	// const me = meetings.map(m=> (<ListItem key={m.mtId} id={m.mtId} title={m.mtTitle} />));
-
-
-
-
 	return (
 		<div>
-			게시글.
-			글번호,글제목,생성시간,장소,글쓴이
-			하단.
-			생성버튼,조회,페이징.
-			<br />
-			<div>
-				{meetings.map(
-					meeting =>
-						<ListItem meeting={meeting} />
-					// <ListItem key={meeting.mtId} id={meeting.mtId} title={meeting.mtTitle}/>
-				)}
-			</div>
+			{/* 게시글 - 글번호,글제목,생성시간,장소,글쓴이
+			하단 - 조회,페이징. */}
+			<h1>모임 목록</h1>
+			<hr />
 
-			<div>
-				<TestItem/>
-				{/* <Original/> */}
-			</div>
+			{meetings.map(
+				meeting => {
+					return <TestCard key={meeting.mtId} meeting={meeting} />
+				}
+			)}
+
+
 
 		</div>
 	);
