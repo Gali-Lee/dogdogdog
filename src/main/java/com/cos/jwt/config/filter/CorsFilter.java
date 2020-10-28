@@ -29,6 +29,7 @@ public class CorsFilter implements Filter {
 		// Expires
 		// Last-Modified
 		// Pragma
+		resp.setHeader("Access-Control-Expose-Headers", "*");
 
 
 		chain.doFilter(request, response);

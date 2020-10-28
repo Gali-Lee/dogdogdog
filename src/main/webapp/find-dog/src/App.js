@@ -35,7 +35,8 @@ function App() {
     if (jwtToken !== null) {
       dispatch(login());
     }
-  }, []);
+    console.log(jwtToken);
+  });
 
   return (
     <div>
