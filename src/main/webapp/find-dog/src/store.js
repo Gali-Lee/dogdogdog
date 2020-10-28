@@ -7,17 +7,17 @@ const LOGOUT = 'LOGOUT';
 export const logout = () => ({ type: LOGOUT });
 
 const initstate = {
-	lsLogin:false,
-}
+	lsLogin: false,
+};
 
-const reducer = (state = initstate, action)=>{
-	switch(action.type){
+const reducer = (state = initstate, action) => {
+	switch (action.type) {
 		case LOGIN:
-			return {isLogin:true};
+			return { isLogin: true };
 		case LOGOUT:
-			return{isLogin:false};
-			default:
-				return state;
+			return { isLogin: false };
+		default:
+			return state;
 	}
 };
 export default reducer;
