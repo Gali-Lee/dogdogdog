@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Join = () => {
 	const [user, setUser] = useState({
@@ -71,6 +72,7 @@ const Join = () => {
 					placeholder="email 입력" />
 				<br />
 				<button onClick={join}>가입</button>
+				<Link to="/joindog">강아지등</Link>
 			</form>
 
 		</div>

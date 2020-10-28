@@ -1,4 +1,4 @@
-package com.cos.jwt.domain.person;
+package com.cos.jwt.domain.user;
 
 public class Member {
 	private String name;
