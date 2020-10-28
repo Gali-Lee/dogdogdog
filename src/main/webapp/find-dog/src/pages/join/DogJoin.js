@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import Join from './Join';
 
-const PetJoin = () => {
-
+const DogJoin = (props) => {
+	const username = useSelector((Join)=>Join.username);
+	console.log(username);
 
 	const [dog, setDog] = useState({
 		name: "",
@@ -41,6 +44,14 @@ const PetJoin = () => {
 		<div>
 			<h2>강아지 정보 입력</h2>
 			<form>
+				<input
+					type="text"
+					name="name"
+					onChange={inputHandle}
+					value={"username"}
+					placeholder="name 입력" />
+				<br />
+
 				<input
 					type="text"
 					name="name"
@@ -87,4 +98,4 @@ const PetJoin = () => {
 	);
 };
 
-export default PetJoin;
+export default DogJoin;

@@ -31,6 +31,7 @@ public class WantedDogController {
 
 		//WantedDog wantedDogEntity = wantedDogRepository.findById(1).get();
 
+		System.out.println(wantedDog);
 		wantedDogRepository.save(wantedDog);
 		return "ok";
 	}
@@ -62,7 +63,6 @@ public class WantedDogController {
 		wantedDogEntity.setAge(wantedDog.getAge());
 		wantedDogEntity.setContent(wantedDog.getContent());
 		wantedDogEntity.setPlace(wantedDog.getPlace());
-		wantedDogEntity.setImage(wantedDog.getImage());
 		wantedDogEntity.setSex(wantedDog.getSex());
 		
 		return "ok";
