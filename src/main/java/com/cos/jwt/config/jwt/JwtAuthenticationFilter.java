@@ -48,7 +48,7 @@ public class JwtAuthenticationFilter implements Filter{
 			try {
 				ObjectMapper om = new ObjectMapper();
 				User person = om.readValue(req.getInputStream(), User.class);
-				System.out.println(person); 
+				System.out.println("person 값 : "+person); 
 				
 				// 1번 username, password를 DB에 던짐
 				User personEntity = 
