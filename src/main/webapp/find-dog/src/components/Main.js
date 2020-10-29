@@ -9,6 +9,9 @@ import ModifyBoard3 from '../pages/Board3/ModifyBoard3';
 import WriteBoard3 from '../pages/Board3/WriteBoard3';
 import Join from '../pages/join/Join';
 import DogJoin from '../pages/join/DogJoin';
+import MapPage from '../pages/map/MapPage';
+import MapContainer from './MapContainer';
+import SearchPlace from '../pages/map/SearchPlace';
 const Main = () => {
 	return (
 		<div>
@@ -22,7 +25,7 @@ const Main = () => {
 				<Route path="/board3/detail/:id" exact={true} component={DetailBoard3} />
 				<Route path="/board3/modify/:id" exact={true} component={ModifyBoard3} />
 				<Route path="/board3/write" exact={true} component={WriteBoard3} />
-				<Route path="/map" exact={true} component={Map} />
+				<Route path="/map" exact={true} component={SearchPlace} />
 			</switch>
 			<right/>
 		</div>
