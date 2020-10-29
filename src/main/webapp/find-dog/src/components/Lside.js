@@ -1,23 +1,15 @@
 import React, { useState } from 'react';
-import {axios} from 'axios';
+import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 const Lside = () => {
-	// const [img, setImage] = useState(null);
 
-	// const onChange = (e) => {
-	// 	setImage(e.target.files[0]);
-	// }
-
-	// const onClick = async () => {
-	// 	const formData = new FormData();
-	// 	formData.append('img', img);
-	// 	// 서버의 upload API 호출
-	// 	const res = await axios.post("/api/upload", formData);
-	// 	console.log(res);
-	// }
 	return (
 		<div>
-			{/* <input type="img" onChange={onChange} />
-			<button onClick={onClick}>제출</button> */}
+			<Nav defaultActiveKey="/home" className="flex-column">
+				<Nav><Link to="/board1">게시판1</Link></Nav>
+				<Nav><Link to="/board2">게시판2</Link></Nav>
+				<Nav><Link to="/board3">게시판3</Link></Nav>
+			</Nav>
 		</div>
 	);
 };

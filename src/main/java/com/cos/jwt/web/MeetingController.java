@@ -5,6 +5,7 @@ package com.cos.jwt.web;
 import java.io.Console;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,24 +45,32 @@ public class MeetingController {
 		}
 	}
 	
-	//id로 해당게시글값 받아 찾고 추가인원 출력.
+	//id로 해당게시글값 받아 찾고 참여 인원 추가 
+	//로그인완료되면 닉네임값도 받아오게추가할것.
 	@PutMapping("/board2/{id}")
-	public void mtMember(@PathVariable int id) {
-		Meeting mt = mtRepository.findById(id).get();
-//		List<MeetingMember> mtList;
-//		mtmRepository.save(entity)
-//		mt.setMtList(mtList);
-		
+	public void mtmInsert(@PathVariable int id,String name) {
+		mtmRepository.mInsertMember(name, id);
 	}
 	
+	//member 삭제
+	@DeleteMapping("/board2/{id}")
+	public void mtmDelete(@PathVariable int id,String name) {
+		mtmRepository.mDeleteMember(name, id);
+	}
+	
+	
+	//필요없을듯..?
 	@GetMapping("/board2/{id}")
 	public Meeting mtMemberList(@PathVariable int id) {
 		return mtRepository.findById(id).get();
 	}
 	
+	
 	@GetMapping("/board2/mList/{id}")
 	public List<String> mtmList(@PathVariable int id) {
 		return mtmRepository.mList(id);
 	}
+	
+	
 
 }
