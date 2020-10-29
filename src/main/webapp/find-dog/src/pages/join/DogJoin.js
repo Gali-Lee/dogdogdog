@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import Join from './Join';
 
 const DogJoin = (props) => {
 	const username = useSelector((Join)=>Join.username);
-	console.log(username);
 
 	const [dog, setDog] = useState({
 		name: "",
@@ -22,15 +20,17 @@ const DogJoin = (props) => {
 	function petJoin(e) {
 		e.preventDefault();
 
-		fetch("http://localhost:8000/petJoinProc", {
+		fetch("http://localhost:8000/dogJoinProc", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json; charset=utf-8",
+				"Authorization": localStorage.getItem("Authorization")
 			},
 			body: JSON.stringify(dog),
 		})
 			.then((res) => res.text())
 			.then((res) => {
+				console.log("33",username);
 				console.log("22", res);
 				if (res === "ok") {
 					alert("가입 성공");
