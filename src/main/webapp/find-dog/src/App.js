@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Lside from './components/Lside';
 import Rside from './components/Rside';
 import styled from 'styled-components';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 /* 건들지 마시오!
 **************************
