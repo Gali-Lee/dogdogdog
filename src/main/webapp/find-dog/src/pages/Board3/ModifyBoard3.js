@@ -14,7 +14,8 @@ const ModifyBoard3 = (props) => {
 		age: "", 
 		sex: "", 
 		place: "", 
-		image: "", 
+		// image1: "", 
+		// image2: "", 
 		content: ""
 	});
 	useEffect(() => {
@@ -29,12 +30,42 @@ const ModifyBoard3 = (props) => {
 			});
 	}, []);
 
+	// const uploadImg = async (e) => {
+	// 	//console.log(e.target.files);
+	// 	const file = e.target.files[0];
+	// 	const base64 = await convertBase64(file);
+	// 	console.log(1, base64);
+	// 	//setBoard3Image({ image: base64 });
+	// 	setBoard3(prevState => {
+	// 		return { ...prevState,
+	// 			[e.target.name]: base64 };
+	// 	});
+	// }
+	// const convertBase64 = (file) => {
+	// 	return new Promise((resolve, reject) => {
+
+	// 		const fileReader = new FileReader();
+	// 		fileReader.readAsDataURL(file);
+
+	// 		fileReader.onload = () => {
+	// 			resolve(fileReader.result);
+	// 		};
+	// 		fileReader.onerror = (error) => {
+	// 			reject(error);
+	// 		};
+	// 	})
+	// }
+
 	function inputHandle(e) {
-		setBoard3({
-			...board3,
-			[e.target.name]: e.target.value,
+
+		setBoard3((prevState) => {
+			return {
+				...prevState,
+				[e.target.name]: e.target.value,
+			};
 		});
 	}
+
 	function submitModify(e) {
 		e.preventDefault();
 		console.log("submitModify() 실행");
@@ -50,21 +81,20 @@ const ModifyBoard3 = (props) => {
 			.then(res => {
 				if (res === "ok") {
 					alert("글이 수정되었습니다.");
-					history.goBack();
+					history.push("/board3/detail/"+id);
 				}
 			})
 	}
 	return (
 		<div>
 			<form>
-				<input
-					type="text"
-					onChange={inputHandle}
+				<select
 					name="catagory"
 					value={board3.catagory}
-					placeholder="카테고리를 입력하세요"
-				/>
-				<br />
+					onChange={inputHandle}>
+					<option value="실종">실종</option>
+					<option value="제보">제보</option>
+				</select>
 				<input
 					type="text"
 					onChange={inputHandle}
@@ -89,13 +119,13 @@ const ModifyBoard3 = (props) => {
 					placeholder="나이를 입력하세요"
 				/>
 				<br />
-				<input
-					type="text"
-					onChange={inputHandle}
+				<select
 					name="sex"
 					value={board3.sex}
-					placeholder="성별을 입력하세요"
-				/>
+					onChange={inputHandle}>
+					<option value="여자">여자</option>
+					<option value="남자">남자</option>
+				</select>
 				<br />
 				<input
 					type="text"
@@ -105,14 +135,22 @@ const ModifyBoard3 = (props) => {
 					placeholder="장소를 입력하세요"
 				/>
 				<br />
-				<input
-					type="text"
-					onChange={inputHandle}
-					name="image"
-					value={board3.image}
-					placeholder="사진을 입력하세요"
+				{/* <input
+					type="file"
+					name="image1"
+					onChange={(e) => {
+						uploadImg(e);
+					}}
 				/>
 				<br />
+				<input
+					type="file"
+					name="image2"
+					onChange={(e) => {
+						uploadImg(e);
+					}}
+				/> */}
+				<br/>
 				<input
 					type="text"
 					onChange={inputHandle}

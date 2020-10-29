@@ -29,6 +29,7 @@ public class DogController {
 	//토큰이 있어야 접근 가능
 	@PostMapping("/dogJoinProc")
 	public ResponseEntity<?> save(@RequestBody Dog dog){
+		System.out.println(session.getAttribute("principal"));
 		User principal = (User) session.getAttribute("principal");
 		dogService.강아지등록(dog, principal);
 		return new ResponseEntity<String>("ok",HttpStatus.CREATED);

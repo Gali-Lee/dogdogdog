@@ -2,6 +2,7 @@ package com.cos.jwt.domain.watedDog;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -31,11 +32,14 @@ public class WantedDog {
 	private String bread;
 	private String age;
 	private String sex;
+/*
+	@Column(length = 10000000)
+	private String image1;
 	
+	@Column(length = 10000000)
+	private String image2;
+	*/
 	private String place;
 	private String content;
 
-	@JsonIgnoreProperties("wantedDog")
-	@OneToMany(mappedBy = "wantedDog", fetch =FetchType.EAGER )
-	private List<WantedDogImage> wantedDogImages;
 }

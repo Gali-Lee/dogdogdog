@@ -13,7 +13,8 @@ const DetailBoard3 = (props) => {
 		age: "", 
 		sex: "", 
 		place: "", 
-		image: "", 
+		// image1: "",
+		// image2: "",
 		content: ""
 	});
 
@@ -54,7 +55,8 @@ const DetailBoard3 = (props) => {
 			<div>나이 : {board3.age}</div>
 			<div>성별 : {board3.sex}</div>
 			<div>장소 : {board3.place}</div>
-			<div>이미지 : {board3.image}</div>
+			{/* <div>이미지 : {board3.image1}</div>
+			<div>이미지 : {board3.image2}</div> */}
 			<div>내용 : {board3.content}</div>
 			<div><Link to={"/board3/modify/" + id}><button>수정</button></Link></div>
 			<div><button onClick={submitDelete}>삭제</button></div>
