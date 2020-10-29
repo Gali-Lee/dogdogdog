@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../store';
 
- 
 
 const Header = () => {
 	const isLogin = useSelector((store) => store.isLogin);
@@ -37,6 +36,7 @@ const Header = () => {
 				(
 					<>
 						<h2> 로그아웃 됨</h2>
+
 						<Link to="/login">로그인</Link>
 					</>
 				)

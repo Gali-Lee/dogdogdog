@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 const WriteBoard3 = () => {
+
 	const history = useHistory();
 
 	const [board3, setBoard3] = useState({
@@ -12,42 +13,51 @@ const WriteBoard3 = () => {
 		age: "",
 		sex: "",
 		place: "",
-		content: ""
+		content: "",
+		image1s: "",
+		image2: ""
 	});
-	const [board3Image, setBoard3Image]= useState({
-		id: "",
-		image: ""
-	})
 
-	const uploadImg = async (e) => {
-		//console.log(e.target.files);
-		const file=e.target.files[0];
-		const base64= await convertBase64(file);
-		console.log(1,base64);
-		setBoard3Image({image : base64});
-	}
-	const convertBase64=(file)=>{
 
-		return new Promise((resolve,reject)=>{
+	// 이미지 base64 로 변환해서 올리는 방법
+	// 	const uploadImg = async (e) => {
+	// 	//console.log(e.target.files);
+	// 	const file = e.target.files[0];
+	// 	const base64 = await convertBase64(file);
+	// 	console.log(1, base64);
+	// 	//setBoard3Image({ image: base64 });
+	// 	setBoard3(prevState => {
+	// 		return { ...prevState,
+	// 			[e.target.name]: base64 };
+	// 	});
+	// }
 
-			const fileReader = new FileReader();
-			fileReader.readAsDataURL(file);
+	// const convertBase64 = (file) => {
+	// 	return new Promise((resolve, reject) => {
 
-			fileReader.onload = ()=>{
-				resolve(fileReader.result);
-			};
-			fileReader.onerror= (error)=>{
-				reject(error);
-			};
-		})
-	}
+	// 		const fileReader = new FileReader();
+	// 		fileReader.readAsDataURL(file);
+
+	// 		fileReader.onload = () => {
+	// 			resolve(fileReader.result);
+	// 		};
+	// 		fileReader.onerror = (error) => {
+	// 			reject(error);
+	// 		};
+	// 	})
+	// }
+
 	function inputHandle(e) {
-		setBoard3({
-			...board3,
-			[e.target.name]: e.target.value,
+
+		setBoard3((prevState) => {// 함수형으로 쓰는 이유 : setstate 두번쓸때 값을 들고오기 우ㅐㅎ서 
+			return {
+				...prevState,
+				[e.target.name]: e.target.value,
+			};
 		});
 	}
 	function submitPost(e) {
+
 		e.preventDefault();
 		console.log("submitPost() 실행");
 
@@ -59,17 +69,15 @@ const WriteBoard3 = () => {
 			body: JSON.stringify(board3)
 		})
 			.then(res => {
-				console.log("res :",res);
 				res.text();
 			})
 			.then(res => {
 				if (res === "ok") {
 					alert("글이 등록되었습니다.");
-					history.goBack();
+					history.push("/board3");
 				}
 			})
 	}
-
 	return (
 		<div>
 			<form>
@@ -96,7 +104,7 @@ const WriteBoard3 = () => {
 					value={board3.bread}
 					placeholder="견종을 입력하세요"
 				/>
-				<br /> 
+				<br />
 				<input
 					type="text"
 					onChange={inputHandle}
@@ -105,13 +113,13 @@ const WriteBoard3 = () => {
 					placeholder="나이를 입력하세요"
 				/>
 				<br />
-				<input
-					type="text"
-					onChange={inputHandle}
+				<select
 					name="sex"
 					value={board3.sex}
-					placeholder="성별을 입력하세요"
-				/>
+					onChange={inputHandle}>
+					<option value="여자">여자</option>
+					<option value="남자">남자</option>
+				</select>
 				<br />
 				<input
 					type="text"
@@ -121,34 +129,23 @@ const WriteBoard3 = () => {
 					placeholder="장소를 입력하세요"
 				/>
 				<br />
-				<input
-					type="file" 
-					// multiple
-					// accept="image/jpeg, image/jpg"
-					 onChange={(e)=>{uploadImg(e);
+				{/* <input
+					type="file"
+					name="image1"
+					onChange={(e) => {
+						uploadImg(e);
 					}}
-					// name="image"
-					// value={board3.image}
+				/>
+				<br /> */}
+				<input
+					type="file"
+					name="image1"
 				/>
 				<input
-					type="file" 
-					// multiple
-					// accept="image/jpeg, image/jpg"
-					 onChange={(e)=>{uploadImg(e);
-					}}
-					// name="image"
-					// value={board3.image}
+					type="file"
+					name="image2"
 				/>
-				<input
-					type="file" 
-					// multiple
-					// accept="image/jpeg, image/jpg"
-					 onChange={(e)=>{uploadImg(e);
-					}}
-					// name="image"
-					// value={board3.image}
-				/>
-				<br />
+				<br/>
 				<input
 					type="text"
 					onChange={inputHandle}

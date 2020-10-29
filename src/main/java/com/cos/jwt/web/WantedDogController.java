@@ -23,7 +23,6 @@ import lombok.RequiredArgsConstructor;
 public class WantedDogController {
 	
 	private final WantedDogRepository wantedDogRepository;
-
 	@PostMapping("/board3/post")
 	@ResponseBody
 	public String 글쓰기(@RequestBody WantedDog wantedDog) {
@@ -48,7 +47,6 @@ public class WantedDogController {
 		
 		return wantedDog;
 	}
-	
 	@Transactional
 	@PutMapping("/board3/{id}")
 	@ResponseBody
@@ -65,9 +63,10 @@ public class WantedDogController {
 		wantedDogEntity.setPlace(wantedDog.getPlace());
 		wantedDogEntity.setSex(wantedDog.getSex());
 		
+//		wantedDogEntity.setImage1(wantedDog.getImage1());
+//		wantedDogEntity.setImage2(wantedDog.getImage2());		
 		return "ok";
 	}
-	
 	@Transactional
 	@DeleteMapping("/board3/{id}")
 	@ResponseBody
