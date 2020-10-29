@@ -28,11 +28,12 @@ const ListBoard3 = () => {
 				<th>나이</th>
 				<th>성별</th>
 				<th>장소</th>
-				<th>이미지</th>
+				<th>이미지1</th>
+				<th>이미지2</th>
 				<th>내용</th>
 			</tr>
 			{board3s.map((board3) => (
-				<ItemBoard3 key={board3.id} post={board3} />
+				<ItemBoard3 key={board3.id} board3={board3} />
 			))}
 		</table>
 	);
