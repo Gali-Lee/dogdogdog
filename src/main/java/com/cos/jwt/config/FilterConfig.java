@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import com.cos.jwt.config.filter.CorsFilter;
 import com.cos.jwt.config.jwt.JwtAuthenticationFilter;
 import com.cos.jwt.config.jwt.JwtAuthorizationFilter;
-import com.cos.jwt.domain.person.PersonRepository;
+import com.cos.jwt.domain.user.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 public class FilterConfig {
 	
-	private final PersonRepository personRepository;
+	private final UserRepository personRepository;
 	
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter(){
@@ -31,7 +31,7 @@ public class FilterConfig {
 		System.out.println("JwtAuthenticationFilter 필터 등록");
 		FilterRegistrationBean<JwtAuthenticationFilter> bean = 
 				new FilterRegistrationBean<>(new JwtAuthenticationFilter(personRepository));
-		bean.addUrlPatterns("/loginProc");
+		bean.addUrlPatterns("/login");
 		bean.setOrder(1); // 낮은 번호부터 실행됨.
 		return bean;
 	}

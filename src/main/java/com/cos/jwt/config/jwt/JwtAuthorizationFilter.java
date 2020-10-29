@@ -14,14 +14,14 @@ import javax.servlet.http.HttpSession;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.cos.jwt.domain.person.Person;
-import com.cos.jwt.domain.person.PersonRepository;
+import com.cos.jwt.domain.user.User;
+import com.cos.jwt.domain.user.UserRepository;
 
 public class JwtAuthorizationFilter implements Filter {
 
-	private PersonRepository personRepository;
+	private UserRepository personRepository;
 
-	public JwtAuthorizationFilter(PersonRepository personRepository) {
+	public JwtAuthorizationFilter(UserRepository personRepository) {
 		this.personRepository = personRepository;
 	}
 
@@ -45,7 +45,7 @@ public class JwtAuthorizationFilter implements Filter {
 			try {
 				int personId = JWT.require(Algorithm.HMAC512(JwtProps.secret)).build().verify(jwtToken).getClaim("id").asInt();
 				HttpSession session = req.getSession();
-				Person personEntity = personRepository.findById(personId).get();
+				User personEntity = personRepository.findById(personId).get();
 				session.setAttribute("principal", personEntity);
 				chain.doFilter(request, response);
 			} catch (Exception e) {
