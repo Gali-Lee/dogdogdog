@@ -32,14 +32,13 @@ public class WantedDog {
 	private String bread;
 	private String age;
 	private String sex;
-/*
+	private String place;
+	private String content;
+
 	@Column(length = 10000000)
 	private String image1;
 	
 	@Column(length = 10000000)
 	private String image2;
-	*/
-	private String place;
-	private String content;
-
+	
 }
