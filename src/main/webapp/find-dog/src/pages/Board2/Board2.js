@@ -20,8 +20,8 @@ const Board2 = () => {
 	}, [])
 
 	return (
-		<div>
-			
+		<div> 
+
 			{/* 게시글 - 글번호,글제목,생성시간,장소,글쓴이
 			하단 - 조회,페이징. */}
 			<h1>모임 목록</h1> <button onClick={<ModalPage/>}>aa</button>
