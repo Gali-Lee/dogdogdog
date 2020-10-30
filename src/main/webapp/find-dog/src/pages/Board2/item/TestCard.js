@@ -2,8 +2,7 @@ import React from 'react';
 import './TestCard.css';
 const TestCard = (props) => {
 
-	let {mtId,mtCreateTime,mtTitle,mtContent,mtPlace,mtTime,mtCount,maxCount,mtList} = props.meeting;
-	console.log(mtCreateTime);
+	let {mtId,mtCreateTime,mtTitle,mtContent,mtPlace,mtTime,mtDate,mtCount,maxCount,mtList,userName} = props.meeting;
 	return (
 		<div class="dog-card">
 			<div class="dog-card-header" >
@@ -16,19 +15,18 @@ const TestCard = (props) => {
 			<div class="dog-card-body">
 				<div class="dog-card-body-header">
 					<h1 class="dog-card-h1">{mtTitle}</h1>
-					<p class="dog-card-body-hashtag">#여수 #순천 #광양</p>
+					<p class="dog-card-body-hashtag">#태그1 #태그2 #태그3</p>
 					<p class="dog-card-body-nickname">
-						작성자: 000<br/>
+						작성자: {userName}<br/>
 						
            		         </p>
 				</div>
 
 				<p class="dog-card-body-description">
 					장소 : {mtPlace}<br/>
-					시간 : {mtTime}<br/>
+					일시 : {mtDate} / {mtTime}<br/>
 					기타 : {mtContent}
-
-			</p>
+				</p>
 
 				<div class="dog-card-body-footer">
 					임시자리

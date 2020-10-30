@@ -1,6 +1,7 @@
 package com.cos.jwt.domain.board2;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -34,9 +35,11 @@ public class Meeting { //Board2 테이블 객체.
 	private String mtTitle; // 게시글제목
 	private String mtContent; //게시글기타내용
 	private String mtPlace; //장소
-	private Timestamp mtTime; //만날시간
-	private int mtCount; //현재인원
+	private String mtTime; //만날시간
+	private String mtDate; //만날날짜
+	private int mtCount; //현재인원 초기값 0
 	private int maxCount; // 최대인원
+	private String userName;//작성자 이름 저장.
 	
 	@JsonIgnoreProperties({"mt"})
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "mt")

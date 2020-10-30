@@ -61,10 +61,11 @@ public class WantedDogController {
 	public String 글쓰기(@RequestParam("catagory") String catagory,
 			@RequestParam("name") String name, @RequestParam("bread") String bread, @RequestParam("age") String age,
 			@RequestParam("sex") String sex, @RequestParam("place") String place,
-			@RequestParam("content") String content, @RequestParam("image1") MultipartFile image1,
-			@RequestParam("image2") MultipartFile image2) throws IllegalStateException, IOException{
+			@RequestParam("content") String content, @RequestParam(required = false,value = "image1") MultipartFile image1,
+			@RequestParam(required = false,value ="image2") MultipartFile image2) throws IllegalStateException, IOException{
 		System.out.println("실종/제보 글쓰기");
 		System.out.println(name);
+		System.out.println("i === "+image1);
 		String image1name=이미지저장(image1);
 		String image2name=이미지저장(image2);
 		WantedDog wantedDog = new WantedDog().builder().catagory(catagory).name(name).bread(bread).age(age).sex(sex).place(place)

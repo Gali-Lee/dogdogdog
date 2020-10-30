@@ -2,7 +2,7 @@ package com.cos.jwt.web;
 
 
 
-import java.io.Console;
+
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.jwt.domain.board2.Meeting;
-import com.cos.jwt.domain.board2.MeetingMember;
+
 import com.cos.jwt.domain.board2.MeetingMemberRepository;
 import com.cos.jwt.domain.board2.MeetingRepository;
+import com.cos.jwt.domain.board2.PageInfo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,18 +30,19 @@ public class MeetingController {
 	private final MeetingMemberRepository mtmRepository;
 	
 	//리스트출력 추후 페이징추가해서 그걸로 바꿀거.
-	@GetMapping("/board2") 
-	public List<Meeting> mtList() {
-		return mtRepository.findAll();
+	@GetMapping("/board2{page}") 
+	public List<Meeting> mtList(@RequestBody PageInfo pageInfo) {
+//		return mtRepository.mPageList(startList, listSize);
+		return mtRepository.mList();
 	}
 	
-	//게시글 등록(추가 처리필요)
+	//게시글 등록
 	@PostMapping("/board2")
 	public String mtInsert(@RequestBody Meeting meeting) {
-		System.out.println("insert 들어옴");
 		try {
 			mtRepository.save(meeting);
 			return "등록완료";
+//			return "redirect:/board2";
 		} catch (Exception e) {
 			return "등록실패";
 		}
