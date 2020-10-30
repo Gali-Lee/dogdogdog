@@ -84,6 +84,7 @@ const WriteBoard3 = () => {
 		const formData = new FormData();
 
 		//formData.append("id", board3.id);
+		
 		formData.append("catagory", board3.catagory);
 		formData.append("name", board3.name);
 		formData.append("bread", board3.bread);

@@ -23,10 +23,12 @@ const Board2 = () => {
 
 	
 	return (
+
 		<div>
 			
 			<ModalPage/>
 			<h1>모임 목록</h1>
+
 			{meetings.map(
 				meeting => {
 					return <TestCard key={meeting.mtId} meeting={meeting} />
