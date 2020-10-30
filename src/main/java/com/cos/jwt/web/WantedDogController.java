@@ -32,22 +32,30 @@ public class WantedDogController {
 	private final WantedDogRepository wantedDogRepository;
 	
 	private String 이미지저장(MultipartFile file) throws IllegalStateException, IOException {
-		//String uploadFolder = "..\\..\\..\\..\\..\\Image";
-		String uploadFolder = "D:\\Image";
-		File uploadPath = new File(uploadFolder, getFolder());
-		if (uploadPath.exists() == false) {
-			uploadPath.mkdirs();
+		File path = new File("");//상대경로 찾을려고 임의로 기본 파일주소를 찍어봄
+		String uploadFolder = path.getAbsolutePath()+"\\src\\main\\webapp\\find-dog\\public\\images"; //거기에 images 폴더로 설정
+		File uploadPath = new File(uploadFolder/*, getFolder()*/);//여기에 설정
+		if (uploadPath.exists() == false) {//없을 때 images 폴더 설정
+			uploadPath.mkdirs();			
 		}
 		UUID uuid = UUID.randomUUID();
 		String uploadFileName = uuid.toString() + "-" + file.getOriginalFilename();
 		File saveFile = new File(uploadPath, uploadFileName);
-		System.out.println(uploadPath);
-		System.out.println(uploadFileName);
+//		System.out.println("파일 경로 :"+uploadPath);
+//		System.out.println("파일 이름 : "+uploadFileName);
 		file.transferTo(saveFile);
-		
+		uploadFileName = ".\\images\\"+uploadFileName;
+		System.out.println(uploadPath+uploadFileName);
 		return uploadFileName;
 	}
 	
+	private String getFolder() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		String str = sdf.format(date);
+
+		return str.replace("-", File.separator);
+	}
 	@PostMapping(value = "/board3/post", consumes = { "multipart/form-data" })
 	@ResponseBody
 	public String 글쓰기(@RequestParam("catagory") String catagory,
@@ -65,16 +73,6 @@ public class WantedDogController {
 		wantedDogRepository.save(wantedDog);
 		return "ok";
 	}
-
-	private String getFolder() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		String str = sdf.format(date);
-
-		return str.replace("-", File.separator);
-	}
-
-	
 
 	@GetMapping("/board3")
 	public List<WantedDog> 글목록() {
