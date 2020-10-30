@@ -39,9 +39,9 @@ public class MeetingController {
 	public String mtInsert(@RequestBody Meeting meeting) {
 		try {
 			mtRepository.save(meeting);
-			return "true";
+			return "등록완료";
 		} catch (Exception e) {
-			return "false";
+			return "등록실패";
 		}
 	}
 	
