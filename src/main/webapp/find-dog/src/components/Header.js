@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../store';
 import { Navbar, Nav } from 'react-bootstrap';
+import AdminNavbar from './AdminNavbar';
+import Sidebar from './Sidebar/Sidebar';
 
 const Header = () => {
 	const isLogin = useSelector((store) => store.isLogin);
@@ -18,9 +20,6 @@ const Header = () => {
 	}
 
 	return (
-
-
-
 
 		<div>
 			<Navbar bg="primary" variant="dark">
