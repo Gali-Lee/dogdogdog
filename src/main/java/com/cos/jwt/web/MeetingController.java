@@ -37,6 +37,7 @@ public class MeetingController {
 	//게시글 등록(추가 처리필요)
 	@PostMapping("/board2")
 	public String mtInsert(@RequestBody Meeting meeting) {
+		System.out.println("insert 들어옴");
 		try {
 			mtRepository.save(meeting);
 			return "등록완료";

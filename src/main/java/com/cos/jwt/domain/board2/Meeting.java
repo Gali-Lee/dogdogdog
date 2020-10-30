@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +29,7 @@ public class Meeting { //Board2 테이블 객체.
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int mtId; //기본키
+	@CreationTimestamp
 	private Timestamp mtCreateTime; //게시글생성시간
 	private String mtTitle; // 게시글제목
 	private String mtContent; //게시글기타내용
