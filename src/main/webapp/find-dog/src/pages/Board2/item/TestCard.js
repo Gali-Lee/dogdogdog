@@ -1,6 +1,5 @@
 import React from 'react';
 import './TestCard.css';
-import InsertModal from './InsertModal'
 const TestCard = (props) => {
 
 	let {mtId,mtCreateTime,mtTitle,mtContent,mtPlace,mtTime,mtCount,maxCount,mtList} = props.meeting;
@@ -8,7 +7,7 @@ const TestCard = (props) => {
 	return (
 		<div class="dog-card">
 			<div class="dog-card-header" >
-				<button class ="dog-button" onClick= {InsertModal} >aa</button>		
+				{/* <button class ="dog-button" onClick= {InsertModal} >aa</button>		 */}
 				<div class="dog-card-header-is_closed" >
 					<div class="dog-card-header-text" > 모집중 </div >
 					<div class="dog-card-header-number" > {mtCount} / {maxCount} </div >
