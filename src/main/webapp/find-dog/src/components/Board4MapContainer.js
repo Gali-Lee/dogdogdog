@@ -2,11 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const { kakao } = window;
 const Board4MapContainer = ({ searchPlace, setLatLng, markerIdx, setCount, count, now }) => {
-	console.log(200, { searchPlace });
-	console.log(500,now);
-	//false = marker X, true = marker O
-	console.log(600,markerIdx);
-	setCount("0");
+
 
 	const [place, setPlace] = useState({
 		lat: "",
@@ -15,6 +11,13 @@ const Board4MapContainer = ({ searchPlace, setLatLng, markerIdx, setCount, count
 
 	useEffect(() => {
 		console.log(5, "MapContainer2");
+		console.log(200, { searchPlace });
+		console.log(500, now);
+		//false = marker X, true = marker O
+		console.log(600, markerIdx);
+		console.log("count", count);
+		console.log("now", now);
+		
 
 		const container = document.getElementById('myMap');
 		const options = {
@@ -27,22 +30,27 @@ const Board4MapContainer = ({ searchPlace, setLatLng, markerIdx, setCount, count
 		//지도 위치 옮길 때마다 지도 중심좌표 place에 저장
 		kakao.maps.event.addListener(map, 'center_changed', function () {
 			let level = map.getLevel();
-			let latLng=map.getCenter();
+			let latLng = map.getCenter();
 			console.log(10, level);
-			console.log(11,latLng);
+			console.log(11, latLng);
 			setPlace({
-				lat:latLng.Ga,
-				lng:latLng.Ha
+				lat: latLng.Ga,
+				lng: latLng.Ha
 			});
-			setLatLng(latLng.Ga,latLng.Ha);
+			setLatLng(latLng.Ga, latLng.Ha);
 		});
-		if(markerIdx){
-			console.log(111,markerIdx);
-		}else{
-			
+		if (markerIdx) {
+			console.log("markerIdx O", markerIdx);
+			console.log("now.lat : ",now.lat);
+			console.log("now.lng : ",now.lng);
+			let coords = new kakao.maps.LatLng(now.lat, now.lng);
+			map.setCenter(coords);
+		} else {
+			console.log("markerIdx X", markerIdx);
+			// 키워드로 장소를 검색
+			ps.keywordSearch(searchPlace, placesSearchCB);
 		}
-		// 키워드로 장소를 검색
-		ps.keywordSearch(searchPlace, placesSearchCB);
+
 
 		// 키워드 검색 완료 시 호출되는 콜백함수
 		function placesSearchCB(data, status, pagination) {
@@ -62,9 +70,9 @@ const Board4MapContainer = ({ searchPlace, setLatLng, markerIdx, setCount, count
 				map.setBounds(bounds);
 			}
 		}
-		
 
-	}, [searchPlace,count]);
+
+	}, [searchPlace, count]);
 
 	//now != null 마커 o
 

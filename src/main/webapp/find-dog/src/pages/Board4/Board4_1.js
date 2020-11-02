@@ -22,6 +22,7 @@ const Board4_1 = () => {
 		setInputText("");
 	};
 	function setLatLng(lat,lng){
+		setCount("0");
 		setNow({
 			lat:lat,
 			lng:lng
