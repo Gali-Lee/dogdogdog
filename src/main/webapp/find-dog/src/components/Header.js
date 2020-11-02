@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../store';
 import { Navbar, Nav } from 'react-bootstrap';
+import { Layout, Menu, Breadcrumb } from 'antd';
+import 'antd/dist/antd.css';
+
 
 const Header = () => {
 	const isLogin = useSelector((store) => store.isLogin);
 	const user = localStorage.getItem("user")
 	const dispatch = useDispatch();
-
+const { SubMenu } = Menu;
 	const logoutbutton = (e) => {
 		e.preventDefault();
 		localStorage.removeItem("Authorization");
@@ -19,11 +22,19 @@ const Header = () => {
 
 	return (
 
-
-
-
 		<div>
-			<Navbar bg="primary" variant="dark">
+			<div className="logo" />
+      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+        <Menu.Item key="1" ><Link to="board1">게시판1</Link></Menu.Item>
+        <Menu.Item key="2"><Link to="board2">게시판 2</Link></Menu.Item>
+        <Menu.Item key="3"><Link to="board3">게시판 3</Link></Menu.Item>
+		<Menu.Item key="4"><Link to="login">로그인</Link></Menu.Item>
+      </Menu>
+
+
+
+
+			{/* <Navbar bg="primary" variant="dark">
 				<Navbar.Brand Link to="/">DOG</Navbar.Brand>
 				<Nav className="mr-auto">
 
@@ -49,7 +60,7 @@ const Header = () => {
 					}
 				</Navbar.Text>
 				</Navbar.Collapse>
-			</Navbar>
+			</Navbar> */}
 
 		</div>
 
