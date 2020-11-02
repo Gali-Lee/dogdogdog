@@ -1,23 +1,53 @@
-import logo from './logo.svg';
-import './App.css';
 
+import './App.css';
+import Header from './components/Header';
+import React, { useEffect } from 'react';
+import { login } from './store';
+import { useDispatch } from 'react-redux';
+import Main from './components/Main';
+import Footer from './components/Footer';
+import Lside from './components/Lside';
+import Rside from './components/Rside';
+import styled from 'styled-components';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+/* 건들지 마시오!
+**************************
+***************************
+**************************
+*******건들지 마시오***********
+*************************
+*************************
+**************************
+***********************
+************************
+*/
+const MainListStyle = styled.div`
+display : grid;
+  grid-template-columns: auto auto auto;
+`;
 function App() {
+
+  //로그인 상태관리
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    let jwtToken = localStorage.getItem("Authorization");
+    if (jwtToken !== null) {
+      dispatch(login());
+    }
+    console.log(jwtToken);
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <MainListStyle>
+        <Lside />
+        <Main />
+        <Rside />
+      </MainListStyle>
+      <Footer />
     </div>
   );
 }
