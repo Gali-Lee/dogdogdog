@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import MapContainer from '../../components/MapContainer';
 
 const WriteBoard3 = () => {
 
@@ -91,6 +92,9 @@ const WriteBoard3 = () => {
 		formData.append("age", board3.age);
 		formData.append("sex", board3.sex);
 		formData.append("place", board3.place);
+		// formData.append("place", place);
+		// formData.append("lat",location.lat);
+		// formData.append("lng",location.lat);
 		formData.append("content", board3.content);
 		formData.append("image1", board3.image1);
 		formData.append("image2", board3.image2);
@@ -112,6 +116,42 @@ const WriteBoard3 = () => {
 				};
 			});
 	}
+	function setLatLng(title, lat, lng) {
+		console.log(30, title);
+		console.log(30, lat);
+		console.log(30, lng);
+		setLocation({
+			title: title,
+			lat: lat,
+			lng: lng
+		});
+	}
+	function showMap(){
+		setVisible(true);
+	}
+	function savePlace(){
+		setVisible(false);
+		console.log(1000,location);
+	}
+	const [inputText, setInputText] = useState("");
+	const [place, setPlace] = useState("");
+	const [visible, setVisible] = useState(false);
+	const [location, setLocation] = useState({
+		title: "",
+		lat: "",
+		lng: "",
+	});
+	const onChange = (e) => {
+		setInputText(e.target.value);
+	};
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		setPlace(inputText);
+		console.log(1, place);
+		setInputText("");
+		showMap();
+	};
 	return (
 		<div>
 			<form encType="multipart/form-data">
@@ -177,19 +217,36 @@ const WriteBoard3 = () => {
 				<input
 					type="text"
 					onChange={inputHandle}
-					name="place"
-					value={board3.place}
-					placeholder="장소를 입력하세요"
-				/>
-				<br />
-				<input
-					type="text"
-					onChange={inputHandle}
 					name="content"
 					value={board3.content}
 					placeholder="내용을 입력하세요"
 				/>
 				<br />
+				<input
+					type="text"
+					onChange={inputHandle}
+					name="place"
+					value={board3.place}
+					placeholder="장소를 입력하세요"
+				/>
+				<input
+					type="text"
+					onChange={onChange}
+					name="place"
+					value={inputText}
+					placeholder="장소를 입력하세요"
+				/>
+				
+				<button onClick={handleSubmit}>검색</button>
+				<br />
+				{visible ? <MapContainer searchPlace={place} latLng={setLatLng} /> : null}
+				<br/>
+				{visible ? <button onClick={savePlace}>장소 저장</button> : null }
+				<br/>
+				<input type="hidden" name="lat" value={location.lat}/>
+				<input type="hidden" name="lng" value={location.lng}/>
+
+				
 				<button onClick={submitPost}>등록</button>
 			</form>
 		</div>

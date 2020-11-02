@@ -12,6 +12,8 @@ import DogJoin from '../pages/join/DogJoin';
 import MapPage from '../pages/map/MapPage';
 import MapContainer from './MapContainer';
 import SearchPlace from '../pages/map/SearchPlace';
+import ModalPage from '../pages/Board2/ModalPage';
+import Board4_1 from '../pages/Board4/Board4_1';
 const Main = () => {
 	return (
 		<div>
@@ -21,11 +23,12 @@ const Main = () => {
 				<Route path="/joindog" exact={true} component={DogJoin} />
 				<Route path="/board1" exact={true} component={Board1} />
 				<Route path="/board2" exact={true} component={Board2} />
+				<Route path="/board2/modal" exact={true} component={ModalPage} />
 				<Route path="/board3" exact={true} component={Board3} />
 				<Route path="/board3/detail/:id" exact={true} component={DetailBoard3} />
 				<Route path="/board3/modify/:id" exact={true} component={ModifyBoard3} />
 				<Route path="/board3/write" exact={true} component={WriteBoard3} />
-				<Route path="/map" exact={true} component={SearchPlace} />
+				<Route path="/map" exact={true} component={Board4_1} />
 			</switch>
 			<right/>
 		</div>
