@@ -93,8 +93,8 @@ const WriteBoard3 = () => {
 		formData.append("sex", board3.sex);
 		formData.append("place", board3.place);
 		// formData.append("place", place);
-		// formData.append("lat",location.lat);
-		// formData.append("lng",location.lat);
+		formData.append("lat",location.lat);
+		formData.append("lng",location.lng);
 		formData.append("content", board3.content);
 		formData.append("image1", board3.image1);
 		formData.append("image2", board3.image2);
@@ -113,6 +113,7 @@ const WriteBoard3 = () => {
 			.then(res => {
 				if (res === "ok") {
 					alert("글이 등록되었습니다.");
+					history.push("/board3");
 				};
 			});
 	}
@@ -149,13 +150,12 @@ const WriteBoard3 = () => {
 
 		setPlace(inputText);
 		console.log(1, place);
-		setInputText("");
+		//setInputText("");
 		showMap();
 	};
 	return (
 		<div>
 			<form encType="multipart/form-data">
-
 				<input
 					type="file"
 					name="image1"
@@ -222,13 +222,7 @@ const WriteBoard3 = () => {
 					placeholder="내용을 입력하세요"
 				/>
 				<br />
-				<input
-					type="text"
-					onChange={inputHandle}
-					name="place"
-					value={board3.place}
-					placeholder="장소를 입력하세요"
-				/>
+
 				<input
 					type="text"
 					onChange={onChange}
@@ -243,10 +237,7 @@ const WriteBoard3 = () => {
 				<br/>
 				{visible ? <button onClick={savePlace}>장소 저장</button> : null }
 				<br/>
-				<input type="hidden" name="lat" value={location.lat}/>
-				<input type="hidden" name="lng" value={location.lng}/>
 
-				
 				<button onClick={submitPost}>등록</button>
 			</form>
 		</div>
