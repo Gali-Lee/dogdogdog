@@ -28,7 +28,7 @@ const SearchPlace = () => {
 	function showMap(){
 		setVisible(true);
 	}
-
+	
 
 	const onChange = (e) => {
 		setInputText(e.target.value);
@@ -55,8 +55,8 @@ const SearchPlace = () => {
 			</form>
 			{visible ? <MapContainer searchPlace={place} latLng={setLatLng} /> : null}
 			<button onClick={show}>show Location</button>
-			<input type="text"></input>
-			<input type="text"></input>
+			<input type="text" name="lat"></input>
+			<input type="text" name="lng"></input>
 		</>
 	);
 };

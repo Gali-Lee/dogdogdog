@@ -12,11 +12,7 @@ const ItemBoard3 = (props) => {
 			<th>{bread}</th>
 			<th>{age}</th>
 			<th>{sex}</th>
-			<th>{place}</th>../
-			{/* <th><img alt="" src={require ("http:localhost:3000/images/03d065de-3746-462d-9ed1-1a7b95ac3a29-napa.jpg")}/></th>
-			 */}
-			<th><img src={image1} alt="" height="200px" /></th>
-			{/* <th><img src={require('../images/'+{image2})} alt="" height="200px" /></th> */}
+			<th>{place}</th>
 			<th>{content}</th>
 		</tr >
 	);

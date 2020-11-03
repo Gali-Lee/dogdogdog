@@ -11,9 +11,8 @@ const Header = () => {
 	const isLogin = useSelector((store) => store.isLogin);
 	const user = localStorage.getItem("user")
 	const dispatch = useDispatch();
-const { SubMenu } = Menu;
-	const logoutbutton = (e) => {
-		e.preventDefault();
+	const { SubMenu } = Menu;
+	const logoutbutton = () => {
 		localStorage.removeItem("Authorization");
 		localStorage.removeItem("user");
 		dispatch(logout());
@@ -24,12 +23,25 @@ const { SubMenu } = Menu;
 
 		<div>
 			<div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-        <Menu.Item key="1" ><Link to="board1">게시판1</Link></Menu.Item>
-        <Menu.Item key="2"><Link to="board2">게시판 2</Link></Menu.Item>
-        <Menu.Item key="3"><Link to="board3">게시판 3</Link></Menu.Item>
-		<Menu.Item key="4"><Link to="login">로그인</Link></Menu.Item>
-      </Menu>
+			<Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
+				{isLogin ?
+					(
+						<>
+							<Menu.Item key="1">{user}님 환영합니다!</Menu.Item>
+							<Menu.Item key="6"><Link to="joindog">강아지 등록</Link></Menu.Item>
+							<Menu.Item key="7" onClick={logoutbutton}>로그아웃</Menu.Item>
+						</>
+					)
+					:
+					(
+						<>
+							<Menu.Item key="4"><Link to="login">로그인</Link></Menu.Item>
+							<Menu.Item key="5"><Link to="join">회원가입</Link></Menu.Item>
+						</>
+					)
+				}
+
+			</Menu>
 
 
 
