@@ -48,12 +48,7 @@ const { Header1, Content, Sider } = Layout;
   return (
     <div>
   <Layout>
-    <Header className="header">
-      <div className="logo" />
-      <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-  
-      </Menu>
-    </Header>
+    <Header/>
     <Layout>
       <Sider width={200} className="site-layout-background">
         <Menu
@@ -62,7 +57,6 @@ const { Header1, Content, Sider } = Layout;
           defaultOpenKeys={['sub1']}
           style={{ height: '100%', borderRight: 0 }}
         >
-
             <Menu.Item key="1"  icon={<UserOutlined />}><Link to="/board1">게시판1</Link></Menu.Item>
             <Menu.Item key="2" icon={<LaptopOutlined />}><Link to="/board2">게시판2</Link></Menu.Item>
             <Menu.Item key="3" icon={<NotificationOutlined />} ><Link to="/board3">게시판3</Link></Menu.Item>
@@ -83,7 +77,7 @@ const { Header1, Content, Sider } = Layout;
       </Layout>
     </Layout>
   </Layout>,
-    <Footer/>
+            <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
 
 
 
