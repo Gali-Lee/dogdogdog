@@ -233,7 +233,9 @@
 }
 .dog-button{
     position: relative;
-    left: 180px;
+    left: 120px;
+    /* padding: 2px; */
+    
 }
 
 

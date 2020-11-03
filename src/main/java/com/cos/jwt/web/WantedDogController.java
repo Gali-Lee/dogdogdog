@@ -66,6 +66,7 @@ public class WantedDogController {
 			@RequestParam("image2") MultipartFile image2) throws IllegalStateException, IOException{
 		System.out.println("실종/제보 글쓰기");
 		System.out.println(name);
+		System.out.println("i === "+image1);
 		String image1name=이미지저장(image1);
 		String image2name=이미지저장(image2);
 		WantedDog wantedDog = new WantedDog().builder().catagory(catagory).name(name).bread(bread).age(age).sex(sex).place(place)
