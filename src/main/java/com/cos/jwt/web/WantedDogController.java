@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cos.jwt.domain.DTO.LocationDTO;
 import com.cos.jwt.domain.watedDog.WantedDog;
 import com.cos.jwt.domain.watedDog.WantedDogRepository;
 
@@ -115,5 +116,12 @@ public class WantedDogController {
 	public String 글삭제(@PathVariable int id) {
 		wantedDogRepository.deleteById(id);
 		return "ok";
+	}
+	
+	@PostMapping("/board4")
+	@ResponseBody
+	public List<WantedDog> 지도목록(@RequestBody LocationDTO location) {
+		System.out.println("지도 목록 검색");
+		return wantedDogRepository.findAll();
 	}
 }

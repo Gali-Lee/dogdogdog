@@ -149,7 +149,7 @@ const WriteBoard3 = () => {
 
 		setPlace(inputText);
 		console.log(1, place);
-		setInputText("");
+		//setInputText("");
 		showMap();
 	};
 	return (

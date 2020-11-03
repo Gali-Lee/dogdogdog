@@ -5,7 +5,6 @@ const Board4_1 = () => {
 	const [inputText, setInputText] = useState("");
 	const [place, setPlace] = useState("");
 	const [now,setNow] = useState("");
-	const [count,setCount] = useState("");
 	//marker ox
 	const [markerIdx, setMarkerIdx] = useState(false);
 
@@ -22,15 +21,19 @@ const Board4_1 = () => {
 		setInputText("");
 	};
 	function setLatLng(lat,lng){
-		setCount("0");
 		setNow({
 			lat:lat,
 			lng:lng
 		})
 	}
-	function show(){
+	function test(){
 		setMarkerIdx(true);
-		setCount("1");
+	}
+	function show(){
+		test();
+	}
+	function re(){
+		setMarkerIdx(false);
 	}
 	return (
 		<div>
@@ -40,8 +43,9 @@ const Board4_1 = () => {
 					value={inputText}
 			/>
 			<button onClick={handleSubmit}>위치 검색</button>
-			<Board4MapContainer searchPlace={place} now={now} markerIdx={markerIdx} setLatLng={setLatLng} count={count} setCount={setCount}></Board4MapContainer>
+			<Board4MapContainer searchPlace={place} now={now} setMarkerIdx={setMarkerIdx} markerIdx={markerIdx} setLatLng={setLatLng}></Board4MapContainer>
 			<button onClick={show}>여기서 찾기 </button>
+			<button onClick={re}>다시찾기</button>
 
 		</div>
 	);

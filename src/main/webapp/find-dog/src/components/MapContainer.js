@@ -50,7 +50,7 @@ const MapContainer = ({ searchPlace,latLng }) => {
 			kakao.maps.event.addListener(marker, 'click', function () {
 				// 마커를 클릭하면 장소명이 인포윈도우에 표출
 				
-				latLng(place.place_name,place.x,place.y);
+				latLng(place.place_name,place.y,place.x);
 				
 				
 			});
