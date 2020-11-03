@@ -30,12 +30,22 @@ public class MeetingController {
 	private final MeetingMemberRepository mtmRepository;
 	
 	//리스트출력 추후 페이징추가해서 그걸로 바꿀거.
-	@GetMapping("/board2")
-	public List<Meeting> mtList() {
-//	public List<Meeting> mtList(@RequestBody PageInfo pageInfo) {
-//		return mtRepository.mPageList(startList, listSize);
-		return mtRepository.mList();
+	@GetMapping("/board2/{page}")
+//	public List<Meeting> mtList() {
+	public List<Meeting> mtList(@PathVariable int page) {
+		int page2 = 6;
+		page = (page-1)*6;
+		return mtRepository.mPageList(page,page2);
+//		return mtRepository.mList();
 	}
+	
+	@GetMapping("/board2/count")
+	public int mtPageCount() {
+		List<Meeting> page = mtRepository.mList();
+		System.out.println("갯수 : "+page.size());
+		return page.size();
+	}
+	
 	
 	//게시글 등록
 	@PostMapping("/board2")
@@ -64,11 +74,11 @@ public class MeetingController {
 	
 	
 	//필요없을듯..?
-	@GetMapping("/board2/{id}")
-	public Meeting mtMemberList(@PathVariable int id) {
-		return mtRepository.findById(id).get();
-	}
-	
+//	@GetMapping("/board2/{id}")
+//	public Meeting mtMemberList(@PathVariable int id) {
+//		return mtRepository.findById(id).get();
+//	}
+//	
 	
 	@GetMapping("/board2/mList/{id}")
 	public List<String> mtmList(@PathVariable int id) {

@@ -29,8 +29,8 @@ const ModalPage = () => {
 				res=> alert(res)
 				
 			);
-			closeModal();
-			window.location.reload();
+			closeModal(); 
+			window.location.reload(); //페이지 새로고침
 		}
 
 		const changeValue = (e) => {

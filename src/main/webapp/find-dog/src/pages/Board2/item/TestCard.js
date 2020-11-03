@@ -1,8 +1,17 @@
 import React from 'react';
 import './TestCard.css';
+import MemberList from './MemberList';
 const TestCard = (props) => {
 
 	let {mtId,mtCreateTime,mtTitle,mtContent,mtPlace,mtTime,mtDate,mtCount,maxCount,mtList,userName} = props.meeting;
+
+	
+
+
+
+	
+
+
 	return (
 		<div class="dog-card">
 			<div class="dog-card-header" >
@@ -25,12 +34,18 @@ const TestCard = (props) => {
 				<p class="dog-card-body-description">
 					장소 : {mtPlace}<br/>
 					일시 : {mtDate} / {mtTime}<br/>
-					기타 : {mtContent}
+					기타 : {mtContent}<br/>
+					<button className="dog-button">참가</button>
+					<button className="dog-button" onClick={<MemberList id = {mtId}/>}>참가목록</button>
+					{/* onClick={<MemberList id = {mtId}/>} */}
+					
+					
 				</p>
 
-				<div class="dog-card-body-footer">
+				<div class="dog-card-body-footer" >
 					임시자리
-				<i class="dog-reg_date"> {mtCreateTime} </i>
+				<i class="dog-reg_date" > {mtCreateTime} </i>
+
 				</div>
 			</div>
 		</div>

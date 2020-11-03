@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import TestCard from './item/TestCard.js';
 import ModalPage from './ModalPage.js';
-import PageInfo from './item/PageInfo.js';
 
 
 
@@ -13,35 +12,55 @@ import PageInfo from './item/PageInfo.js';
 const Board2 = () => {
 
 	const [meetings, setMeetings] = useState([]);
-	let p = PageInfo(1,2,3);
-	console.log("page 정보 : ",p);
-	
-		
-
-	
+	const [page, setPage] = useState({
+		p: 1,
+	});
+	const [maxPage, setMaxPage] = useState([]);
+	let b1,b2 = '';
 
 	useEffect(() => {
-		fetch("http://localhost:8000/board2/").then(res => res.json()).then(
+		fetch("http://localhost:8000/board2/" + page.p).then(res => res.json()).then(
 			res => {
 				setMeetings(res);
+				console.log("res = ", res);
 			}
 		);
-	}, [])
+		fetch("http://localhost:8000/board2/count").then(res => res.text()).then(
+			res => {
+				setMaxPage(res);
+			}
+		);
+	}, [page])
 
 
-
-	// // console.log("page 정보는 : ",page);
-	// // setPage({...page,[2]:2});
-	
-	// setPage({
-	// 	a : "12",
-	// });
+	function down() {
+		if (page.p > 1)
+			setPage({ p: page.p - 1 });
+		else {
+			//버튼 비활성화 넣을곳
+			b1='disabled';
+		}
+	}
+	function up() {
+		if (page.p * 6 < maxPage)
+			setPage({ p: page.p + 1 });
+		else {
+			b2='disabled';
+			//버튼 비활성화 넣을곳
+		}
+	}
 
 	return (
 
 		<div>
-			<ModalPage />
-			<h1>모임 목록</h1>
+			<div>
+				<ModalPage />
+				<button onClick={down} >왼쪽 이미지</button>
+
+				<h3 style={{ display: "inline" }}>모임 목록</h3>
+				<button onClick={up} >오른쪽 이미지</button>
+				<hr />
+			</div>
 			{meetings.map(
 				meeting => {
 					return <TestCard key={meeting.mtId} meeting={meeting} />

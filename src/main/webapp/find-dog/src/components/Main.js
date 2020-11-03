@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Login from '../pages/login/Login';
 import Board1 from '../pages/Board1/Board1';
 import Board2 from '../pages/Board2/Board2';
@@ -17,7 +17,7 @@ import Board4_1 from '../pages/Board4/Board4_1';
 const Main = () => {
 	return (
 		<div>
-			<switch>
+			<Switch>
 				<Route path="/login" exact={true} component={Login} />
 				<Route path="/join" exact={true} component={Join} />
 				<Route path="/joindog" exact={true} component={DogJoin} />
@@ -29,7 +29,7 @@ const Main = () => {
 				<Route path="/board3/modify/:id" exact={true} component={ModifyBoard3} />
 				<Route path="/board3/write" exact={true} component={WriteBoard3} />
 				<Route path="/map" exact={true} component={Board4_1} />
-			</switch>
+			</Switch>
 			<right/>
 		</div>
 	);
