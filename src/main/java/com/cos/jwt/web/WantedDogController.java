@@ -33,7 +33,7 @@ public class WantedDogController {
 	
 	private String 이미지저장(MultipartFile file) throws IllegalStateException, IOException {
 		File path = new File("");//상대경로 찾을려고 임의로 기본 파일주소를 찍어봄
-		String uploadFolder = path.getAbsolutePath()+"\\src\\main\\webapp\\find-dog\\public\\images"; //거기에 images 폴더로 설정
+		String uploadFolder = path.getAbsolutePath()+"\\src\\main\\webapp\\find-dog\\public\\src\\images"; //거기에 images 폴더로 설정
 		File uploadPath = new File(uploadFolder/*, getFolder()*/);//여기에 설정
 		if (uploadPath.exists() == false) {//없을 때 images 폴더 설정
 			uploadPath.mkdirs();			
@@ -44,15 +44,15 @@ public class WantedDogController {
 //		System.out.println("파일 경로 :"+uploadPath);
 //		System.out.println("파일 이름 : "+uploadFileName);
 		file.transferTo(saveFile);
-		uploadFileName = ".\\images\\"+uploadFileName;
-		System.out.println(uploadPath+uploadFileName);
+		//uploadFileName = ".\\images\\"+uploadFileName;
+		//System.out.println(uploadPath+uploadFileName);
 		return uploadFileName;
 	}
 	
 	private String getFolder() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
-		String str = sdf.format(date);
+		String str = sdf.format(date);https://whale.naver.com/details/translate?=main&wpid=RydDy7
 
 		return str.replace("-", File.separator);
 	}

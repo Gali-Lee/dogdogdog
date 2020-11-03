@@ -113,6 +113,7 @@ const WriteBoard3 = () => {
 			.then(res => {
 				if (res === "ok") {
 					alert("글이 등록되었습니다.");
+					history.push("/board3");
 				};
 			});
 	}
@@ -155,7 +156,6 @@ const WriteBoard3 = () => {
 	return (
 		<div>
 			<form encType="multipart/form-data">
-
 				<input
 					type="file"
 					name="image1"
@@ -246,7 +246,6 @@ const WriteBoard3 = () => {
 				<input type="hidden" name="lat" value={location.lat}/>
 				<input type="hidden" name="lng" value={location.lng}/>
 
-				
 				<button onClick={submitPost}>등록</button>
 			</form>
 		</div>
