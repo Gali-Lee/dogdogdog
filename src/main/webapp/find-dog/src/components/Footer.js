@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const FooterStyle = styled.div`
-	font-size : 30px;
-	
-`;
+
 const Footer = () => {
 	return (
-		<div>
+		<div >
 			<br></br>
 			<h6 >프로젝트 명 : dog dog dog  </h6><br/>
 			<h6 >참여자 : 곽형갑 이태규 김소연 이동우</h6><br/>

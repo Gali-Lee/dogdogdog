@@ -15,7 +15,7 @@ import SearchPlace from '../pages/map/SearchPlace';
 import ModalPage from '../pages/Board2/ModalPage';
 import Board4_1 from '../pages/Board4/Board4_1';
 import Wanted from './Wanted';
-import Switch from 'react-bootstrap/esm/Switch';
+
 const Main = () => {
 	return (
 		<div>
