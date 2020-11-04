@@ -27,6 +27,8 @@ public class WantedDog {
 	private String age;
 	private String sex;
 	private String place;
+	private double lat;
+	private double lng;
 	private String content;
 
 	@Column(length = 10000000)

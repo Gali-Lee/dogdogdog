@@ -1,9 +1,17 @@
 import React from 'react';
 import './TestCard.css';
+import MemberList from './MemberList';
 const TestCard = (props) => {
 
-	let {mtId,mtCreateTime,mtTitle,mtContent,mtPlace,mtTime,mtCount,maxCount,mtList} = props.meeting;
-	console.log(mtCreateTime);
+	let {mtId,mtCreateTime,mtTitle,mtContent,mtPlace,mtTime,mtDate,mtCount,maxCount,mtList,userName} = props.meeting;
+
+	
+
+
+
+	
+
+
 	return (
 		<div class="dog-card">
 			<div class="dog-card-header" >
@@ -16,23 +24,28 @@ const TestCard = (props) => {
 			<div class="dog-card-body">
 				<div class="dog-card-body-header">
 					<h1 class="dog-card-h1">{mtTitle}</h1>
-					<p class="dog-card-body-hashtag">#여수 #순천 #광양</p>
+					<p class="dog-card-body-hashtag">#태그1 #태그2 #태그3</p>
 					<p class="dog-card-body-nickname">
-						작성자: 000<br/>
+						작성자: {userName}<br/>
 						
            		         </p>
 				</div>
 
 				<p class="dog-card-body-description">
 					장소 : {mtPlace}<br/>
-					시간 : {mtTime}<br/>
-					기타 : {mtContent}
+					일시 : {mtDate} / {mtTime}<br/>
+					기타 : {mtContent}<br/>
+					<button className="dog-button">참가</button>
+					<button className="dog-button" onClick={<MemberList id = {mtId}/>}>참가목록</button>
+					{/* onClick={<MemberList id = {mtId}/>} */}
+					
+					
+				</p>
 
-			</p>
-
-				<div class="dog-card-body-footer">
+				<div class="dog-card-body-footer" >
 					임시자리
-				<i class="dog-reg_date"> {mtCreateTime} </i>
+				<i class="dog-reg_date" > {mtCreateTime} </i>
+
 				</div>
 			</div>
 		</div>

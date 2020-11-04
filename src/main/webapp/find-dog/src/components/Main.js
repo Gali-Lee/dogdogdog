@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Login from '../pages/login/Login';
 import Board1 from '../pages/Board1/Board1';
 import Board2 from '../pages/Board2/Board2';
