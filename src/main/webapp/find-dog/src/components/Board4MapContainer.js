@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { InfoWindow } from 'google-maps-react';
 
 const { kakao } = window;
 const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, markerIdx, now }) => {
@@ -17,6 +18,7 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, markerIdx, n
 		//false = marker X, true = marker O
 		console.log(600, markerIdx);
 		console.log("now", now);
+		var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
 
 		const container = document.getElementById('myMap');
@@ -64,15 +66,7 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, markerIdx, n
 
 			for (let i = 0; i < list.length; i++) {
 				console.log("리스트for", list[i]);
-				var imageSize = new kakao.maps.Size(24,35);
-				var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-				var marker = new kakao.maps.Marker({
-					map:map,
-					position: new kakao.maps.LatLng(list[i].lat,list[i].lng),
-					title: list[i].name,
-					image: markerImage
-
-				})
+				displayMarker(list[i]);
 			}
 			map.setCenter(coords);
 
@@ -81,14 +75,26 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, markerIdx, n
 			// 키워드로 장소를 검색
 			ps.keywordSearch(searchPlace, placesSearchCB);
 		}
-		// function displayMarker(place) {
-		// 	console.log("displayMarker:", place.name);
-		// 	let marker = new kakao.maps.Marker({
-		// 		position: new kakao.maps.LatLng(place.lat, place.lng)
-		// 	});
-		// 	marker.setMap(map);
+		function displayMarker(place) {
+			var imageSize = new kakao.maps.Size(24, 35);
+			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+			var marker = new kakao.maps.Marker({
+				map: map,
+				position: new kakao.maps.LatLng(place.lat, place.lng),
+				title: place.name,
+				image: markerImage
 
-		// }
+			});
+			
+			kakao.maps.event.addListener(marker,'click',function(){
+				console.log("여기도",place.image1);
+				infowindow.setContent('<div><img src=\\src\\images\\'+place.image1+' height="200px" /></div>');
+			//	<div><img src={"\\src\\images\\"+place.image1} alt="" height="200px" /></div>
+				
+				infowindow.open(map,marker);
+			});
+
+		}
 
 		// 키워드 검색 완료 시 호출되는 콜백함수
 		function placesSearchCB(data, status, pagination) {

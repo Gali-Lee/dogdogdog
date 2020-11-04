@@ -25,6 +25,7 @@ const DetailBoard3 = (props) => {
 
 		}).then((res) => res.json())
 			.then((res) => {
+				console.log("여기",res.image1);
 				setBoard3(res);
 			});
 	}, []);
