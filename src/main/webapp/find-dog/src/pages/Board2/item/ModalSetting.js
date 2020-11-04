@@ -32,10 +32,12 @@ const ModalSetting = ({ className, visible, children, onClose, maskClosable,clos
           {/* {closable && <CloseButton className="modal-close" onClick={close} />} */}
           {/* {closable} */}
           {children}
+          
+          
         </ModalInner>
+
       </ModalWrapper>
 
-      <div>aaa</div>
     </div>
   );
 };
