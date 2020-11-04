@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cos.jwt.domain.DTO.LocationDTO;
+import com.cos.jwt.domain.user.User;
+import com.cos.jwt.domain.user.UserRepository;
 import com.cos.jwt.domain.watedDog.WantedDog;
 import com.cos.jwt.domain.watedDog.WantedDogRepository;
 
@@ -31,6 +34,8 @@ import lombok.RequiredArgsConstructor;
 public class WantedDogController {
 
 	private final WantedDogRepository wantedDogRepository;
+	private final UserRepository userRepository;
+	private final HttpSession session;
 	
 	private String 이미지저장(MultipartFile file) throws IllegalStateException, IOException {
 		File path = new File("");//상대경로 찾을려고 임의로 기본 파일주소를 찍어봄
@@ -55,17 +60,18 @@ public class WantedDogController {
 	public String 글쓰기(@RequestParam("catagory") String catagory,
 			@RequestParam("name") String name, @RequestParam("bread") String bread, @RequestParam("age") String age,
 			@RequestParam("sex") String sex, @RequestParam("place") String place, @RequestParam("lat") double lat, @RequestParam("lng") double lng,
-			@RequestParam("content") String content,@RequestParam("date") String date, @RequestParam("image1") MultipartFile image1,
+			@RequestParam("content") String content,@RequestParam("type") String type,@RequestParam("property") String property,@RequestParam("date") String date, @RequestParam("image1") MultipartFile image1,
 			@RequestParam("image2") MultipartFile image2) throws IllegalStateException, IOException{
 		System.out.println("실종/제보 글쓰기");
-		System.out.println(name);
-		System.out.println("i === "+image1);
 		String image1name=이미지저장(image1);
 		String image2name=이미지저장(image2);
+		User principal = (User) session.getAttribute("principal");
+		System.out.println(session.getAttribute("principal"));
 		WantedDog wantedDog = new WantedDog().builder().catagory(catagory).name(name).bread(bread).age(age).sex(sex).place(place)
-				.date(date).lat(lat).lng(lng).content(content).image1(image1name).image2(image2name).build();
+				.date(date).lat(lat).user(principal).lng(lng).type(type).property(property).content(content).image1(image1name).image2(image2name).build();
 		
 		wantedDogRepository.save(wantedDog);
+		
 		return "ok";
 	}
 

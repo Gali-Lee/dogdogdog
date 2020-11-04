@@ -54,8 +54,8 @@ const Wanted = (props) => {
 		age: "",
 		sex: "",
 		place: "",
-		// image1: "", 
-		// image2: "", 
+		image1: "", 
+		 image2: "", 
 		content: ""
 	});
 	useEffect(() => {
