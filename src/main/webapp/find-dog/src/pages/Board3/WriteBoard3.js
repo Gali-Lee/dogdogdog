@@ -13,6 +13,7 @@ const WriteBoard3 = () => {
 		bread: "",
 		age: "",
 		sex: "",
+		date: "",
 		place: "",
 		content: "",
 		image1: "",
@@ -85,25 +86,24 @@ const WriteBoard3 = () => {
 		const formData = new FormData();
 
 		//formData.append("id", board3.id);
-		
+
 		formData.append("catagory", board3.catagory);
 		formData.append("name", board3.name);
 		formData.append("bread", board3.bread);
 		formData.append("age", board3.age);
 		formData.append("sex", board3.sex);
 		formData.append("place", board3.place);
-		// formData.append("place", place);
-		formData.append("lat",location.lat);
-		formData.append("lng",location.lng);
+		formData.append("lat", location.lat);
+		formData.append("lng", location.lng);
 		formData.append("content", board3.content);
 		formData.append("image1", board3.image1);
 		formData.append("image2", board3.image2);
+		formData.append("date",board3.date);
 		console.log(formData);
 
 		fetch("http://localhost:8000/board3/post", {
 			method: "POST",
 			headers: {
-				// "Content-Type": "application/json; charset=utf-8"
 			},
 			body: formData
 		})
@@ -127,14 +127,13 @@ const WriteBoard3 = () => {
 			lng: lng
 		});
 	}
-	function showMap(){
+	function showMap() {
 		setVisible(true);
 	}
-	function savePlace(){
+	function savePlace() {
 		setVisible(false);
-		console.log(1000,location);
+		console.log(1000, location);
 	}
-	const [inputText, setInputText] = useState("");
 	const [place, setPlace] = useState("");
 	const [visible, setVisible] = useState(false);
 	const [location, setLocation] = useState({
@@ -142,17 +141,14 @@ const WriteBoard3 = () => {
 		lat: "",
 		lng: "",
 	});
-	const onChange = (e) => {
-		setInputText(e.target.value);
-	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		setPlace(inputText);
+		setPlace(board3.place);
 		console.log(1, place);
-		//setInputText("");
 		showMap();
 	};
+	
 	return (
 		<div>
 			<form encType="multipart/form-data">
@@ -222,21 +218,25 @@ const WriteBoard3 = () => {
 					placeholder="내용을 입력하세요"
 				/>
 				<br />
-
+				<input 
+					type="date"
+					onChange={inputHandle} 
+					value={board3.date} 
+					name="date" />
+				<br />
 				<input
 					type="text"
-					onChange={onChange}
+					onChange={inputHandle}
 					name="place"
-					value={inputText}
+					value={board3.place}
 					placeholder="장소를 입력하세요"
 				/>
-				
 				<button onClick={handleSubmit}>검색</button>
 				<br />
 				{visible ? <MapContainer searchPlace={place} latLng={setLatLng} /> : null}
-				<br/>
-				{visible ? <button onClick={savePlace}>장소 저장</button> : null }
-				<br/>
+				<br />
+				{visible ? <button onClick={savePlace}>장소 저장</button> : null}
+				<br />
 
 				<button onClick={submitPost}>등록</button>
 			</form>

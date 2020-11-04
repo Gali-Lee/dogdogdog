@@ -50,19 +50,12 @@ public class WantedDogController {
 		return uploadFileName;
 	}
 	
-	private String getFolder() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date date = new Date();
-		String str = sdf.format(date);https://whale.naver.com/details/translate?=main&wpid=RydDy7
-
-		return str.replace("-", File.separator);
-	}
 	@PostMapping(value = "/board3/post", consumes = { "multipart/form-data" })
 	@ResponseBody
 	public String 글쓰기(@RequestParam("catagory") String catagory,
 			@RequestParam("name") String name, @RequestParam("bread") String bread, @RequestParam("age") String age,
 			@RequestParam("sex") String sex, @RequestParam("place") String place, @RequestParam("lat") double lat, @RequestParam("lng") double lng,
-			@RequestParam("content") String content, @RequestParam("image1") MultipartFile image1,
+			@RequestParam("content") String content,@RequestParam("date") String date, @RequestParam("image1") MultipartFile image1,
 			@RequestParam("image2") MultipartFile image2) throws IllegalStateException, IOException{
 		System.out.println("실종/제보 글쓰기");
 		System.out.println(name);
@@ -70,7 +63,7 @@ public class WantedDogController {
 		String image1name=이미지저장(image1);
 		String image2name=이미지저장(image2);
 		WantedDog wantedDog = new WantedDog().builder().catagory(catagory).name(name).bread(bread).age(age).sex(sex).place(place)
-				.lat(lat).lng(lng).content(content).image1(image1name).image2(image2name).build();
+				.date(date).lat(lat).lng(lng).content(content).image1(image1name).image2(image2name).build();
 		
 		wantedDogRepository.save(wantedDog);
 		return "ok";

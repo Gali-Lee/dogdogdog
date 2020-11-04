@@ -1,5 +1,7 @@
 package com.cos.jwt.domain.watedDog;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +28,9 @@ public class WantedDog {
 	private String bread;
 	private String age;
 	private String sex;
+	private String date;
 	private String place;
+	
 	private double lat;
 	private double lng;
 	private String content;

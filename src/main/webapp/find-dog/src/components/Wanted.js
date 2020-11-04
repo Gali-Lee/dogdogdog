@@ -70,8 +70,9 @@ const Wanted = (props) => {
 					document.getElementById('wanted')
 					, { width: 1080, height: 1080 })
 					.then(function (blob) {
+						console.log(blob);
 						saveAs(blob, 'myImage.png');
-						history.push("/board3/detail/" + id);
+						//history.push("/board3/detail/" + id);
 					});
 			});
 	}, []);

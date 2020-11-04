@@ -12,9 +12,10 @@ const DetailBoard3 = (props) => {
 		bread: "",
 		age: "",
 		sex: "",
+		date:"",
 		place: "",
-		// image1: "",
-		// image2: "",
+		image1: "",
+		image2: "",
 		content: ""
 	});
 
@@ -47,16 +48,16 @@ const DetailBoard3 = (props) => {
 	}
 	return (
 		<div>
-			<h1>글 상세보기 페이지 입니다.</h1>
+			<img src={"\\src\\images\\"+board3.image1} alt="" height="200px" />
+			<img src={"\\src\\images\\"+board3.image2} alt="" height="200px" />
 			<div>번호 : {board3.id}</div>
 			<div>카테고리 : {board3.catagory}</div>
 			<div>반려동물 이름 : {board3.name}</div>
 			<div>견종 : {board3.bread}</div>
 			<div>나이 : {board3.age}</div>
 			<div>성별 : {board3.sex}</div>
+			<div>날짜 : {board3.date}</div>
 			<div>장소 : {board3.place}</div>
-			<img src={"\\src\\images\\"+board3.image1} alt="" height="200px" />
-			<img src={"\\src\\images\\"+board3.image2} alt="" height="200px" />
 			<div>내용 : {board3.content}</div>
 			<div><Link to={"/wanted/" + id}><button>전단지만들기</button></Link></div>
 			<div><Link to={"/board3/modify/" + id}><button>수정</button></Link></div>
