@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { InfoWindow } from 'google-maps-react';
 
 const { kakao } = window;
-const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, markerIdx, now }) => {
+const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, list, markerIdx, now }) => {
 
 	const [place, setPlace] = useState({
 		lat: "",
 		lng: "",
 	})
 	const [idx, setIdx] = useState(1);
-	const [list, setList] = useState([]);
+	const [temp, setTemp] = useState(false);
 
 	useEffect(() => {
 		console.log(5, "MapContainer2");
@@ -29,6 +29,7 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, markerIdx, n
 		const map = new kakao.maps.Map(container, options);
 		const ps = new kakao.maps.services.Places();
 
+
 		//지도 위치 옮길 때마다 지도 중심좌표 place에 저장
 		kakao.maps.event.addListener(map, 'center_changed', function () {
 			let level = map.getLevel();
@@ -41,41 +42,11 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, markerIdx, n
 			});
 			setLatLng(latLng.Ha, latLng.Ga);
 		});
-		if (markerIdx) {
-			console.log("markerIdx O", markerIdx);
-			console.log("now.lat : ", now.lat);
-			console.log("now.lng : ", now.lng);
-			let coords = new kakao.maps.LatLng(now.lat, now.lng);
-			console.log("coord", coords.Ga);
-			console.log("coord", coords.Ha);
 
-			fetch("http://localhost:8000/board4", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json; charset=utf-8",
-					"Authorization": localStorage.getItem("Authorization")
-				},
-				body: JSON.stringify(now)
-
-			}).then((res) => res.json())
-				.then((res) => {
-					setList(res);
-				});
-			console.log("리스트", list);
+		ps.keywordSearch(searchPlace, placesSearchCB);
+		function displayMarker(place) {
 			var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 
-			for (let i = 0; i < list.length; i++) {
-				console.log("리스트for", list[i]);
-				displayMarker(list[i]);
-			}
-			map.setCenter(coords);
-
-		} else {
-			console.log("markerIdx X", markerIdx);
-			// 키워드로 장소를 검색
-			ps.keywordSearch(searchPlace, placesSearchCB);
-		}
-		function displayMarker(place) {
 			var imageSize = new kakao.maps.Size(24, 35);
 			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
 			var marker = new kakao.maps.Marker({
@@ -85,13 +56,13 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, markerIdx, n
 				image: markerImage
 
 			});
-			
-			kakao.maps.event.addListener(marker,'click',function(){
-				console.log("여기도",place.image1);
-				infowindow.setContent('<div><img src=\\src\\images\\'+place.image1+' height="200px" /></div>');
-			//	<div><img src={"\\src\\images\\"+place.image1} alt="" height="200px" /></div>
-				
-				infowindow.open(map,marker);
+
+			kakao.maps.event.addListener(marker, 'click', function () {
+				console.log("여기도", place.image1);
+				infowindow.setContent('<div><img src=\\src\\images\\' + place.image1 + ' height="200px" /></div>');
+				//	<div><img src={"\\src\\images\\"+place.image1} alt="" height="200px" /></div>
+
+				infowindow.open(map, marker);
 			});
 
 		}
@@ -111,16 +82,21 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, markerIdx, n
 				// 검색된 장소 위치를 기준으로 지도 범위를 재설정
 				console.log(4, (bounds.da + bounds.ia) / 2);
 				console.log(5, (bounds.ka + bounds.ja) / 2);
+				for (let i = 0; i < list.length; i++) {
+					console.log("리스트for", list[i]);
+					displayMarker(list[i]);
+				}
 				map.setBounds(bounds);
+				
 			}
 		}
 
 
-	}, [searchPlace, markerIdx, idx]);
+	}, [searchPlace]);
 	function showMarker() {
 		setIdx(idx + 1);
 	}
-	//now != null 마커 o
+
 
 	return (
 		<div>
@@ -129,9 +105,7 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, markerIdx, n
 				height: '500px'
 			}}>
 				{}
-
 			</div>
-			<button onClick={showMarker}>리스트보기</button>
 		</div>
 	);
 };

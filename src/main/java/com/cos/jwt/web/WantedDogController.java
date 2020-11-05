@@ -119,9 +119,8 @@ public class WantedDogController {
 		return "ok";
 	}
 	
-	@PostMapping("/board4")
-	@ResponseBody
-	public List<WantedDog> 지도목록(@RequestBody LocationDTO location) {
+	@GetMapping("/board4")
+	public List<WantedDog> 지도목록() {
 		System.out.println("지도 목록 검색");
 		return wantedDogRepository.findAll();
 	}
