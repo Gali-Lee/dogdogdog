@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.jwt.domain.board2.Meeting;
-
+import com.cos.jwt.domain.board2.MeetingMember;
 import com.cos.jwt.domain.board2.MeetingMemberRepository;
 import com.cos.jwt.domain.board2.MeetingRepository;
 import com.cos.jwt.domain.board2.PageInfo;
@@ -73,12 +73,13 @@ public class MeetingController {
 	}
 	
 	
-	//필요없을듯..?
-//	@GetMapping("/board2/{id}")
-//	public Meeting mtMemberList(@PathVariable int id) {
-//		return mtRepository.findById(id).get();
+	//생각해보니 이거 잘못됐네. meeting에서 현재인원 올라가야되니 결국 meeting타고 meetingmember 생성해야함.
+//	@PostMapping("/board2/mList/")
+//	public String mtmInsert(@RequestBody MeetingMember mtm) {
+//		mtmRepository.save(mtm);
+//		return "참가완료";
 //	}
-//	
+	
 	
 	@GetMapping("/board2/mList/{id}")
 	public List<String> mtmList(@PathVariable int id) {
