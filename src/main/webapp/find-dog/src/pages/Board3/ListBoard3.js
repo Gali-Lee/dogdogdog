@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import ItemBoard3 from '../../components/ItemBoard3';
+import styled from "styled-components"
 
+const ListStyle = styled.div`
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 10px;
+  //padding: 20px 250px;
+`;
 const ListBoard3 = () => {
 
 	const [board3s, setBoard3s] = useState([]);
 
 	useEffect(() => {
 
-		console.log("게시판 목록 그려짐 ");
+		console.log("board3 목록");
 
 		fetch("http://localhost:8000/board3", {
 			method: "GET",
@@ -19,21 +26,11 @@ const ListBoard3 = () => {
 	}, []);
 
 	return (
-		<table>
-			<tr>
-				<th>번호</th>
-				<th>카테고리</th>
-				<th>이름</th>
-				<th>견종</th>
-				<th>나이</th>
-				<th>성별</th>
-				<th>장소</th>
-				<th>내용</th>
-			</tr>
+		<ListStyle>
 			{board3s.map((board3) => (
 				<ItemBoard3 key={board3.id} board3={board3} />
 			))}
-		</table>
+		</ListStyle>
 	);
 };
 

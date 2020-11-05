@@ -1,10 +1,17 @@
 package com.cos.jwt.domain.user;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import com.cos.jwt.domain.watedDog.WantedDog;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +33,12 @@ public class User {
 	private String password;
 	private String email;
 	private String place;
+
 	private String phoneNumber;
+
+	@JsonIgnoreProperties({"user"}) //무시하고 싶은 변수명 
+	@OneToMany(mappedBy = "user", fetch= FetchType.EAGER)//Post 오브젝트의 user 변수
+	private List<WantedDog> wantedDogs;
+	
 }
 
