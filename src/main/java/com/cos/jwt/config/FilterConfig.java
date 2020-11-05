@@ -42,7 +42,8 @@ public class FilterConfig {
 		FilterRegistrationBean<JwtAuthorizationFilter> bean = 
 				new FilterRegistrationBean<>(new JwtAuthorizationFilter(personRepository));
 		bean.addUrlPatterns("/dogJoinProc");
-		bean.addUrlPatterns("/board3/post");
+		bean.addUrlPatterns("/board3/*");
+		bean.addUrlPatterns("/person/*");
 		bean.setOrder(2); // 낮은 번호부터 실행됨.
 		return bean;
 	}

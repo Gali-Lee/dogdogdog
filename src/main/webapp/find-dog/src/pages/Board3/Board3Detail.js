@@ -3,6 +3,7 @@ import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 import { useHistory, Link } from 'react-router-dom';
 import styled from "styled-components"
+import Board3Comment from './Board3Comment';
 const ImageStyle = styled.img`
   width: 100%;
   height: 200px;
@@ -44,6 +45,7 @@ left: 50px;
 `;
 
 const Board3Detail = (props) => {
+	
 	const id = props.match.params.id;
 	const history = useHistory();
 
@@ -64,8 +66,8 @@ const Board3Detail = (props) => {
 		user: ""
 	});
 
+	//해당하는 페이지의 데이터를 들고옴
 	useEffect(() => {
-
 		fetch("http://localhost:8000/board3/" + id, {
 			method: "GET",
 
@@ -74,23 +76,17 @@ const Board3Detail = (props) => {
 				console.log(res);
 				setBoard3(res);
 			});
-		fetch("http://localhost:8000/board3/" + id, {
-			method: "GET",
-
-		}).then((res) => res.json())
-			.then((res) => {
-				console.log(res);
-				setBoard3(res);
-			});
+		
 	}, []);
 
+	//삭제버튼 눌렀을때 실행
 	function submitDelete(e) {
+
 		e.preventDefault();
 		console.log("submitDelete() 실행");
 
 		fetch("http://localhost:8000/board3/" + id, {
 			method: "DELETE",
-
 		})
 			.then(res => res.text())
 			.then(res => {
@@ -100,6 +96,8 @@ const Board3Detail = (props) => {
 				}
 			})
 	}
+
+	//전단지만들기 버튼 눌렀을때 실행
 	function submitMake(e) {
 		e.preventDefault();
 		domtoimage.toBlob(
@@ -111,6 +109,7 @@ const Board3Detail = (props) => {
 				//history.push("/board3/detail/" + id);
 			});
 	}
+
 	return (
 		<div>
 			<SectionStyle id="wanted">
@@ -128,11 +127,12 @@ const Board3Detail = (props) => {
 				<div>특징 : {board3.property}</div>
 				{board3.user.email}
 			</SectionStyle>
+
 			<div><Link to={"/board3/modify/" + id}><button>수정</button></Link></div>
 			<div><button onClick={submitDelete}>삭제</button></div>
 			<div><button onClick={submitMake}>전단지 만들기</button></div>
-			{/* 댓글 */}
-
+			
+			<Board3Comment id={id}/>
 		</div>
 	);
 };
