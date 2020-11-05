@@ -49,6 +49,7 @@ public class IndexController {
 		return new ResponseEntity<String>("ok", HttpStatus.CREATED);
 
 	}
+
 	@GetMapping("/person/{id}")
 	public ResponseEntity<?> 회원정보(@PathVariable int id, HttpServletRequest request) {
 		HttpSession session = request.getSession();
