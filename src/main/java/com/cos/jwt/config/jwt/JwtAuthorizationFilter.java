@@ -32,24 +32,19 @@ public class JwtAuthorizationFilter implements Filter {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
-		System.out.println("1234");
 		String jwtToken = req.getHeader(JwtProps.header);
-		System.out.println("44");
-		System.out.println(jwtToken);
 		if (jwtToken == null) {
 			PrintWriter out = resp.getWriter();
 			out.print("jwtToken not found");
 			out.flush();
 		} else {
 			jwtToken = jwtToken.replace(JwtProps.auth, "");
-			int personId = JWT.require(Algorithm.HMAC512(JwtProps.secret)).build().verify(jwtToken).getClaim("id").asInt();
-			System.out.println(personId);
-			HttpSession session = req.getSession();
-			User personEntity = personRepository.findById(personId).orElseThrow();
-			session.setAttribute("principal", personEntity);
-			System.out.println("personEntity : "+personEntity.toString());
-			System.out.println("sdfsdfsdf");
 			try {
+				int personId = JWT.require(Algorithm.HMAC512(JwtProps.secret)).build().verify(jwtToken).getClaim("id")
+						.asInt();
+				HttpSession session = req.getSession();
+				User personEntity = personRepository.findById(personId).get();
+				session.setAttribute("principal", personEntity);
 				chain.doFilter(request, response);
 			} catch (Exception e) {
 				PrintWriter out = resp.getWriter();
