@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import ModalSetting from './item/ModalSetting';
 
-
 const ModalPage = () => {
 	
 	
-
+		//기본값
 		const [meeting,setMeeting] =useState({
 			mtTitle : "",
 			maxCount :"",
@@ -16,7 +15,7 @@ const ModalPage = () => {
 			userName: localStorage.user,
 		});
 
-
+		//등록전송 함수
 		const submitInsert = (e) => {
 			e.preventDefault();
 			fetch("http://localhost:8000/board2",{
@@ -33,6 +32,7 @@ const ModalPage = () => {
 			window.location.reload(); //페이지 새로고침
 		}
 
+		//form에있는  
 		const changeValue = (e) => {
 		setMeeting({
 			...meeting,
@@ -59,7 +59,8 @@ const ModalPage = () => {
 					onClose={closeModal}>
 					{/* =====모달 바디 시작=====*/}
 					{/* 제목(mtTitle), 모임인원(maxCount),시간(mtTime),장소(mtPlace),기타(mtContent)  */}
-					<form action="http://localhost:8000/board2/" method="post">
+					{/* <form action="http://localhost:8000/board2/" method="post"> */}
+					<form>
 						<h5>모임 개설</h5> 
 						{/* <div onChange={changeValue} value={meeting.userName} name="userName"/> */}
 						제목 : <input onChange={changeValue} value={meeting.mtTitle} name="mtTitle"/><br />

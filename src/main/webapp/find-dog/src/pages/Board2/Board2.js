@@ -20,10 +20,8 @@ const Board2 = () => {
 
 	useEffect(() => {
 		fetch("http://localhost:8000/board2/" + page.p).then(res => res.json()).then(
-			res => {
-				setMeetings(res);
-				console.log("res = ", res);
-			}
+			res => 
+				setMeetings(res)
 		);
 		fetch("http://localhost:8000/board2/count").then(res => res.text()).then(
 			res => {

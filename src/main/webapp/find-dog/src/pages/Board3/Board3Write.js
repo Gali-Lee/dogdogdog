@@ -158,12 +158,10 @@ const Board3Write = () => {
 				};
 			});
 	}
-	function setLatLng(title, lat, lng) {
-		console.log(30, title);
+	function setLatLng(lat, lng) {
 		console.log(30, lat);
 		console.log(30, lng);
 		setLocation({
-			title: title,
 			lat: lat,
 			lng: lng
 		});

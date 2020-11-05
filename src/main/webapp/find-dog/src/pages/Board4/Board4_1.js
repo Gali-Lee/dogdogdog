@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Board4MapContainer from '../../components/Board4MapContainer';
 
 const Board4_1 = () => {
 	const [inputText, setInputText] = useState("");
 	const [place, setPlace] = useState("");
 	const [now,setNow] = useState("");
+	const [list,setList] = useState([]);
 	//marker ox
 	const [markerIdx, setMarkerIdx] = useState(false);
 
 	const onChange = (e) => {
 		setInputText(e.target.value);
 	};
+	useEffect(()=>{
+		fetch("http://localhost:8000/board4", {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json; charset=utf-8",
+					"Authorization": localStorage.getItem("Authorization")
+				},
+
+			}).then((res) => res.json())
+				.then((res) => {
+					setList(res);
+				});
+	},[])
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -43,9 +57,8 @@ const Board4_1 = () => {
 					value={inputText}
 			/>
 			<button onClick={handleSubmit}>위치 검색</button>
-			<Board4MapContainer searchPlace={place} now={now} setMarkerIdx={setMarkerIdx} markerIdx={markerIdx} setLatLng={setLatLng}></Board4MapContainer>
-			<button onClick={show}>여기서 찾기 </button>
-			<button onClick={re}>다시찾기</button>
+			<Board4MapContainer searchPlace={place} list={list} now={now} setLatLng={setLatLng}></Board4MapContainer>
+
 
 		</div>
 	);

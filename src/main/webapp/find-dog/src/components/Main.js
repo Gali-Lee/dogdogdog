@@ -11,7 +11,6 @@ import Board4_1 from '../pages/Board4/Board4_1';
 import Board3Modify from '../pages/Board3/Board3Modify';
 import Board3Detail from '../pages/Board3/Board3Detail';
 import Board3Write from '../pages/Board3/Board3Write';
-
 const Main = () => {
 	return (
 		<div>
