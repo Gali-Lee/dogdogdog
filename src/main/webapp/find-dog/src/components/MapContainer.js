@@ -30,7 +30,6 @@ const MapContainer = ({ searchPlace,latLng }) => {
 				let bounds = new kakao.maps.LatLngBounds();
 
 				for (let i = 0; i < data.length; i++) {
-					displayMarker(data[i]);
 					bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
 				}
 
@@ -38,8 +37,18 @@ const MapContainer = ({ searchPlace,latLng }) => {
 				map.setBounds(bounds);
 			}
 		}
+		let marker = new kakao.maps.Marker({
+			position: map.getCenter()
+		});
+		marker.setMap(map);
+		kakao.maps.event.addListener(map,'click',function(mouseEvent){
+			var latlng=mouseEvent.latLng;
+
+			marker.setPosition(latlng);
+			latLng(latlng.getLat(),latlng.getLng());
+		});
 		let infowindow = new kakao.maps.InfoWindow({ zIndex: 1 });
-		function displayMarker(place) {
+		/* function displayMarker(place) {
 			console.log(3,"marker click");
 			console.log(4,place.place_name)
 			let marker = new kakao.maps.Marker({
@@ -54,7 +63,7 @@ const MapContainer = ({ searchPlace,latLng }) => {
 				
 				alert("장소가 등록되었습니다.");
 			});
-		}
+		} */
 	}, [searchPlace]);
 
 
