@@ -104,12 +104,12 @@ const Join = (props) => {
 						value={user.phoneNumber} placeholder="폰번호 입력" />
 				</Form.Item>
 
-				<Form.Item label="지역" type="text">
+				{/* <Form.Item label="지역" type="text">
 					<Select type="text" name="place" onChange={inputHandle}>
 						<option name="place" value="진구">진구</option>
 						<option name="place" value="남구">남구</option>
 					</Select>
-				</Form.Item>
+				</Form.Item> */}
 
 
 				{/* <Form.Item
