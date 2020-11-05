@@ -21,6 +21,7 @@ const Board3List = () => {
 
 		}).then((res) => res.json())
 			.then((res) => {
+				console.log(res);
 				setBoard3s(res);
 			});
 	}, []);

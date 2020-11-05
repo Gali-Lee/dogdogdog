@@ -36,7 +36,7 @@ public class User {
 	private String place;
 	private String phoneNumber;
 
-	@JsonIgnoreProperties({"user"}) //무시하고 싶은 변수명 
+	@JsonIgnoreProperties({"user","content"}) //무시하고 싶은 변수명 
 	@OneToMany(mappedBy = "user", fetch= FetchType.LAZY)//Post 오브젝트의 user 변수
 	private List<Board3> board3s;
 	

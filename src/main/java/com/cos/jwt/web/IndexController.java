@@ -2,7 +2,6 @@ package com.cos.jwt.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,10 +50,6 @@ public class IndexController {
 
 	}
 
-	
-
-
-	// @CrossOrigin(origins = "http://127.0.0.1:5500", methods = RequestMethod.GET)
 	@GetMapping("/person/{id}")
 	public ResponseEntity<?> 회원정보(@PathVariable int id, HttpServletRequest request) {
 		HttpSession session = request.getSession();
