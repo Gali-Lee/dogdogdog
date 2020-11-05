@@ -1,4 +1,3 @@
-
 server:
   port: 8000
   servlet:
@@ -10,8 +9,6 @@ spring:
     url: jdbc:mysql://localhost:3306/cos?serverTimezone=Asia/Seoul
     username: cos
     password: bitc5600
-  servlet:    multipart:      max-request-size: 50MB
-      max-file-size: 50MB        
     
   jpa:
     hibernate:
@@ -19,4 +16,3 @@ spring:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
-

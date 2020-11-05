@@ -48,11 +48,6 @@ public class IndexController {
 		return new ResponseEntity<String>("ok",HttpStatus.CREATED);
 		
 	}
-//	@GetMapping("/user")
-//	public String 가져오기(String username) {
-//		
-//		return phoneNumber;
-//	}
 	
 	//@CrossOrigin(origins = "http://127.0.0.1:5500", methods = RequestMethod.GET)
 	@GetMapping("/person/{id}")
