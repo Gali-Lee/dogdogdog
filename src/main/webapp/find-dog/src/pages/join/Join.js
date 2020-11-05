@@ -29,6 +29,7 @@ const Join = (props) => {
 		password: "",
 		place: "",
 		email: "",
+		phoneNumber: ""
 	});
 
 	const onFinish = (values) => {
@@ -64,7 +65,7 @@ const Join = (props) => {
 	}
 	return (
 
-		// 회원 정보 오브젝트에 안들어감 수정해야함.
+
 		<div>
 			<Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
 				<Form.Item
@@ -92,7 +93,26 @@ const Join = (props) => {
 						value={user.password} placeholder="비밀번호 입력" />
 				</Form.Item>
 
+
 				<Form.Item
+					name={['user', 'phoneNumber']}
+					label="폰번호"
+				>
+					<Input type="text"
+						name="phoneNumber"
+						onChange={inputHandle}
+						value={user.phoneNumber} placeholder="폰번호 입력" />
+				</Form.Item>
+
+				<Form.Item label="지역" type="text">
+					<Select type="text" name="place" onChange={inputHandle}>
+						<option name="place" value="진구">진구</option>
+						<option name="place" value="남구">남구</option>
+					</Select>
+				</Form.Item>
+
+
+				{/* <Form.Item
 					name={['user', 'place']}
 					label="지역"
 				>
@@ -100,7 +120,7 @@ const Join = (props) => {
 						name="place"
 						onChange={inputHandle}
 						value={user.place} placeholder="지역 입력" />
-				</Form.Item>
+				</Form.Item> */}
 
 
 				<Form.Item
