@@ -22,25 +22,53 @@ const validateMessages = {
 		email: '${label} is not validate email!'
 	},
 };
+let pMessage = "";
 
 const Join = (props) => {
 	const [user, setUser] = useState({
 		username: "",
 		password: "",
+		repassword: "",
 		place: "",
 		email: "",
 		phoneNumber: ""
 	});
 
+
 	const onFinish = (values) => {
 		console.log(values);
 	};
 
+	function check() {
+		if (user.password === user.repassword) {
+			pMessage = "일치합니다";
+		} else if (user.password !== user.repassword) {
+			pMessage = "불일치";
+		}
+	}
 
 	function inputHandle(e) {
 		setUser({ ...user, [e.target.name]: e.target.value });
-		console.log(user)
+		console.log(user);
+		Check();
+		// setTimeout(Check, 500);
+		// if (e.target.name !== 'name') {
+		// }
 	}
+	function Check(){
+		console.log("check 들어옴");
+		if (user.password === user.repassword) {
+				pMessage = "일치합니다";
+				console.log(pMessage);
+			} else if (user.password !== user.repassword) {
+				pMessage = "불일치";
+				console.log(pMessage);
+			}
+	}
+
+
+
+
 
 	function join(e) {
 		e.preventDefault();
@@ -63,9 +91,10 @@ const Join = (props) => {
 				}
 			});
 	}
+
+
+
 	return (
-
-
 		<div>
 			<Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
 				<Form.Item
@@ -93,6 +122,20 @@ const Join = (props) => {
 						value={user.password} placeholder="비밀번호 입력" />
 				</Form.Item>
 
+				<Form.Item
+					name={['user', 'repassword']}
+					label="비밀번호 확인"
+
+				>
+					<Input type="password"
+						name="repassword"
+						onChange={inputHandle}
+						value={user.repassword} placeholder="비밀번호 재입력" />
+				</Form.Item>
+				<text>{pMessage}</text>
+
+
+
 
 				<Form.Item
 					name={['user', 'phoneNumber']}
@@ -105,10 +148,16 @@ const Join = (props) => {
 				</Form.Item>
 
 				<Form.Item label="지역" type="text">
-					<Select type="text" name="place" onChange={inputHandle}>
+					<select type="text" name="place" onChange={inputHandle}>
 						<option name="place" value="진구">진구</option>
 						<option name="place" value="남구">남구</option>
-					</Select>
+						<option name="place" value="남구">강서구</option>
+						<option name="place" value="남구">해운대구</option>
+						<option name="place" value="남구">서구</option>
+						<option name="place" value="남구">북구</option>
+						<option name="place" value="남구">수영구</option>
+						<option name="place" value="남구">동래구</option>
+					</select>
 				</Form.Item>
 
 
@@ -127,7 +176,7 @@ const Join = (props) => {
 					name={['user', 'email']}
 					label="이메일"
 				>
-					<Input type="text"
+					<Input type="email"
 						name="email"
 						onChange={inputHandle}
 						value={user.email}

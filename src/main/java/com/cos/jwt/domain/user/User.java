@@ -34,7 +34,6 @@ public class User {
 	private String password;
 	private String email;
 	private String place;
-
 	private String phoneNumber;
 
 	@JsonIgnoreProperties({"user"}) //무시하고 싶은 변수명 

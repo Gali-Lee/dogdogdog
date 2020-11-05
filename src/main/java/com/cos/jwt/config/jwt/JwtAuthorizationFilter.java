@@ -45,7 +45,6 @@ public class JwtAuthorizationFilter implements Filter {
 				HttpSession session = req.getSession();
 				User personEntity = personRepository.findById(personId).get();
 				session.setAttribute("principal", personEntity);
-
 				chain.doFilter(request, response);
 			} catch (Exception e) {
 				PrintWriter out = resp.getWriter();
