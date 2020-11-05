@@ -141,7 +141,7 @@ const Join = (props) => {
 					name={['user', 'phoneNumber']}
 					label="폰번호"
 				>
-					<InputNumber type="text"
+					<Input type="text"
 						name="phoneNumber"
 						onChange={inputHandle}
 						value={user.phoneNumber} placeholder="폰번호 입력" />
