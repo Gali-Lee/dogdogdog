@@ -1,8 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import { InfoWindow } from 'google-maps-react';
+import Test from './Test.js';
+import styled from 'styled-components';
+
+const ImageStyle = styled.img`
+  width: 100%;
+  height: 200px;
+`;
+const SectionStyle = styled.div`
+background-color:white;
+`;
+const Section1Style = styled.div`
+display: grid;
+grid-template-columns: auto;
+color: red;
+border: 2px solid black;
+background-color:white;
+font-size: 65px;
+font-weight:bold;
+text-shadow: 3px 3px black;
+text-align: center;
+`;
+const Section2Style = styled.div`
+display: grid;
+grid-template-columns: auto auto;
+background-color:white;
+border:2px solid black;
+margin: 20px 20px;
+`;
+const Section3Style = styled.div`
+display: grid;
+background-color: red;
+color: white;
+text-align: center;
+`;
+const TextStyle = styled.div`
+display: inline-block;
+background-color: rgba(192,192,192,0.5);
+position: relative;
+/* 겹치듯이 사용할려면 무조건 렐러티브 */
+top: 10px;
+left: 50px;
+`;
 
 const { kakao } = window;
-const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, list, markerIdx, now }) => {
+const Board4MapContainer = ({ id, searchPlace, setLatLng, setMarkerIdx, setId, list, markerIdx, now }) => {
 
 	const [place, setPlace] = useState({
 		lat: "",
@@ -10,7 +52,6 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, list, marker
 	})
 	const [idx, setIdx] = useState(1);
 	const [temp, setTemp] = useState(false);
-
 	useEffect(() => {
 		console.log(5, "MapContainer2");
 		console.log(200, { searchPlace });
@@ -28,7 +69,7 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, list, marker
 		};
 		const map = new kakao.maps.Map(container, options);
 		const ps = new kakao.maps.services.Places();
-
+		
 
 		//지도 위치 옮길 때마다 지도 중심좌표 place에 저장
 		kakao.maps.event.addListener(map, 'center_changed', function () {
@@ -59,6 +100,23 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, list, marker
 
 			kakao.maps.event.addListener(marker, 'click', function () {
 				console.log("여기도", place.image1);
+				// let content='<div><SectionStyle id="wanted"><Section1Style>'+place.type+'를 찾습니다</Section1Style>'
+				// 	+'<Section2Style>'
+				// 	+'<div><ImageStyle src=\\src\\images\\'+place.image1+ ' height="200px" /></div>'
+				// 	+'<div><ImageStyle src=\\src\\images\\'+place.image2+ ' height="200px" /></div>'
+				// 	+'</Section2Style><Section3Style>'
+				// 	+'<div>'+place.bread+' ('+place.sex+'/'+place.age+'살)</div>'
+				// 	+'<div>'+place.date+','+place.place+' 근처</div>'
+				// 	+'</Section3Style>'
+				// 	+'<div>내용 : '+place.content+'</div>'
+				// 	+'<div>특징 : '+place.property+'</div>'
+				// 	+place.user.email
+				// 	+'</SectionStyle>'
+				// 	+'</div>';
+				//
+				setId(place.id);
+				console.log("place.id"+place.id);
+				console.log("idid",id);
 				infowindow.setContent('<div><img src=\\src\\images\\' + place.image1 + ' height="200px" /></div>');
 				//	<div><img src={"\\src\\images\\"+place.image1} alt="" height="200px" /></div>
 
@@ -106,6 +164,7 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, list, marker
 			}}>
 				{}
 			</div>
+			
 		</div>
 	);
 };

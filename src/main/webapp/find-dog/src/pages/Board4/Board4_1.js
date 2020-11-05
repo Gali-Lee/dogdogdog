@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Board4MapContainer from '../../components/Board4MapContainer';
+import Test from '../../components/Test';
 
 const Board4_1 = () => {
 	const [inputText, setInputText] = useState("");
 	const [place, setPlace] = useState("");
 	const [now,setNow] = useState("");
 	const [list,setList] = useState([]);
+	const [id,setId] = useState(0);
+	const [id1,setId1] = useState("");
 	//marker ox
 	const [markerIdx, setMarkerIdx] = useState(false);
 
@@ -57,8 +60,8 @@ const Board4_1 = () => {
 					value={inputText}
 			/>
 			<button onClick={handleSubmit}>위치 검색</button>
-			<Board4MapContainer searchPlace={place} list={list} now={now} setLatLng={setLatLng}></Board4MapContainer>
-
+			<Board4MapContainer id={id} setId={setId} searchPlace={place} list={list} now={now} setLatLng={setLatLng}></Board4MapContainer>
+			<Test id={id1}/>
 
 		</div>
 	);
