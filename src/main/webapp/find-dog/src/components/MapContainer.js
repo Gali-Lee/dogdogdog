@@ -61,7 +61,7 @@ const MapContainer = ({ searchPlace,latLng }) => {
 				
 				latLng(place.place_name,place.y,place.x);
 				
-				
+				alert("장소가 등록되었습니다.");
 			});
 		} */
 	}, [searchPlace]);

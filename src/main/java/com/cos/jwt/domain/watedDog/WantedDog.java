@@ -1,10 +1,16 @@
 package com.cos.jwt.domain.watedDog;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.cos.jwt.domain.user.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,22 +28,26 @@ public class WantedDog {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String catagory;
+	private String type;
 	private String name;
 	private String bread;
 	private String age;
 	private String sex;
+	private String date;
 	private String place;
+	@Column(length = 10000000)
+	private String content;
+	private String property;
 	private double lat;
 	private double lng;
-	private String content;
 
 	@Column(length = 10000000)
 	private String image1;
 	
 	@Column(length = 10000000)
-	private String image2;
+	private String image2;	
 	
-	@Column(length = 10000000)
-	private String wanted;
-	
+	@JoinColumn(name="userId")
+	@ManyToOne
+	private User user;
 }

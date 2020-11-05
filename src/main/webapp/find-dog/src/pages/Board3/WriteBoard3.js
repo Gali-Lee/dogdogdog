@@ -1,22 +1,62 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import MapContainer from '../../components/MapContainer';
+import styled from "styled-components";
 
+const FormStyle = styled.form`
+  display: grid;
+  justify-items: auto;
+`;
+const InputBoxStyle = styled.div`
+display:grid;
+grid-template-columns: auto auto;
+`;
+const InputStyle = styled.input`
+  height: 45px;
+  width: 80%;
+  color: rgb(100, 100, 100);
+  font-size: 15px;
+  border: 1px solid #003458;
+  border-radius: 6px;
+`;
+const SelectStyle = styled.select`
+  height: 45px;
+  width: 80%;
+  color: rgb(100, 100, 100);
+  font-size: 15px;
+  border: 1px solid #003458;
+  border-radius: 6px;
+`;
+const ButtonStyle = styled.button`
+  background-color: #003458;
+  color: white;
+  width: 80px;
+  height: 45px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 0px;
+  cursor: pointer;
+`;
 const WriteBoard3 = () => {
 
 	const history = useHistory();
 
 	const [board3, setBoard3] = useState({
-		id: "",
-		catagory: "",
-		name: "",
-		bread: "",
-		age: "",
-		sex: "",
-		place: "",
-		content: "",
-		image1: "",
-		image2: ""
+		id: "", //번호
+		image1: "",//이미지1
+		image2: "",//이미지2
+		catagory: "",//실종, 제보
+		type: "",//고양이, 강아지
+		name: "",//동물 이름
+		bread: "",//동물 종류
+		age: "",//나이
+		sex: "",//성별
+		date: "",//발견날짜
+		place: "",//발견장소
+		content: "",//내용
+		property: "",//특징
+
 	});
 
 	const uploadImg = async (e) => {
@@ -85,34 +125,34 @@ const WriteBoard3 = () => {
 		const formData = new FormData();
 
 		//formData.append("id", board3.id);
-		
+
 		formData.append("catagory", board3.catagory);
 		formData.append("name", board3.name);
 		formData.append("bread", board3.bread);
 		formData.append("age", board3.age);
+		formData.append("type", board3.type);
 		formData.append("sex", board3.sex);
 		formData.append("place", board3.place);
-		// formData.append("place", place);
-		formData.append("lat",location.lat);
-		formData.append("lng",location.lng);
 		formData.append("content", board3.content);
 		formData.append("image1", board3.image1);
 		formData.append("image2", board3.image2);
-		console.log(formData);
+		formData.append("date", board3.date);
+		formData.append("property", board3.property);
+		formData.append("user",localStorage.user);
+		formData.append("lat", location.lat);
+		formData.append("lng", location.lng);
 
 		fetch("http://localhost:8000/board3/post", {
 			method: "POST",
 			headers: {
-				// "Content-Type": "application/json; charset=utf-8"
+				"Authorization": localStorage.getItem("Authorization"),
 			},
 			body: formData
 		})
-			.then(res => {
-				res.text();
-			})
+			.then(res =>res.text())
 			.then(res => {
 				if (res === "ok") {
-					alert("글이 등록되었습니다.");
+					 alert("글이 등록되었습니다.");
 					history.push("/board3");
 				};
 			});
@@ -125,14 +165,13 @@ const WriteBoard3 = () => {
 			lng: lng
 		});
 	}
-	function showMap(){
+	function showMap() {
 		setVisible(true);
 	}
-	function savePlace(){
+	function savePlace() {
 		setVisible(false);
-		console.log(1000,location);
+		console.log(1000, location);
 	}
-	const [inputText, setInputText] = useState("");
 	const [place, setPlace] = useState("");
 	const [visible, setVisible] = useState(false);
 	const [location, setLocation] = useState({
@@ -140,21 +179,20 @@ const WriteBoard3 = () => {
 		lat: "",
 		lng: "",
 	});
-	const onChange = (e) => {
-		setInputText(e.target.value);
-	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		setPlace(inputText);
+		setPlace(board3.place);
 		console.log(1, place);
-		//setInputText("");
 		showMap();
 	};
+
 	return (
 		<div>
-			<form encType="multipart/form-data">
-				<input
+			<FormStyle encType="multipart/form-data">
+				<label>사진 첨부</label>
+				<br />
+				<InputStyle
 					type="file"
 					name="image1"
 					onChange={(e) => {
@@ -162,7 +200,7 @@ const WriteBoard3 = () => {
 					}}
 				/>
 				<br />
-				<input
+				<InputStyle
 					type="file"
 					name="image2"
 					onChange={(e) => {
@@ -170,74 +208,120 @@ const WriteBoard3 = () => {
 					}}
 				/>
 				<br />
-				<select
+				<label>카테고리</label>
+				<SelectStyle
 					name="catagory"
 					value={board3.catagory}
 					onChange={selectHandle}>
 					<option selected value="선택안함">선택안함</option>
 					<option value="실종">실종</option>
 					<option value="제보">제보</option>
-				</select>
+				</SelectStyle>
 				<br />
-				<input
+				<label>동물 종류</label>
+				<SelectStyle
+					name="type"
+					value={board3.type}
+					onChange={selectHandle}>
+					<option selected value="선택안함">선택안함</option>
+					<option value="강아지">강아지</option>
+					<option value="고양이">고양이</option>
+				</SelectStyle>
+				<br />
+				<label>이름</label>
+				<InputStyle
 					type="text"
 					onChange={inputHandle}
 					name="name"
 					value={board3.name}
-					placeholder="반려동물의 이름을 입력하세요"
+					placeholder="이름을 입력하세요"
 				/>
 				<br />
-				<input
+				<label>품종</label>
+				<InputStyle
 					type="text"
 					onChange={inputHandle}
 					name="bread"
 					value={board3.bread}
-					placeholder="견종을 입력하세요"
+					placeholder="품종을 입력하세요"
 				/>
 				<br />
-				<input
-					type="text"
-					onChange={inputHandle}
+				<label>나이</label>
+				<SelectStyle
 					name="age"
 					value={board3.age}
-					placeholder="나이를 입력하세요"
-				/>
+					onChange={selectHandle}>
+					<option selected value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+					<option value="6">6</option>
+					<option value="7">7</option>
+					<option value="8">8</option>
+					<option value="9">9</option>
+					<option value="10">10</option>
+					<option value="11">11</option>
+					<option value="12">12</option>
+					<option value="13">13</option>
+					<option value="14">14</option>
+					<option value="15">15</option>
+					<option value="16">16</option>
+					<option value="17">17</option>
+					<option value="18">18</option>
+					<option value="19">19</option>
+					<option value="20">20</option>
+
+				</SelectStyle>
 				<br />
-				<select
+				<label>성별</label>
+				<SelectStyle
 					name="sex"
 					value={board3.sex}
 					onChange={selectHandle}>
-					<option selected value="선택안함">선택안함</option>
-					<option value="여자">여자</option>
-					<option value="남자">남자</option>
-				</select>
+					<option selected value="모름">모름</option>
+					<option value="수컷">수컷</option>
+					<option value="암컷">암컷</option>
+					<option value="중성화된 수컷">중성화된 수컷</option>
+					<option value="중성화된 암컷">중성화된 암컷</option>
+				</SelectStyle>
 				<br />
-				<input
-					type="text"
+				<label>당시의 시간</label>
+				<InputStyle
+					type="date"
 					onChange={inputHandle}
-					name="content"
-					value={board3.content}
-					placeholder="내용을 입력하세요"
-				/>
+					value={board3.date}
+					name="date" />
 				<br />
-
-				<input
-					type="text"
-					onChange={onChange}
-					name="place"
-					value={inputText}
-					placeholder="장소를 입력하세요"
-				/>
+				<label>당시의 장소</label>
+				<InputBoxStyle>
+					<InputStyle
+						type="text"
+						onChange={inputHandle}
+						name="place"
+						value={board3.place}
+						placeholder="장소를 입력하세요"
+					/><button onClick={handleSubmit}>검색</button>
+				</InputBoxStyle>
 				
-				<button onClick={handleSubmit}>검색</button>
-				<br />
 				{visible ? <MapContainer searchPlace={place} latLng={setLatLng} /> : null}
-				<br/>
-				{visible ? <button onClick={savePlace}>장소 저장</button> : null }
-				<br/>
-
-				<button onClick={submitPost}>등록</button>
-			</form>
+				<br />
+				{visible ? <button onClick={savePlace}>장소 저장</button> : null}
+				<br />
+				<br />
+				<label>특징을 입력하세요</label>
+				<textarea
+					onChange={inputHandle}
+					name="property"
+					defaultValue={board3.property}></textarea>
+				<br />
+					<label>내용을 입력하세요</label>
+				<textarea
+					onChange={inputHandle}
+					name="content">{board3.content}</textarea>
+				<br />
+				<ButtonStyle onClick={submitPost}>등록</ButtonStyle>
+			</FormStyle>
 		</div>
 	);
 };

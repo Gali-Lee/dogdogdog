@@ -50,7 +50,7 @@ const { Header1, Content, Sider } = Layout;
   <Layout>
     <Header/>
     <Layout>
-      <Sider width={200} className="site-layout-background">
+     <Sider width={200} className="site-layout-background">
         <Menu
           mode="inline"
           defaultSelectedKeys={['1']}
@@ -63,6 +63,7 @@ const { Header1, Content, Sider } = Layout;
             <Menu.Item key="4" icon={<NotificationOutlined />} ><Link to="/map">지도</Link></Menu.Item>
         </Menu>
       </Sider>
+
       <Layout style={{ padding: '0 24px 24px' }}>
         <Content
           className="site-layout-background"
@@ -74,12 +75,26 @@ const { Header1, Content, Sider } = Layout;
         >
           <Main/>
         </Content>
+        <Sider width={200} className="site-layout-background">
+        <Menu
+          mode="inline"
+          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['sub1']}
+          style={{ height: '100%', borderRight: 0 }}
+        >
+            <Menu.Item key="1"  icon={<UserOutlined />}><Link to="/board1">게시판1</Link></Menu.Item>
+            <Menu.Item key="2" icon={<LaptopOutlined />}><Link to="/board2">게시판2</Link></Menu.Item>
+            <Menu.Item key="3" icon={<NotificationOutlined />} ><Link to="/board3">게시판3</Link></Menu.Item>
+            <Menu.Item key="4" icon={<NotificationOutlined />} ><Link to="/map">지도</Link></Menu.Item>
+        </Menu>
+      </Sider>
       </Layout>
     </Layout>
-  </Layout>,
-            <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
-
-
+  </Layout>
+            <Footer></Footer>
+  </div>
+  );
+}
 
 
       {/* <Header />
@@ -89,8 +104,6 @@ const { Header1, Content, Sider } = Layout;
         <Rside />
       </MainListStyle>
       <Footer /> */}
-    </div>
-  );
-}
+  
 
 export default App;
