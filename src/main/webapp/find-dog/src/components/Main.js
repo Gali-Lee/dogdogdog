@@ -9,12 +9,10 @@ import ModifyBoard3 from '../pages/Board3/ModifyBoard3';
 import WriteBoard3 from '../pages/Board3/WriteBoard3';
 import Join from '../pages/join/Join';
 import DogJoin from '../pages/join/DogJoin';
-import MapPage from '../pages/map/MapPage';
-import MapContainer from './MapContainer';
-import SearchPlace from '../pages/map/SearchPlace';
 import ModalPage from '../pages/Board2/ModalPage';
 import Board4_1 from '../pages/Board4/Board4_1';
 import Wanted from './Wanted';
+
 const Main = () => {
 	return (
 		<div>
@@ -32,7 +30,6 @@ const Main = () => {
 				<Route path="/map" exact={true} component={Board4_1} />
 				<Route path="/wanted/:id" eexact={true} component={Wanted}/>
 			</Switch>
-			<right/>
 		</div>
 	);
 };

@@ -5,9 +5,10 @@ import { Link } from 'react-router-dom';
 const Board3 = () => {
 	return (
 		<div>
+			<Link to={"/board3/write"}><button>글쓰기</button></Link>	
 			<ListBoard3/>
 			<div>
-			<Link to={"/board3/write"}><button>글쓰기</button></Link>			
+					
 			</div>
 			<hr/>
 		</div>
