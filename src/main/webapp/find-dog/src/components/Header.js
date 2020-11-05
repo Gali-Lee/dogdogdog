@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../store';
 import { Navbar, Nav } from 'react-bootstrap';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb, Typography, Space } from 'antd';
 import 'antd/dist/antd.css';
 
 
+const { Title } = Typography;
 const Header = () => {
 	const isLogin = useSelector((store) => store.isLogin);
 	const user = localStorage.getItem("user")
@@ -22,14 +23,17 @@ const Header = () => {
 	return (
 
 		<div>
+
+				
 			<div className="logo" />
 			<Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
 				{isLogin ?
 					(
 						<>
-							<Menu.Item key="1">{user}님 환영합니다!</Menu.Item>
+						
 							<Menu.Item key="6"><Link to="joindog">강아지 등록</Link></Menu.Item>
 							<Menu.Item key="7" onClick={logoutbutton}>로그아웃</Menu.Item>
+							<Menu.Item key="1">{user}님 환영합니다!</Menu.Item>
 						</>
 					)
 					:
@@ -37,11 +41,21 @@ const Header = () => {
 						<>
 							<Menu.Item key="4"><Link to="login">로그인</Link></Menu.Item>
 							<Menu.Item key="5"><Link to="join">회원가입</Link></Menu.Item>
+							<Space align="center">
+						<Title level={2} style={{align:"center"}}>h2. Ant Design</Title>
+						</Space>
 						</>
 					)
 				}
-
+				
 			</Menu>
+			
+		</div>
+
+	);
+};
+
+export default Header;
 
 
 
@@ -74,9 +88,3 @@ const Header = () => {
 				</Navbar.Collapse>
 			</Navbar> */}
 
-		</div>
-
-	);
-};
-
-export default Header;

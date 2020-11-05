@@ -12,6 +12,7 @@ import DogJoin from '../pages/join/DogJoin';
 import ModalPage from '../pages/Board2/ModalPage';
 import Board4_1 from '../pages/Board4/Board4_1';
 import Wanted from './Wanted';
+
 const Main = () => {
 	return (
 		<div>
