@@ -1,13 +1,14 @@
 import React from 'react';
-import ListBoard3 from './ListBoard3';
 import { Link } from 'react-router-dom';
+import Board3List from './Board3List';
 
 const Board3 = () => {
 	return (
 		<div>
-			<ListBoard3/>
+			<Link to={"/board3/write"}><button>글쓰기</button></Link>	
+			<Board3List/>
 			<div>
-			<Link to={"/board3/write"}><button>글쓰기</button></Link>			
+					
 			</div>
 			<hr/>
 		</div>

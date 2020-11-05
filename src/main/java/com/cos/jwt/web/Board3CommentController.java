@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,7 +51,7 @@ public class Board3CommentController {
 	}
 
 	@Transactional
-	@PutMapping("/board3/{board3Id}/{commentId}")
+	@DeleteMapping("/board3/{board3Id}/{commentId}")
 	@ResponseBody
 	public String 댓글수정(@RequestBody Board3Comment comment, @PathVariable int board3Id, @PathVariable int commentId) {
 		System.out.println("댓글 수정");
