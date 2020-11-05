@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.cos.jwt.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,6 +34,7 @@ public class Board3 {
 	private String sex;
 	private String date;
 	private String place;
+	
 	@Column(length = 10000000)
 	private String content;
 	private String property;
@@ -45,6 +47,7 @@ public class Board3 {
 	@Column(length = 10000000)
 	private String image2;	
 	
+	@JsonIgnoreProperties({"board3s"})
 	@JoinColumn(name="userId")
 	@ManyToOne
 	private User user;

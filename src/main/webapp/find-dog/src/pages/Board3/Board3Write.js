@@ -156,7 +156,6 @@ const Board3Write = () => {
 					 alert("글이 등록되었습니다.");
 					history.push("/board3");
 				}else{
-					console.log(res);
 				};
 			});
 	}
