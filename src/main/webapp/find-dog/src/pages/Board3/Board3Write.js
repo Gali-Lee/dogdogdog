@@ -143,7 +143,7 @@ const Board3Write = () => {
 		formData.append("lat", location.lat);
 		formData.append("lng", location.lng);
 
-		fetch("http://localhost:8000/board3/post", {
+		fetch("http://localhost:8000/board3/write", {
 			method: "POST",
 			headers: {
 				"Authorization": localStorage.getItem("Authorization"),
@@ -155,6 +155,8 @@ const Board3Write = () => {
 				if (res === "ok") {
 					 alert("글이 등록되었습니다.");
 					history.push("/board3");
+				}else{
+					console.log(res);
 				};
 			});
 	}
