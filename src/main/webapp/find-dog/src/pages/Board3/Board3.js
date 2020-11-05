@@ -8,7 +8,6 @@ const Board3 = () => {
 			<Link to={"/board3/write"}><button>글쓰기</button></Link>	
 			<Board3List/>
 			<div>
-					
 			</div>
 			<hr/>
 		</div>
