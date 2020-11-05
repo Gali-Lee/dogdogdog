@@ -16,7 +16,7 @@
 
 .dog-card {
 
-	height: 200px;
+	height: 220px;
     
 	width: 400px;
 
@@ -219,6 +219,7 @@
 }
 .dog-icon {
 
+    
     display: inline-block;
 
     vertical-align: middle;
@@ -233,7 +234,9 @@
 }
 .dog-button{
     position: relative;
-    left: 180px;
+    left: 120px;
+    /* padding: 2px; */
+    
 }
 
 
