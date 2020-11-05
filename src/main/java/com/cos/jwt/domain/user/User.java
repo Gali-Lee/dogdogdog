@@ -29,7 +29,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="username", unique = true)
+	@Column(unique = true)
 	private String username; 
 	private String password;
 	private String email;
@@ -38,7 +38,7 @@ public class User {
 	private String phoneNumber;
 
 	@JsonIgnoreProperties({"user"}) //무시하고 싶은 변수명 
-	@OneToMany(mappedBy = "user", fetch= FetchType.EAGER)//Post 오브젝트의 user 변수
+	@OneToMany(mappedBy = "user", fetch= FetchType.LAZY)//Post 오브젝트의 user 변수
 	private List<Board3> board3s;
 	
 }

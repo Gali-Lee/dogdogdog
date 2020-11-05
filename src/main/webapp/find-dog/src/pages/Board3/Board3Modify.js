@@ -118,7 +118,7 @@ const Board3Modify = (props) => {
 		formData.append("image2", board3.image2);
 		formData.append("date", board3.date);
 		formData.append("property", board3.property);
-		
+
 		// formData.append("lat", location.lat);
 		// formData.append("lng", location.lng);
 
@@ -133,7 +133,7 @@ const Board3Modify = (props) => {
 			.then(res => {
 				if (res === "ok") {
 					alert("글이 수정되었습니다.");
-					history.push("/board3/detail/"+id);
+					history.push("/board3/detail/" + id);
 				}
 			})
 	}
@@ -264,7 +264,7 @@ const Board3Modify = (props) => {
 					onChange={inputHandle}
 					name="property">{board3.property}</textarea>
 				<br />
-					<label>내용을 입력하세요</label>
+				<label>내용을 입력하세요</label>
 				<textarea
 					onChange={inputHandle}
 					name="content">{board3.content}</textarea>

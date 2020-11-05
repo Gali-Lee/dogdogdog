@@ -63,8 +63,8 @@ public class Board3Controller {
 		String image1name = 이미지저장(image1);
 		String image2name = 이미지저장(image2);
 		
-		User principal = (User) session.getAttribute("principal");
-		
+		User principal = (User)session.getAttribute("principal");
+	
 		Board3 board3 = new Board3().builder().catagory(catagory).name(name).bread(bread).age(age).sex(sex).place(place)
 				.date(date).lat(lat).user(principal).lng(lng).type(type).property(property).content(content)
 				.image1(image1name).image2(image2name).build();
@@ -83,7 +83,6 @@ public class Board3Controller {
 	public Board3 글상세(@PathVariable int board3Id) {
 		System.out.println("실종/제보 상세글");
 		Board3 board3 = board3Repository.findById(board3Id).get();
-
 		return board3;
 	}
 
@@ -106,7 +105,7 @@ public class Board3Controller {
 	}
 
 	@Transactional
-	@DeleteMapping("/board3/@{board3Id}")
+	@DeleteMapping("/board3/{board3Id}")
 	@ResponseBody
 	public String 글삭제(@PathVariable int board3Id) {
 		board3Repository.deleteById(board3Id);
