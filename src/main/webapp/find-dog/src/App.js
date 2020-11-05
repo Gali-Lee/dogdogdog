@@ -30,6 +30,10 @@ const MainListStyle = styled.div`
 display : grid;
   grid-template-columns: auto auto auto;
 `;
+
+const  AppStyle = styled.div`
+font-family: "62570체";
+`;
 function App() {
 
   //로그인 상태관리
@@ -46,7 +50,7 @@ function App() {
 const { Header1, Content, Sider } = Layout;
 
   return (
-    <div>
+    <AppStyle>
   <Layout>
     <Header/>
     <Layout>
@@ -89,7 +93,7 @@ const { Header1, Content, Sider } = Layout;
         <Rside />
       </MainListStyle>
       <Footer /> */}
-    </div>
+    </AppStyle>
   );
 }
 
