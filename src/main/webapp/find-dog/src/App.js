@@ -27,6 +27,7 @@ import Chat from './pages/Chat/Chat';
 ***********************
 ************************
 */
+
 const MainListStyle = styled.div`
 display : grid;
   grid-template-columns: auto auto auto;
