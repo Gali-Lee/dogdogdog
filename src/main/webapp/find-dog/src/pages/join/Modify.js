@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Form, Input, InputNumber, Button, Select } from 'antd';
+import React, { useEffect } from 'react';
+import { Form, Button, Input } from 'antd';
 import 'antd/dist/antd.css';
-import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
-const { Option } = Select;
 
 const layout = {
 	labelCol: {
@@ -15,6 +13,9 @@ const layout = {
 	},
 };
 
+let pMessage = "";
+
+
 const validateMessages = {
 	required: '${label} is required!',
 	types: {
@@ -22,32 +23,28 @@ const validateMessages = {
 		email: '${label} is not validate email!'
 	},
 };
-let pMessage = "";
 
-const Join = (props) => {
+
+const Modify = (props) => {
+
 	const [user, setUser] = useState({
 		username: "",
 		password: "",
-		repassword: "",
 		place: "",
 		email: "",
 		phoneNumber: ""
 	});
 
-
 	const onFinish = (values) => {
 		console.log(values);
 	};
-
-
+	
 	function inputHandle(e) {
 		setUser({ ...user, [e.target.name]: e.target.value });
 		console.log(user);
 		Check();
-		// setTimeout(Check, 500);
-		// if (e.target.name !== 'name') {
-		// }
 	}
+
 	function Check(){
 		console.log("check 들어옴");
 		if (user.password === user.repassword) {
@@ -58,11 +55,27 @@ const Join = (props) => {
 				console.log(pMessage);
 			}
 	}
+	let userId = props.match.params.id;
+	//로그인된 정보 가져오기
+	useEffect(() => {
+		console.log("userEffect 들어옴");
+		fetch("http://localhost:8000/user/" +userId , {
+			method: "GET",
+			headers: {
+				"Authorization": localStorage.getItem("Authorization")
+			}
+		})
+		.then(res => {
+			res.json()
+		})
+		.then(res => {
+			console.log("회원정보:"+res);
+			setUser(res);
+		});
+	}, []);
 
 
-
-
-
+	//수정된거 던지기
 	function join(e) {
 		e.preventDefault();
 
@@ -77,15 +90,13 @@ const Join = (props) => {
 			.then((res) => {
 				console.log("22", res);
 				if (res === "ok") {
-					alert("가입 성공");
+					alert("수정 성공");
 					props.history.push("/login");
 				} else {
-					alert("가입 실패");
+					alert("수정 실패");
 				}
 			});
 	}
-
-
 
 	return (
 		<div>
@@ -154,18 +165,6 @@ const Join = (props) => {
 					</select>
 				</Form.Item>
 
-
-				{/* <Form.Item
-					name={['user', 'place']}
-					label="지역"
-				>
-					<Input type="text"
-						name="place"
-						onChange={inputHandle}
-						value={user.place} placeholder="지역 입력" />
-				</Form.Item> */}
-
-
 				<Form.Item
 					name={['user', 'email']}
 					label="이메일"
@@ -183,46 +182,8 @@ const Join = (props) => {
         </Button>
 				</Form.Item>
 			</Form>
-
-
-			{/* <form>
-				<br />
-				<h2>회원 정보 입력</h2>
-				<input
-					type="text"
-					name="username"
-					onChange={inputHandle}
-					value={user.username}
-					placeholder="username 입력" />
-				<br />
-
-				<input
-					type="password"
-					name="password"
-					onChange={inputHandle}
-					value={user.password}
-					placeholder="password 입력" />
-				<br />
-
-				<input
-					type="text"
-					name="place"
-					onChange={inputHandle}
-					value={user.place}
-					placeholder="place 입력" />
-				<br />
-
-				<input
-					type="text"
-					name="email"
-					onChange={inputHandle}
-					value={user.email}
-					placeholder="email 입력" />
-				<br />
-				<button onClick={join}>가입</button>
-			</form> */}
 		</div>
 	);
 };
 
-export default Join;
+export default Modify;

@@ -1,3 +1,5 @@
+import {createStore, applyMiddleware} from 'redux';
+
 
 // 로그인 상태관리
 const LOGIN = 'LOGIN';
