@@ -112,10 +112,15 @@ public class Board3Controller {
 		return "ok";
 	}
 
-	@PostMapping("/board4")
-	@ResponseBody
-	public List<Board3> 지도목록(@RequestBody LocationDTO location) {
+	@GetMapping("/board4")
+	public List<Board3> 지도목록() {
 		System.out.println("지도 목록 검색");
 		return board3Repository.findAll();
+	}
+	@GetMapping("/board4/{id}")
+	public Board3 지도글(@PathVariable int id) {
+		System.out.println("지도글");
+		Board3 board3 = board3Repository.findById(id).get();
+		return board3;
 	}
 }
