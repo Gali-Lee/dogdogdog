@@ -57,15 +57,14 @@ const Board3Modify = (props) => {
 		content: "",//내용
 		property: "",//특징
 	});
+	
 	useEffect(() => {
-
 		fetch("http://localhost:8000/board3/" + id, {
 			method: "GET",
 
 		}).then((res) => res.json())
 			.then((res) => {
 				setBoard3(res);
-
 			});
 	}, []);
 
@@ -122,7 +121,7 @@ const Board3Modify = (props) => {
 		// formData.append("lat", location.lat);
 		// formData.append("lng", location.lng);
 
-		fetch("http://localhost:8000/board3/" + id, {
+		fetch("http://localhost:8000/board3/modify/" + id, {
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json; charset=utf-8"

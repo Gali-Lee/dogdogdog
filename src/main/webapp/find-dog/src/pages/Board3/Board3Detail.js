@@ -73,7 +73,6 @@ const Board3Detail = (props) => {
 
 		}).then((res) => res.json())
 			.then((res) => {
-				console.log(res);
 				setBoard3(res);
 			});
 		

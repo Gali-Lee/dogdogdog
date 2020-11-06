@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Form, Input, InputNumber, Button, Select } from 'antd';
-const { Option } = Select;
 
 const layout = {
 	labelCol: {
@@ -30,7 +29,6 @@ const DogJoin = (props) => {
 
 	function inputHandle(e) {
 		setDog({ ...dog, [e.target.name]: e.target.value });
-		console.log(dog)
 	}
 
 	function dogJoin(e) {
