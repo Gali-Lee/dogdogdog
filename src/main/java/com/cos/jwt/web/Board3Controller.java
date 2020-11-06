@@ -87,25 +87,31 @@ public class Board3Controller {
 	}
 
 	@Transactional
-	@PutMapping("/board3/{board3Id}")
+	@PutMapping("/board3/modify/{board3Id}")
 	@ResponseBody
 	public String 글수정(@PathVariable int board3Id, @RequestBody Board3 board3) {
 
 		System.out.println("실종/제보 글 수정하기");
 		Board3 board3Entity = board3Repository.findById(board3Id).get();
 
+		board3Entity.setCatagory(board3.getCatagory());
 		board3Entity.setName(board3.getName());
 		board3Entity.setBread(board3.getBread());
 		board3Entity.setAge(board3.getAge());
-		board3Entity.setContent(board3.getContent());
-		board3Entity.setPlace(board3.getPlace());
+		board3Entity.setType(board3.getType());
 		board3Entity.setSex(board3.getSex());
+		board3Entity.setPlace(board3.getPlace());
+		board3Entity.setContent(board3.getContent());
+		board3Entity.setImage1(board3.getImage1());
+		board3Entity.setImage1(board3.getImage1());
+		board3Entity.setDate(board3.getDate());
+		board3Entity.setProperty(board3.getProperty());
 
 		return "ok";
 	}
 
 	@Transactional
-	@DeleteMapping("/board3/{board3Id}")
+	@DeleteMapping("/board3/delete/{board3Id}")
 	@ResponseBody
 	public String 글삭제(@PathVariable int board3Id) {
 		board3Repository.deleteById(board3Id);

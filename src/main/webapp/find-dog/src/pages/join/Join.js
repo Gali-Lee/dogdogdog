@@ -85,7 +85,7 @@ const Join = (props) => {
 				console.log("22", res);
 				if (res === "ok") {
 					alert("가입 성공");
-					props.history.push("/");
+					props.history.push("/login");
 				} else {
 					alert("가입 실패");
 				}
