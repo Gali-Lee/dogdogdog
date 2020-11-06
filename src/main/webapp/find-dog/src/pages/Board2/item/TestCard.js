@@ -5,32 +5,13 @@ const TestCard = (props) => {
 
 	let {mtId,mtCreateTime,mtTitle,mtContent,mtPlace,mtTime,mtDate,mtCount,maxCount,mtList,userName} = props.meeting;
 
-	const mtm = {
-			mtName : userName,
-			mt : mtId,
-		};
-
-
-	const submitInsert = (e) => {
-		e.preventDefault();
-		fetch("http://localhost:8000/board2/mList", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json; charset=utf-8"
-			},
-			body: JSON.stringify(mtm)
-		}).then(res => res.text()).then(
-			res => alert(res)
-
-		);
-		// window.location.reload(); //페이지 새로고침
-	}
+	
 
 	return (
 		<div class="dog-card">
 			{/* style={{ display: "inline" }} */}
 
-			<MemberList mtId={mtId} userName={userName} /><button onClick={submitInsert}>참가</button>
+			<MemberList mtId={mtId} userName={userName} />
 			<div class="dog-card-header" >
 				{/* <button class ="dog-button" onClick= {InsertModal} >aa</button>		 */}
 				<div class="dog-card-header-is_closed" >
