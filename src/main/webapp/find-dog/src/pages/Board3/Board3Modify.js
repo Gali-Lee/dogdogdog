@@ -143,7 +143,7 @@ const Board3Modify = (props) => {
 				<br />
 				<InputStyle
 					type="file"
-					name="image1"
+					name="image1"					
 					onChange={(e) => {
 						uploadImg(e);
 					}}
