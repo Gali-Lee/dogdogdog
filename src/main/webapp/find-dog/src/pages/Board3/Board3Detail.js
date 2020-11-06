@@ -45,7 +45,7 @@ left: 50px;
 `;
 
 const Board3Detail = (props) => {
-	
+
 	const id = props.match.params.id;
 	const history = useHistory();
 
@@ -75,7 +75,7 @@ const Board3Detail = (props) => {
 			.then((res) => {
 				setBoard3(res);
 			});
-		
+
 	}, []);
 
 	//삭제버튼 눌렀을때 실행
@@ -126,13 +126,14 @@ const Board3Detail = (props) => {
 				<div>특징 : {board3.property}</div>
 				{board3.user.email}
 			</SectionStyle>
+			{board3.user.username === localStorage.user ?
+				<Link to={"/board3/modify/" + id}><button>수정</button></Link> : null}
+			{board3.user.username === localStorage.user ? <button onClick={submitDelete}>삭제</button> : null}
 
-			<div><Link to={"/board3/modify/" + id}><button>수정</button></Link></div>
-			<div><button onClick={submitDelete}>삭제</button></div>
 			<div><button onClick={submitMake}>전단지 만들기</button></div>
-			
-			<Board3Comment id={id}/>
-		</div>
+
+			<Board3Comment id={id} />
+		</div >
 	);
 };
 

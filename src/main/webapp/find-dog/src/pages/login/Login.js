@@ -60,6 +60,7 @@ const Login = (props) => {
 		}).then(res => {
 			if (res === "ok") {
 				localStorage.setItem("user", user.username);
+				localStorage.setItem("email",user.email);
 				alert("로그인 완료");
 				// 로그인 상태 값 리덕스 저장
 				dispatch(login());
