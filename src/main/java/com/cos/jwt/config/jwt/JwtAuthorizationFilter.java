@@ -40,13 +40,15 @@ public class JwtAuthorizationFilter implements Filter {
 		} 
 		else {
 			jwtToken = jwtToken.replace(JwtProps.auth, "");
+			System.out.println("sssss");
 			try {
-				int personId = JWT.require(Algorithm.HMAC512(JwtProps.secret)).build().verify(jwtToken).getClaim("id")
-						.asInt();
+				String personId = JWT.require(Algorithm.HMAC512(JwtProps.secret)).build().verify(jwtToken).getClaim("id")
+						.asString();
 				
 				HttpSession session = req.getSession();
 				User personEntity = personRepository.findById(personId).get();
 				session.setAttribute("principal", personEntity);
+				System.out.println("sssss");
 				chain.doFilter(request, response);
 
 			} catch (Exception e) {
