@@ -42,7 +42,7 @@ const Board3Comment = (props) => {
 
 		console.log("submitCommentWrite() 실행");
 		
-		fetch("http://localhost:8000/board3/"+id+"/comment/write", {
+		fetch("http://localhost:8000/board3/comment/"+id, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json; charset=utf-8",
