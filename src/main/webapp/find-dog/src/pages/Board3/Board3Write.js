@@ -115,83 +115,30 @@ const Board3Write = () => {
 			};
 		});
 	}
-
 	function submitPost(e) {
-
 		e.preventDefault();
 
 		console.log("submitPost() 실행");
-	
-		console.log("board3.image1",board3.image1);
-		console.log("board3.image2",board3.image2);
-		const formData = new FormData();
 
-		formData.append("catagory", board3.catagory);
-		formData.append("name", board3.name);
-		formData.append("bread", board3.bread);
-		formData.append("age", board3.age);
-		formData.append("type", board3.type);
-		formData.append("sex", board3.sex);
-		formData.append("place", board3.place);
-		formData.append("content", board3.content);
+		let form = document.getElementById("form");
+		const formData = new FormData(form);
 
-		formData.append("date", board3.date);
-		formData.append("property", board3.property);
-		formData.append("user", localStorage.user);
-		formData.append("lat", location.lat);
-		formData.append("lng", location.lng);
-
-		if (board3.image1 === "" &&
-			board3.image2 !== "") {
-
-			formData.append("image1", board3.image2);
-			formData.append("image2", board3.image2);
-
-			fetch("http://localhost:8000/board3/write", {
-				method: "POST",
-				headers: {
-					"Authorization": localStorage.getItem("Authorization"),
-				},
-				body: formData
-			})
-				.then(res => res.text())
-				.then(res => {
-					if (res === "ok") {
-						alert("글이 등록되었습니다.");
-						history.push("/board3");
-					} else {
-					};
-				});
-		}
-		else if (board3.image1 !== "" &&
-			board3.image2 === "") {
-
-			formData.append("image1", board3.image1);
-			formData.append("image2", board3.image1);
-
-			fetch("http://localhost:8000/board3/write", {
-				method: "POST",
-				headers: {
-					"Authorization": localStorage.getItem("Authorization"),
-				},
-				body: formData
-			})
-				.then(res => res.text())
-				.then(res => {
-					if (res === "ok") {
-						alert("글이 등록되었습니다.");
-						history.push("/board3");
-					} else {
-					};
-				});
-		}
-		else if (board3.image1 === null && board3.image2 === null) {
+		// if (board3.image1 === "" && board3.image2 !== "") {
+		// 	formData.append("image1", board3.image2);
+		// 	formData.append("image2", board3.image2);	
+		// }
+		// else if (board3.image1 !== "" && board3.image2 === "") {
+		// 	formData.append("image1", board3.image1);
+		// 	formData.append("image2", board3.image1);			
+		// }
+		// else if (board3.image1 === "" && board3.image2 === "") {
+		// 	alert("사진을 한장이상 업로드 해주세요!");
+		// }
+		if (board3.image1 === "" && board3.image2 === "") {
 			alert("사진을 한장이상 업로드 해주세요!");
 		}
 		else {
-			formData.append("image1", board3.image1);
-			formData.append("image2", board3.image2);
-
+			console.log("fetch 실행");
 			fetch("http://localhost:8000/board3/write", {
 				method: "POST",
 				headers: {
@@ -241,7 +188,7 @@ const Board3Write = () => {
 
 	return (
 		<div>
-			<FormStyle encType="multipart/form-data">
+			<FormStyle id="form" encType="multipart/form-data">
 				<label>사진 첨부</label>
 				<br />
 				<InputStyle

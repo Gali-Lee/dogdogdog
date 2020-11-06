@@ -40,19 +40,22 @@ public class JwtAuthorizationFilter implements Filter {
 		} 
 		else {
 			jwtToken = jwtToken.replace(JwtProps.auth, "");
-			System.out.println("sssss");
 			try {
+				
 				String personId = JWT.require(Algorithm.HMAC512(JwtProps.secret)).build().verify(jwtToken).getClaim("id")
 						.asString();
 				
 				HttpSession session = req.getSession();
+				//System.out.println("session"+session);
+				System.out.println("들어옴");
 				User personEntity = personRepository.findById(personId).get();
+				
 				session.setAttribute("principal", personEntity);
-				System.out.println("sssss");
+				
 				chain.doFilter(request, response);
-
+				
 			} catch (Exception e) {
-				//System.out.println(e.getCause());
+				System.out.println("헉");
 				PrintWriter out = resp.getWriter();
 				out.print("JWTAUTHORIZATION");
 				out.print("verify fail");

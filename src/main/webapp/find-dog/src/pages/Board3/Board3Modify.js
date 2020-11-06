@@ -42,6 +42,12 @@ const Board3Modify = (props) => {
 	const id = props.match.params.id;
 	const history = useHistory();
 
+	const [originImage1,setOriginImage1] = useState();
+	const [originImage2,setOriginImage2] = useState();
+
+	const [image1, setImage1] = useState();
+	const [image2, setImage2] = useState();
+
 	const [board3, setBoard3] = useState({
 		id: "", //번호
 		image1: "",//이미지1
@@ -57,7 +63,7 @@ const Board3Modify = (props) => {
 		content: "",//내용
 		property: "",//특징
 	});
-	
+
 	useEffect(() => {
 		fetch("http://localhost:8000/board3/" + id, {
 			method: "GET",
@@ -65,17 +71,28 @@ const Board3Modify = (props) => {
 		}).then((res) => res.json())
 			.then((res) => {
 				setBoard3(res);
+				setImage1(res.image1);
+				setImage2(res.image2);
+				setOriginImage1(res.image1);
+				setOriginImage2(res.image2);
 			});
 	}, []);
 
 	const uploadImg = async (e) => {
 		const file = e.target.files[0];
+		const filename = e.target.files[0].name;
 		setBoard3(prevState => {
 			return {
 				...prevState,
 				[e.target.name]: file
 			};
 		});
+		if (e.target.name === "image1") {
+			setImage1(filename);
+		}
+		else if (e.target.name === "image2") {
+			setImage2(filename);
+		}
 	}
 
 	function inputHandle(e) {
@@ -101,32 +118,14 @@ const Board3Modify = (props) => {
 
 		console.log("submitModify() 실행");
 
-		const formData = new FormData();
-
-		//formData.append("id", board3.id);
-
-		formData.append("catagory", board3.catagory);
-		formData.append("name", board3.name);
-		formData.append("bread", board3.bread);
-		formData.append("age", board3.age);
-		formData.append("type", board3.type);
-		formData.append("sex", board3.sex);
-		formData.append("place", board3.place);
-		formData.append("content", board3.content);
-		formData.append("image1", board3.image1);
-		formData.append("image2", board3.image2);
-		formData.append("date", board3.date);
-		formData.append("property", board3.property);
-
-		// formData.append("lat", location.lat);
-		// formData.append("lng", location.lng);
+		let form= document.getElementById("form");
+		const formData = new FormData(form);
 
 		fetch("http://localhost:8000/board3/modify/" + id, {
-			method: "PUT",
+			method: "POST",
 			headers: {
-				"Content-Type": "application/json; charset=utf-8"
 			},
-			body: JSON.stringify(board3)
+			body: formData
 		})
 			.then(res => res.text())
 			.then(res => {
@@ -138,16 +137,18 @@ const Board3Modify = (props) => {
 	}
 	return (
 		<div>
-			<FormStyle encType="multipart/form-data">
+			<FormStyle id="form" encType="multipart/form-data">
 				<label>사진 첨부</label>
 				<br />
+
 				<InputStyle
 					type="file"
-					name="image1"					
+					name="image1"
 					onChange={(e) => {
 						uploadImg(e);
 					}}
 				/>
+				<div>{image1}</div>
 				<br />
 				<InputStyle
 					type="file"
@@ -156,6 +157,7 @@ const Board3Modify = (props) => {
 						uploadImg(e);
 					}}
 				/>
+				<div>{image2}</div>
 				<br />
 				<label>카테고리</label>
 				<SelectStyle
