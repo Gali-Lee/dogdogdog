@@ -1,6 +1,7 @@
 package com.cos.jwt.domain.board2;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -43,8 +46,13 @@ public class Meeting { //Board2 테이블 객체.
 	
 	@JsonIgnoreProperties({"mt"})
 	@OneToMany(fetch = FetchType.LAZY,mappedBy = "mt")
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<MeetingMember> mtList; 
 	
+	public void countUp() {
+		mtCount += 1;
+//		mtList.add(name);
+	}
 	
-
+	
 }
