@@ -1,11 +1,19 @@
 import React from 'react';
 
 const Board3CommentItem = (props) => {
-	const {id, content, board3Id, userId} = props.comment;
+
+	const comment = props.comment;
+	const submitCommentDelete = props.submitCommentDelete;
+
 	return (
 		<div>
-			<div>{userId}</div>
-			<div>{content}</div>
+			<div>사용자{comment.user.username}</div>
+			<div>댓글 내용 {comment.content}</div>
+			<div>
+				{comment.user.username === localStorage.user ?
+					<button onClick={() => submitCommentDelete(comment.id)}>삭제 </button>
+					: null}
+			</div>
 		</div>
 	);
 };

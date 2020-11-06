@@ -16,11 +16,11 @@ const Board2 = () => {
 		p: 1,
 	});
 	const [maxPage, setMaxPage] = useState([]);
-	let b1,b2 = '';
+	let b1, b2 = '';
 
 	useEffect(() => {
 		fetch("http://localhost:8000/board2/" + page.p).then(res => res.json()).then(
-			res => 
+			res =>
 				setMeetings(res)
 		);
 		fetch("http://localhost:8000/board2/count").then(res => res.text()).then(
@@ -36,24 +36,27 @@ const Board2 = () => {
 			setPage({ p: page.p - 1 });
 		else {
 			//버튼 비활성화 넣을곳
-			b1='disabled';
+			b1 = 'disabled';
 		}
 	}
 	function up() {
 		if (page.p * 6 < maxPage)
 			setPage({ p: page.p + 1 });
 		else {
-			b2='disabled';
+			b2 = 'disabled';
 			//버튼 비활성화 넣을곳
 		}
 	}
-
+	// <img src="./img/left.png" />
+	let aa ={
+		color : "red",
+	}
 	return (
 
 		<div>
 			<div>
 				<ModalPage />
-				<button onClick={down} >왼쪽 이미지</button>
+				<button onClick={down} style={aa} >aa</button>
 
 				<h3 style={{ display: "inline" }}>모임 목록</h3>
 				<button onClick={up} >오른쪽 이미지</button>

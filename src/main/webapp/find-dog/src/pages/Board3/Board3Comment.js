@@ -18,13 +18,17 @@ const Board3Comment = (props) => {
 
 	//해당하는 게시글의 댓글 그려줌
 	useEffect(() => {
-		fetch("http://localhost:8000/board3/{board3Id}/comment" + id, {
+
+		console.log("해당글의 댓글 목록");
+
+		fetch("http://localhost:8000/board3/comment/" + id, {
 			method: "GET",
 
 		}).then((res) => res.json())
 			.then((res) => {
 				setComments(res);
 			});
+
 	}, []);
 
 	function inputHandle(e) {
@@ -36,25 +40,39 @@ const Board3Comment = (props) => {
 		});
 	}
 
+	function submitCommentDelete(commentId) {
+		console.log("submitCommentDelete() 실행");
+
+		fetch("http://localhost:8000/board3/comment/delete/" + commentId, {
+			method: "DELETE",
+		})
+			.then(res => res.text())
+			.then(res => {
+				if (res === "ok") {
+					setComments(comments.filter((comment) => comment.id !== commentId));
+					//삭제하고 다른게 있으면 삭제해줌..
+					alert("삭제 되었습니다.");
+				}
+			})
+	}
+
 	//댓글 등록
 	function submitCommentWrite(e) {
-		e.preventDefault();
-
 		console.log("submitCommentWrite() 실행");
-		
-		fetch("http://localhost:8000/board3/comment/"+id, {
+
+		fetch("http://localhost:8000/board3/comment/write/" + id, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json; charset=utf-8",
-				"Authorization": localStorage.getItem("Authorization"),
+				"Authorization": localStorage.getItem("Authorization")
 			},
-			body: JSON.stringify(commentInput)	
+			body: JSON.stringify(commentInput)
 
-		}).then((res) => {res.json();
-			console.log(res);
-		})
+		}).then((res) => res.text())
 			.then((res) => {
+				console.log("res", res);
 				if (res === "ok") {
+					// setComments(comments.filter((comment) => comment.id !== ));
 					alert("댓글이 등록되었습니다.");
 				}
 				else {
@@ -73,11 +91,11 @@ const Board3Comment = (props) => {
 					value={commentInput.content} />
 				<button onClick={submitCommentWrite}>댓글 등록</button>
 			</form>
-			{/* <div>
+			<div>
 				{comments.map((comment) => (
-					<Board3CommentItem key={comment.id} comment={comment} />
+					<Board3CommentItem key={comment.id} comment={comment} submitCommentDelete={submitCommentDelete} />
 				))}
-			</div> */}
+			</div>
 		</div>
 	);
 };

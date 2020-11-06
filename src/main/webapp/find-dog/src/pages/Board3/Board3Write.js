@@ -125,8 +125,12 @@ const Board3Write = () => {
 
 		const formData = new FormData();
 
-		//formData.append("id", board3.id);
+		if(board3.image1===null){
 
+		}
+		if(board3.image2==null){
+
+		}
 		formData.append("catagory", board3.catagory);
 		formData.append("name", board3.name);
 		formData.append("bread", board3.bread);
