@@ -33,7 +33,7 @@ const Header = () => {
 						
 							<Menu.Item key="6"><Link to="joindog">강아지 등록</Link></Menu.Item>
 							<Menu.Item key="7" onClick={logoutbutton}>로그아웃</Menu.Item>
-							<Menu.Item key="1">{user}님 환영합니다!</Menu.Item>
+							<Menu.Item key="1"><Link to={"/user/modify/"+user}>{user}님 환영합니다!</Link></Menu.Item>
 						</>
 					)
 					:
