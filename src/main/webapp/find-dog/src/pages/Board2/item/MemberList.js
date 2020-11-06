@@ -25,8 +25,9 @@ const MemberList = (props) => {
 	};
 
 
-	const submitInsert = (e) => {
-		e.preventDefault();
+
+	const submitInsert = () => {
+		// e.preventDefault();
 		fetch("http://localhost:8000/board2/mList", {
 			method: "POST",
 			headers: {

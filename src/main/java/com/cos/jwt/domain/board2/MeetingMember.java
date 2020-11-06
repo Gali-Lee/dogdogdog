@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ public class MeetingMember { //Meeting과 N:1관계를 맺는 테이블. 참가�
 	private String mtName;
 	
 	@ManyToOne
+	@JoinColumn(name="mtId")
 	private Meeting mt;
 	
 	

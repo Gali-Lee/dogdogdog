@@ -4,6 +4,7 @@ package com.cos.jwt.web;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +43,6 @@ public class MeetingController {
 	@GetMapping("/board2/count")
 	public int mtPageCount() {
 		List<Meeting> page = mtRepository.mList();
-		System.out.println("갯수 : "+page.size());
 		return page.size();
 	}
 	
@@ -53,7 +53,6 @@ public class MeetingController {
 		try {
 			mtRepository.save(meeting);
 			return "등록완료";
-//			return "redirect:/board2";
 		} catch (Exception e) {
 			return "등록실패";
 		}
@@ -74,11 +73,25 @@ public class MeetingController {
 	
 	
 	//생각해보니 이거 잘못됐네. meeting에서 현재인원 올라가야되니 결국 meeting타고 meetingmember 생성해야함.
-//	@PostMapping("/board2/mList/")
-//	public String mtmInsert(@RequestBody MeetingMember mtm) {
-//		mtmRepository.save(mtm);
-//		return "참가완료";
-//	}
+	@PostMapping("/board2/mList")
+	public String mtmInsert(@RequestBody MeetingMember mtm) {
+		System.out.println("ㅅㅄㅄㅂ");
+//		String aa =mtm.getMtName();
+//		Meeting mt = mtRepository.findById();
+		
+		System.out.println(mtRepository.findById(mtm.getMt().getMtId()));
+			
+//			mtmRepository.save(mtm);
+			return "참가완료";
+	}
+	
+	@GetMapping("/board2/test")
+	public Optional<Meeting> test() {
+		System.out.println("aaa");
+		Optional<Meeting> mt = mtRepository.findById(21);
+		
+		return mt;
+	}
 	
 	
 	@GetMapping("/board2/mList/{id}")
