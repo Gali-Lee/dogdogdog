@@ -1,7 +1,6 @@
 import React from 'react';
 import Sider from 'antd/lib/layout/Sider';
 import { Menu } from 'antd';
-import SubMenu from 'antd/lib/menu/SubMenu';
 import 'antd/dist/antd.css';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';

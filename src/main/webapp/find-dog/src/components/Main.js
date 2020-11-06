@@ -4,15 +4,14 @@ import Login from '../pages/login/Login';
 import Board1 from '../pages/Board1/Board1';
 import Board2 from '../pages/Board2/Board2';
 import Board3 from '../pages/Board3/Board3';
-import DetailBoard3 from '../pages/Board3/DetailBoard3';
-import ModifyBoard3 from '../pages/Board3/ModifyBoard3';
-import WriteBoard3 from '../pages/Board3/WriteBoard3';
 import Join from '../pages/join/Join';
 import DogJoin from '../pages/join/DogJoin';
 import ModalPage from '../pages/Board2/ModalPage';
 import Board4_1 from '../pages/Board4/Board4_1';
-import Wanted from './Wanted';
-
+import Board3Modify from '../pages/Board3/Board3Modify';
+import Board3Detail from '../pages/Board3/Board3Detail';
+import Board3Write from '../pages/Board3/Board3Write';
+import Board1Write from '../pages/Board1/Board1Write';
 const Main = () => {
 	return (
 		<div>
@@ -24,11 +23,11 @@ const Main = () => {
 				<Route path="/board2" exact={true} component={Board2} />
 				<Route path="/board2/modal" exact={true} component={ModalPage} />
 				<Route path="/board3" exact={true} component={Board3} />
-				<Route path="/board3/detail/:id" exact={true} component={DetailBoard3} />
-				<Route path="/board3/modify/:id" exact={true} component={ModifyBoard3} />
-				<Route path="/board3/write" exact={true} component={WriteBoard3} />
+				<Route path="/board3/detail/:id" exact={true} component={Board3Detail} />
+				<Route path="/board3/modify/:id" exact={true} component={Board3Modify} />
+				<Route path="/board3/write" exact={true} component={Board3Write} />
 				<Route path="/map" exact={true} component={Board4_1} />
-				<Route path="/wanted/:id" eexact={true} component={Wanted}/>
+				<Route path="/board1/write" exact={true} component={Board1Write}/>
 			</Switch>
 		</div>
 	);

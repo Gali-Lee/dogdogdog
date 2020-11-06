@@ -15,6 +15,7 @@ import SubMenu from 'antd/lib/menu/SubMenu';
 import { Layout, Menu, Breadcrumb } from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import Chat from './pages/Chat/Chat';
 /* 건들지 마시오!
 **************************
 ***************************
@@ -30,6 +31,12 @@ const MainListStyle = styled.div`
 display : grid;
   grid-template-columns: auto auto auto;
 `;
+
+
+const  AppStyle = styled.div`
+font-family: "62570체";
+`;
+
 function App() {
 
   //로그인 상태관리
@@ -42,11 +49,10 @@ function App() {
     }
     console.log(jwtToken);
   });
-
 const { Header1, Content, Sider } = Layout;
 
   return (
-    <div>
+    <AppStyle>
   <Layout>
     <Header/>
     <Layout>
@@ -76,34 +82,14 @@ const { Header1, Content, Sider } = Layout;
           <Main/>
         </Content>
         <Sider width={200} className="site-layout-background">
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          style={{ height: '100%', borderRight: 0 }}
-        >
-            <Menu.Item key="1"  icon={<UserOutlined />}><Link to="/board1">게시판1</Link></Menu.Item>
-            <Menu.Item key="2" icon={<LaptopOutlined />}><Link to="/board2">게시판2</Link></Menu.Item>
-            <Menu.Item key="3" icon={<NotificationOutlined />} ><Link to="/board3">게시판3</Link></Menu.Item>
-            <Menu.Item key="4" icon={<NotificationOutlined />} ><Link to="/map">지도</Link></Menu.Item>
-        </Menu>
+  
+      <Chat/>
       </Sider>
       </Layout>
     </Layout>
   </Layout>
             <Footer></Footer>
-  </div>
+  </AppStyle>
   );
 }
-
-
-      {/* <Header />
-      <MainListStyle>
-        <Lside />
-        <Main />
-        <Rside />
-      </MainListStyle>
-      <Footer /> */}
-  
-
 export default App;

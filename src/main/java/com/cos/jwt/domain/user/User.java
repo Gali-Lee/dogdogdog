@@ -10,7 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.cos.jwt.domain.watedDog.WantedDog;
+import com.cos.jwt.domain.board3.Board3;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -24,19 +24,25 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class User {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="username", unique = true)
+	@Column(unique = true)
 	private String username; 
 	private String password;
 	private String email;
 	private String place;
+	private String phoneNumber;
+
+	@JsonIgnoreProperties({"user","content"}) //무시하고 싶은 변수명 
+	@OneToMany(mappedBy = "user", fetch= FetchType.LAZY)//Post 오브젝트의 user 변수
+	private List<Board3> board3s;
 	
 	@JsonIgnoreProperties({"user"}) //무시하고 싶은 변수명 
-	@OneToMany(mappedBy = "user", fetch= FetchType.EAGER)//Post 오브젝트의 user 변수
-	private List<WantedDog> wantedDogs;
+	@OneToMany(mappedBy = "user", fetch= FetchType.LAZY)//Post 오브젝트의 user 변수
+	private List<Board3> board1s;
 	
 }
 
