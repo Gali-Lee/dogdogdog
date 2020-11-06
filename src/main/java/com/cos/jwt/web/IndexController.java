@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,4 +67,18 @@ public class IndexController {
 		
 		return new ResponseEntity<User>(userService.유저정보조회(username), HttpStatus.OK);
 	}
+
+@PutMapping("/user/{id}")
+public ResponseEntity<?> update(@RequestBody User user, @PathVariable String id){
+	User principal = (User) session.getAttribute("principal");
+	System.out.println("indexcontroller 들어옴");
+	String result = userService.글수정(user, id, principal);
+	
+	if(result == "1") {
+		return new ResponseEntity<String>("ok", HttpStatus.OK);
+	}else {
+		return new ResponseEntity<String>("fail", HttpStatus.FORBIDDEN);
+	}
+}
+
 }

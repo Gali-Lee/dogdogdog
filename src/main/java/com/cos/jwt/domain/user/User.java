@@ -27,7 +27,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private String id;
 	
 	@Column(unique = true)
 	private String username; 
@@ -35,6 +35,7 @@ public class User {
 	private String email;
 	private String place;
 	private String phoneNumber;
+	private String userImage;
 
 	@JsonIgnoreProperties({"user","content"}) //무시하고 싶은 변수명 
 	@OneToMany(mappedBy = "user", fetch= FetchType.LAZY)//Post 오브젝트의 user 변수

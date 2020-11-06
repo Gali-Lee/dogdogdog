@@ -35,74 +35,74 @@ const Modify = (props) => {
 		phoneNumber: ""
 	});
 
+	const sUsername = localStorage.getItem("username");
+
+	useEffect(() => {
+		fetch("http://localhost:8000/user/" + sUsername, {
+			method: "GET",
+			headers: {
+				"Authorization": localStorage.getItem("Authorization")
+			}
+		}).then(res => res.json()).then(res => {
+			setUser(res);
+		});
+	}, []);
+	console.log(user);
+
 	const onFinish = (values) => {
 		console.log(values);
 	};
-	
+
 	function inputHandle(e) {
 		setUser({ ...user, [e.target.name]: e.target.value });
 		console.log(user);
 		Check();
 	}
 
-	function Check(){
+	function Check() {
 		console.log("check 들어옴");
 		if (user.password === user.repassword) {
-				pMessage = "일치합니다";
-				console.log(pMessage);
-			} else if (user.password !== user.repassword) {
-				pMessage = "불일치";
-				console.log(pMessage);
-			}
+			pMessage = "일치합니다";
+			console.log(pMessage);
+		} else if (user.password !== user.repassword) {
+			pMessage = "불일치";
+			console.log(pMessage);
+		}
 	}
-	let userId = props.match.params.id;
-	//로그인된 정보 가져오기
-	useEffect(() => {
-		console.log("userEffect 들어옴");
-		fetch("http://localhost:8000/user/" +userId , {
-			method: "GET",
-			headers: {
-				"Authorization": localStorage.getItem("Authorization")
-			}
-		})
-		.then(res => {
-			res.json()
-		})
-		.then(res => {
-			console.log("회원정보:"+res);
-			setUser(res);
-		});
-	}, []);
 
-
+	const modifyId = localStorage.getItem("id");
 	//수정된거 던지기
 	function join(e) {
 		e.preventDefault();
 
-		fetch("http://localhost:8000/joinProc", {
-			method: "POST",
+		fetch("http://localhost:8000/user/" + modifyId, {
+			method: "PUT",
 			headers: {
 				"Content-Type": "application/json; charset=utf-8",
 			},
 			body: JSON.stringify(user),
 		})
-			.then((res) => res.text())
+			.then((res) => {
+				return res.text();
+			})
 			.then((res) => {
 				console.log("22", res);
 				if (res === "ok") {
 					alert("수정 성공");
-					props.history.push("/login");
+					props.history.push("/");
 				} else {
 					alert("수정 실패");
 				}
 			});
 	}
+	console.log(user);
+	console.log(user.username);
 
 	return (
 		<div>
 			<Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
 				<Form.Item
-					name="username"
+
 					label="이름"
 					rules={[
 						{
@@ -113,10 +113,11 @@ const Modify = (props) => {
 					<Input type="text"
 						name="username"
 						onChange={inputHandle}
-						value={user.username} placeholder="이름 입력" />
+				value={user.username} ></Input>
+
 				</Form.Item>
 				<Form.Item
-					name={['user', 'password']}
+				
 					label="비밀번호"
 
 				>
@@ -127,7 +128,7 @@ const Modify = (props) => {
 				</Form.Item>
 
 				<Form.Item
-					name={['user', 'repassword']}
+				
 					label="비밀번호 확인"
 
 				>
@@ -142,7 +143,7 @@ const Modify = (props) => {
 
 
 				<Form.Item
-					name={['user', 'phoneNumber']}
+			
 					label="폰번호"
 				>
 					<Input type="text"
@@ -152,7 +153,7 @@ const Modify = (props) => {
 				</Form.Item>
 
 				<Form.Item label="지역" type="text">
-					<select type="text" name="place" onChange={inputHandle}>
+					<select type="text" name="place" onChange={inputHandle} value={user.place}>
 						<option name="place" value="진구">진구</option>
 						<option name="place" value="남구">남구</option>
 						<option name="place" value="남구">강서구</option>
@@ -166,7 +167,7 @@ const Modify = (props) => {
 				</Form.Item>
 
 				<Form.Item
-					name={['user', 'email']}
+		
 					label="이메일"
 				>
 					<Input type="email"
@@ -178,7 +179,7 @@ const Modify = (props) => {
 
 				<Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
 					<Button type="primary" htmlType="submit" onClick={join}>
-						가입하기
+						수정하기
         </Button>
 				</Form.Item>
 			</Form>

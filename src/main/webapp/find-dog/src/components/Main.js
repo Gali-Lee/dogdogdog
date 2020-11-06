@@ -19,7 +19,7 @@ const Main = () => {
 	return (
 		<div>
 			<Switch>
-				<Route path="/user/modify/:username" exact={true} component={Modify} />
+				<Route path="/modify" exact={true} component={Modify} />
 				<Route path="/login" exact={true} component={Login} />
 				<Route path="/join" exact={true} component={Join} />
 				<Route path="/joindog" exact={true} component={DogJoin} />

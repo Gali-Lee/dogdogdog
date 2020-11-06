@@ -35,8 +35,13 @@ const Login = (props) => {
 
 
 	const [user, setUser] = useState({
+		id: '',
 		username: '',
-		password: ''
+		password: '',
+		email: '',
+		place: '',
+		phoneNumber: '',
+		userImage: ''
 	});
 
 	const submitLogin = (e) => {
@@ -59,15 +64,40 @@ const Login = (props) => {
 
 		}).then(res => {
 			if (res === "ok") {
-				localStorage.setItem("user", user.username);
-				localStorage.setItem("email",user.email);
+
 				alert("로그인 완료");
 				// 로그인 상태 값 리덕스 저장
-				dispatch(login());
-				props.history.push("/board3");
+					dispatch(login());
+				console.log("유저이름" + user.username);
+				//로그인된 정보 가져오기
+				fetch("http://localhost:8000/user/" + user.username, {
+					method: "GET",
+					headers: {
+						"Authorization": localStorage.getItem("Authorization")
+					}
+				})
+					.then(res => res.json()
+					)
+					.then(res => {
+						console.log(res);
+						console.log(res.email);
+						setUser(res)
+						localStorage.setItem("id", res.id)
+						localStorage.setItem("username", res.username)
+						localStorage.setItem("email", res.email)
+						localStorage.setItem("place", res.place)
+						localStorage.setItem("phoneNumber", res.phoneNumber)
+						localStorage.setItem("userImage", res.userImage)
+
+						//	setUser(res);
+
+
+					});
+				props.history.push("/board1");
 			} else {
 				alert('아이디 혹은 비번을 다시 입력하세요!');
 			}
+
 		});
 	}
 
@@ -77,10 +107,9 @@ const Login = (props) => {
 			[e.target.name]: e.target.value
 		});
 	}
-	
+
 	return (
 		<div>
-
 			<Form
 				{...layout}
 				name="basic"
