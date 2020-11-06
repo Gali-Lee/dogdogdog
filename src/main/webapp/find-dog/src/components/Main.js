@@ -11,6 +11,7 @@ import Board4_1 from '../pages/Board4/Board4_1';
 import Board3Modify from '../pages/Board3/Board3Modify';
 import Board3Detail from '../pages/Board3/Board3Detail';
 import Board3Write from '../pages/Board3/Board3Write';
+import Board1Write from '../pages/Board1/Board1Write';
 const Main = () => {
 	return (
 		<div>
@@ -26,6 +27,7 @@ const Main = () => {
 				<Route path="/board3/modify/:id" exact={true} component={Board3Modify} />
 				<Route path="/board3/write" exact={true} component={Board3Write} />
 				<Route path="/map" exact={true} component={Board4_1} />
+				<Route path="/board1/write" exact={true} component={Board1Write}/>
 			</Switch>
 		</div>
 	);

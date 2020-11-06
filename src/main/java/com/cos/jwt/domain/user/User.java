@@ -40,5 +40,9 @@ public class User {
 	@OneToMany(mappedBy = "user", fetch= FetchType.LAZY)//Post 오브젝트의 user 변수
 	private List<Board3> board3s;
 	
+	@JsonIgnoreProperties({"user"}) //무시하고 싶은 변수명 
+	@OneToMany(mappedBy = "user", fetch= FetchType.LAZY)//Post 오브젝트의 user 변수
+	private List<Board3> board1s;
+	
 }
 
