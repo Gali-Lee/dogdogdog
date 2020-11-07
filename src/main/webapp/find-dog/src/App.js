@@ -61,7 +61,7 @@ function App() {
           defaultOpenKeys={['sub1']}
           style={{ height: '100%', borderRight: 0 }}
         >
-            <Menu.Item key="1"  icon={<UserOutlined />}><Link to="/chat">게시판1</Link></Menu.Item>
+            <Menu.Item key="1"  icon={<UserOutlined />}><Link to="/board1">게시판1</Link></Menu.Item>
             <Menu.Item key="2" icon={<LaptopOutlined />}><Link to="/board2">게시판2</Link></Menu.Item>
             <Menu.Item key="3" icon={<NotificationOutlined />} ><Link to="/board3">게시판3</Link></Menu.Item>
             <Menu.Item key="4" icon={<NotificationOutlined />} ><Link to="/map">지도</Link></Menu.Item>
