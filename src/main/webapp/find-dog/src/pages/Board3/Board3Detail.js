@@ -84,7 +84,7 @@ const Board3Detail = (props) => {
 		e.preventDefault();
 		console.log("submitDelete() 실행");
 
-		fetch("http://localhost:8000/board3/" + id, {
+		fetch("http://localhost:8000/board3/delete/" + id, {
 			method: "DELETE",
 		})
 			.then(res => res.text())
