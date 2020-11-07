@@ -53,7 +53,8 @@ public class Board1Controller {
 	@PostMapping(value = "/board1/write", consumes = { "multipart/form-data" })
 	@ResponseBody
 	public String 글쓰기(@RequestParam("catagory") String catagory, 
-			@RequestParam("place") String place, 
+			@RequestParam("placename") String place, 
+			@RequestParam("addr") String addr,
 			@RequestParam("title") String title,
 			@RequestParam("lat") double lat, @RequestParam("lng") double lng,
 			@RequestParam("content") String content,
@@ -62,6 +63,11 @@ public class Board1Controller {
 			throws IllegalStateException, IOException {
 		
 		System.out.println("실종/제보 글쓰기");
+		System.out.println(addr);
+		String[] split=addr.split(" ");
+		for(int i =0; i<split.length;i++) {
+			System.out.println(split[i]);
+		}
 		
 		String image1name = 이미지저장(image1);
 		String image2name = 이미지저장(image2);
@@ -69,7 +75,7 @@ public class Board1Controller {
 		User principal = (User)session.getAttribute("principal");
 	
 		Board1 board1 = new Board1().builder().catagory(catagory).place(place)
-				.lat(lat).user(principal).lng(lng).content(content).title(title)
+				.lat(lat).user(principal).lng(lng).content(content).title(title).addr(split[1])
 				.image1(image1name).image2(image2name).build();
 
 		board1Repository.save(board1);
@@ -103,7 +109,6 @@ public class Board1Controller {
 		board1Entity.setContent(board1.getContent());
 		board1Entity.setImage1(board1.getImage1());
 		board1Entity.setImage1(board1.getImage1());
-		board1Entity.setProperty(board1.getProperty());
 
 		return "ok";
 	}
