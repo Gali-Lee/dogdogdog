@@ -108,7 +108,6 @@ const Board3Detail = (props) => {
 				//history.push("/board3/detail/" + id);
 			});
 	}
-
 	return (
 		<div>
 			<SectionStyle id="wanted">
