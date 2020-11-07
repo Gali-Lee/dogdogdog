@@ -55,13 +55,14 @@ const Login = (props) => {
 				} else {
 				}
 			}
-			return res.text();
-
+			return res.json();
 		}).then(res => {
-			if (res === "ok") {
+			
+			if (res.state === "ok") {
 				localStorage.setItem("user", user.username);
-				localStorage.setItem("email",user.email);
+				localStorage.setItem("email",res.image);
 				alert("로그인 완료");
+
 				// 로그인 상태 값 리덕스 저장
 				dispatch(login());
 				props.history.push("/board3");

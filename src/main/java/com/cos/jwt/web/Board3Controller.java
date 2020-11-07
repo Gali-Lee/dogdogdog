@@ -32,7 +32,7 @@ public class Board3Controller {
 
 	private final Board3Repository board3Repository;
 	private final HttpSession session;
-
+	
 	private String 이미지저장(MultipartFile file) throws IllegalStateException, IOException {
 		File path = new File("");// 상대경로 찾을려고 임의로 기본 파일주소를 찍어봄
 		String uploadFolder = path.getAbsolutePath() + "\\src\\main\\webapp\\find-dog\\public\\images"; // 거기에 images
@@ -47,7 +47,6 @@ public class Board3Controller {
 		file.transferTo(saveFile);
 		return uploadFileName;
 	}
-
 	@PostMapping(value = "/board3/write", consumes = { "multipart/form-data" })
 	@ResponseBody
 	public String 글쓰기(@RequestParam("catagory") String catagory, @RequestParam("name") String name,
@@ -57,9 +56,7 @@ public class Board3Controller {
 			@RequestParam("property") String property, @RequestParam("date") String date,
 			@RequestParam("image1") MultipartFile image1, @RequestParam("image2") MultipartFile image2)
 			throws IllegalStateException, IOException {
-
 		System.out.println("실종/제보 글쓰기");
-
 		String image1name="";
 		String image2name="";
 		
@@ -82,20 +79,17 @@ public class Board3Controller {
 		board3Repository.save(board3);
 		return "ok";
 	}
-
 	@GetMapping("/board3")
 	public List<Board3> 글목록() {
 		System.out.println("실종/제보 글목록");
 		return board3Repository.findAll();
 	}
-
 	@GetMapping("/board3/{board3Id}")
 	public Board3 글상세(@PathVariable int board3Id) {
 		System.out.println("실종/제보 상세글");
 		Board3 board3 = board3Repository.findById(board3Id).get();
 		return board3;
 	}
-
 	@Transactional
 	@PostMapping(value = "/board3/modify/{board3Id}", consumes = { "multipart/form-data" })
 	@ResponseBody
