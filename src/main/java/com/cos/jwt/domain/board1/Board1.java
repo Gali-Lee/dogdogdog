@@ -1,12 +1,16 @@
 package com.cos.jwt.domain.board1;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.cos.jwt.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -27,10 +31,17 @@ public class Board1 {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String catagory;
-	private String title;
+	private String type;
+	private String name;
+	private String bread;
+	private String age;
+	private String sex;
+	private String date;
 	private String place;
+	
 	@Column(length = 10000000)
 	private String content;
+	private String property;
 	private double lat;
 	private double lng;
 
@@ -44,4 +55,8 @@ public class Board1 {
 	@JoinColumn(name="userId")
 	@ManyToOne
 	private User user;
+	
+	@JsonIgnoreProperties({"user", "board1"})
+	@OneToMany(mappedBy = "board1", fetch = FetchType.EAGER)
+	private List<Board1Comment> comments;
 }

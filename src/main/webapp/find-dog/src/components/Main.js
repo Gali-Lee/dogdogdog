@@ -13,11 +13,13 @@ import Board3Detail from '../pages/Board3/Board3Detail';
 import Board3Write from '../pages/Board3/Board3Write';
 
 import Board1Write from '../pages/Board1/Board1Write';
+import Modify from '../pages/join/Modify';
 
 const Main = () => {
 	return (
 		<div>
 			<Switch>
+				<Route path="/user/modify/:username" exact={true} component={Modify} />
 				<Route path="/login" exact={true} component={Login} />
 				<Route path="/join" exact={true} component={Join} />
 				<Route path="/joindog" exact={true} component={DogJoin} />

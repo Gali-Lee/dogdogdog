@@ -15,6 +15,7 @@ import com.cos.jwt.domain.dog.Dog;
 import com.cos.jwt.domain.dog.DogRepository;
 import com.cos.jwt.domain.user.User;
 import com.cos.jwt.domain.user.UserRepository;
+import com.cos.jwt.domain.user.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,6 +26,7 @@ public class IndexController {
 	private final UserRepository personRepository;
 	private final DogRepository dogRepository;
 	private final HttpSession session;
+	private final UserService userService;
 
 	// 회원정보 등록
 	@PostMapping("/joinProc")
@@ -33,14 +35,7 @@ public class IndexController {
 		personRepository.save(person);
 		return "ok";
 	}
-
-	// 강아지 정보 등록
-	@PostMapping("/petJoinProc")
-	public String 펫등록(@RequestBody Dog dog) {
-		dogRepository.save(dog);
-		return "ok";
-	}
-
+	
 	// 로그아웃
 	@GetMapping("/logout")
 	public ResponseEntity<?> logout() {
@@ -50,23 +45,25 @@ public class IndexController {
 
 	}
 
-	@GetMapping("/person/{id}")
-	public ResponseEntity<?> 회원정보(@PathVariable int id, HttpServletRequest request) {
-		HttpSession session = request.getSession();
-		System.out.println("회원정보 조회");
-		if (session.getAttribute("principal") != null) {
-			User personEntity = personRepository.findById(id).get();
-			System.out.println(personEntity);
-			return new ResponseEntity<User>(personEntity, HttpStatus.OK);
-		}
-		return new ResponseEntity<String>("You don't have authorization", HttpStatus.FORBIDDEN);
+//	@GetMapping("/user/{username}")
+//	public ResponseEntity<?> 회원정보(@PathVariable int id, HttpServletRequest request) {
+//		HttpSession session = request.getSession();
+//		System.out.println("회원정보 조회");
+//		if (session.getAttribute("principal") != null) {
+//			User personEntity = personRepository.findById(id).get();
+//			System.out.println(personEntity);
+//			return new ResponseEntity<User>(personEntity, HttpStatus.OK);
+//		}
+//		return new ResponseEntity<String>("You don't have authorization", HttpStatus.FORBIDDEN);
+//
+//	}
 
-	}
-
-	@GetMapping("/member/{id}")
-	public User 회원정보(@PathVariable int id) {
-		System.out.println("회원정보 조회");
-		User personEntity = personRepository.findById(id).get();
-		return personEntity;
+	@GetMapping("/user/{username}")
+	public ResponseEntity<?> detail(@PathVariable String username) {
+		System.out.println("회원정보 조회"+username);
+		//User personEntity = personRepository.mFindByUsername(username);
+		//System.out.println(personEntity);
+		
+		return new ResponseEntity<User>(userService.유저정보조회(username), HttpStatus.OK);
 	}
 }

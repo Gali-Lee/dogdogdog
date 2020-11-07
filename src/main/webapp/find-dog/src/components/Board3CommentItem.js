@@ -1,20 +1,41 @@
 import React from 'react';
+import styled from 'styled-components';
 
+const CommentItemStyle = styled.div`
+	display: grid;
+	grid-template-columns: 20% 80%;
+	border: 2px solid #003458;
+`;
+const UserImageStyle = styled.img`
+	 width: 100%;
+  height: 50px;
+`;
+const CommentContentStyle= styled.div`
+	display: grid;
+	grid-template-rows: auto auto;
+`;
+const NameStyle = styled.div`
+	//text-align:center;
+	font-weight:bold;
+`;
 const Board3CommentItem = (props) => {
 
 	const comment = props.comment;
 	const submitCommentDelete = props.submitCommentDelete;
 
 	return (
-		<div>
-			<div>사용자{comment.user.username}</div>
-			<div>댓글 내용 {comment.content}</div>
+		<CommentItemStyle>
+			<div>유저사진</div>
+			<CommentContentStyle>
+				<NameStyle>{comment.user.username}</NameStyle>
+				<div>{comment.content}</div>
 			<div>
 				{comment.user.username === localStorage.user ?
 					<button onClick={() => submitCommentDelete(comment.id)}>삭제 </button>
 					: null}
 			</div>
-		</div>
+			</CommentContentStyle>
+		</CommentItemStyle>
 	);
 };
 

@@ -57,7 +57,6 @@ const Board3Write = () => {
 		place: "",//발견장소
 		content: "",//내용
 		property: "",//특징
-
 	});
 
 	const uploadImg = async (e) => {
@@ -116,52 +115,46 @@ const Board3Write = () => {
 			};
 		});
 	}
-
 	function submitPost(e) {
-
 		e.preventDefault();
 
 		console.log("submitPost() 실행");
 
-		const formData = new FormData();
+		let form = document.getElementById("form");
+		const formData = new FormData(form);
 
-		if(board3.image1===null){
-
+		// if (board3.image1 === "" && board3.image2 !== "") {
+		// 	formData.append("image1", board3.image2);
+		// 	formData.append("image2", board3.image2);	
+		// }
+		// else if (board3.image1 !== "" && board3.image2 === "") {
+		// 	formData.append("image1", board3.image1);
+		// 	formData.append("image2", board3.image1);			
+		// }
+		// else if (board3.image1 === "" && board3.image2 === "") {
+		// 	alert("사진을 한장이상 업로드 해주세요!");
+		// }
+		if (board3.image1 === "" && board3.image2 === "") {
+			alert("사진을 한장이상 업로드 해주세요!");
 		}
-		if(board3.image2==null){
-
+		else {
+			console.log("fetch 실행");
+			fetch("http://localhost:8000/board3/write", {
+				method: "POST",
+				headers: {
+					"Authorization": localStorage.getItem("Authorization"),
+				},
+				body: formData
+			})
+				.then(res => res.text())
+				.then(res => {
+					if (res === "ok") {
+						alert("글이 등록되었습니다.");
+						history.push("/board3");
+					} else {
+					};
+				});
 		}
-		formData.append("catagory", board3.catagory);
-		formData.append("name", board3.name);
-		formData.append("bread", board3.bread);
-		formData.append("age", board3.age);
-		formData.append("type", board3.type);
-		formData.append("sex", board3.sex);
-		formData.append("place", board3.place);
-		formData.append("content", board3.content);
-		formData.append("image1", board3.image1);
-		formData.append("image2", board3.image2);
-		formData.append("date", board3.date);
-		formData.append("property", board3.property);
-		formData.append("user",localStorage.user);
-		formData.append("lat", location.lat);
-		formData.append("lng", location.lng);
-
-		fetch("http://localhost:8000/board3/write", {
-			method: "POST",
-			headers: {
-				"Authorization": localStorage.getItem("Authorization"),
-			},
-			body: formData
-		})
-			.then(res =>res.text())
-			.then(res => {
-				if (res === "ok") {
-					 alert("글이 등록되었습니다.");
-					history.push("/board3");
-				}else{
-				};
-			});
 	}
 	function setLatLng(lat, lng) {
 		console.log(30, lat);
@@ -195,7 +188,7 @@ const Board3Write = () => {
 
 	return (
 		<div>
-			<FormStyle encType="multipart/form-data">
+			<FormStyle id="form" encType="multipart/form-data">
 				<label>사진 첨부</label>
 				<br />
 				<InputStyle
@@ -309,7 +302,7 @@ const Board3Write = () => {
 						placeholder="장소를 입력하세요"
 					/><button onClick={handleSubmit}>검색</button>
 				</InputBoxStyle>
-				
+
 				{visible ? <MapContainer searchPlace={place} latLng={setLatLng} /> : null}
 				<br />
 				{visible ? <button onClick={savePlace}>장소 저장</button> : null}
@@ -321,7 +314,7 @@ const Board3Write = () => {
 					name="property"
 					defaultValue={board3.property}></textarea>
 				<br />
-					<label>내용을 입력하세요</label>
+				<label>내용을 입력하세요</label>
 				<textarea
 					onChange={inputHandle}
 					name="content">{board3.content}</textarea>

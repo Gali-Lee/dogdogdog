@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import Board3CommentItem from '../../components/Board3CommentItem';
 
+const FromStyle = styled.form`
+display : grid;
+grid-template-columns : auto auto auto;
+`;
 const Board3Comment = (props) => {
 
 	const id = props.id;
@@ -83,14 +88,19 @@ const Board3Comment = (props) => {
 
 	return (
 		<div>
-			<form>
-				<h1>댓글 관리</h1>
+			<FromStyle>
+				<div>유저사진</div>
+				<div>
+					<div>
+						<div>{localStorage.user}</div>
 				<input type="text"
 					onChange={inputHandle}
 					name="content"
 					value={commentInput.content} />
+				</div>
+				</div>
 				<button onClick={submitCommentWrite}>댓글 등록</button>
-			</form>
+			</FromStyle>
 			<div>
 				{comments.map((comment) => (
 					<Board3CommentItem key={comment.id} comment={comment} submitCommentDelete={submitCommentDelete} />

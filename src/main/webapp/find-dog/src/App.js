@@ -6,17 +6,11 @@ import { login } from './store';
 import { useDispatch } from 'react-redux';
 import Main from './components/Main';
 import Footer from './components/Footer';
-import Lside from './components/Lside';
-import Rside from './components/Rside';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SiderBar from './components/SiderBar';
-import SubMenu from 'antd/lib/menu/SubMenu';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu} from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-
-
 
 /* 건들지 마시오!
 **************************
@@ -36,7 +30,7 @@ display : grid;
 `;
 
 
-const  AppStyle = styled.div`
+const AppStyle = styled.div`
 font-family: "62570체";
 `;
 
@@ -52,10 +46,11 @@ function App() {
     }
     console.log(jwtToken);
   });
-const { Header1, Content, Sider } = Layout;
+  const { Header1, Content, Sider } = Layout;
 
   return (
     <AppStyle>
+
   <Layout>
     <Header/>
     <Layout>
@@ -86,11 +81,12 @@ const { Header1, Content, Sider } = Layout;
         </Content>
         <Sider width={200} className="site-layout-background">
       </Sider>
+          </Layout>
+        </Layout>
+
       </Layout>
-    </Layout>
-  </Layout>
-            <Footer></Footer>
-  </AppStyle>
+      <Footer></Footer>
+    </AppStyle>
   );
 }
 export default App;
