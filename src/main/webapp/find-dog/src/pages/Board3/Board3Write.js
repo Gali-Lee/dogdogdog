@@ -58,7 +58,6 @@ const Board3Write = () => {
 		content: "",//내용
 		property: "",//특징
 	});
-
 	const uploadImg = async (e) => {
 		const file = e.target.files[0];
 		setBoard3(prevState => {
@@ -68,7 +67,6 @@ const Board3Write = () => {
 			};
 		});
 	}
-
 	// 이미지 base64 로 변환해서 올리는 방법
 	/*
 	const uploadImg = async (e) => {
@@ -185,7 +183,6 @@ const Board3Write = () => {
 		console.log(1, place);
 		showMap();
 	};
-
 	return (
 		<div>
 			<FormStyle id="form" encType="multipart/form-data">
@@ -270,7 +267,6 @@ const Board3Write = () => {
 					<option value="18">18</option>
 					<option value="19">19</option>
 					<option value="20">20</option>
-
 				</SelectStyle>
 				<br />
 				<label>성별</label>
@@ -319,6 +315,8 @@ const Board3Write = () => {
 					onChange={inputHandle}
 					name="content">{board3.content}</textarea>
 				<br />
+				<input type="hidden" name="lat" value={location.lat} />
+				<input type="hidden" name="lng" value={location.lng} />
 				<ButtonStyle onClick={submitPost}>등록</ButtonStyle>
 			</FormStyle>
 		</div>

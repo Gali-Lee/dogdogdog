@@ -1,6 +1,5 @@
 package com.cos.jwt.web;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.http.HttpStatus;
@@ -9,13 +8,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cos.jwt.domain.dog.Dog;
-import com.cos.jwt.domain.dog.DogRepository;
 import com.cos.jwt.domain.user.User;
 import com.cos.jwt.domain.user.UserRepository;
-import com.cos.jwt.domain.user.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,9 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class IndexController {
 
 	private final UserRepository personRepository;
-	private final DogRepository dogRepository;
 	private final HttpSession session;
-	private final UserService userService;
 
 	// 회원정보 등록
 	@PostMapping("/joinProc")
@@ -42,7 +37,6 @@ public class IndexController {
 		System.out.println("2223s");
 		session.invalidate();
 		return new ResponseEntity<String>("ok", HttpStatus.CREATED);
-
 	}
 
 //	@GetMapping("/user/{username}")
@@ -59,11 +53,13 @@ public class IndexController {
 //	}
 
 	@GetMapping("/user/{username}")
+	@ResponseBody
 	public ResponseEntity<?> detail(@PathVariable String username) {
-		System.out.println("회원정보 조회"+username);
-		//User personEntity = personRepository.mFindByUsername(username);
-		//System.out.println(personEntity);
 		
-		return new ResponseEntity<User>(userService.유저정보조회(username), HttpStatus.OK);
+		System.out.println("회원정보 조회"+username);
+//		User personEntity = personRepository.mFindByUsername(username);
+//		System.out.println(personEntity);
+		//userRepository.mFindByUsername(username);
+		return new ResponseEntity<User>(personRepository.mFindByUsername(username), HttpStatus.OK);
 	}
 }

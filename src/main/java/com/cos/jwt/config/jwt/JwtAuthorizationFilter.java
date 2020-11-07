@@ -44,9 +44,8 @@ public class JwtAuthorizationFilter implements Filter {
 				
 				int personId = JWT.require(Algorithm.HMAC512(JwtProps.secret)).build().verify(jwtToken).getClaim("id")
 						.asInt();
-				
+
 				HttpSession session = req.getSession();
-				//System.out.println("session"+session);
 				System.out.println("들어옴");
 				System.out.println(jwtToken);
 				System.out.println(personId);
