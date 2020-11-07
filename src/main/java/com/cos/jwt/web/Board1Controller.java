@@ -52,12 +52,13 @@ public class Board1Controller {
 
 	@PostMapping(value = "/board1/write", consumes = { "multipart/form-data" })
 	@ResponseBody
-	public String 글쓰기(@RequestParam("catagory") String catagory, @RequestParam("name") String name,
-			@RequestParam("bread") String bread, @RequestParam("age") String age, @RequestParam("sex") String sex,
-			@RequestParam("place") String place, @RequestParam("lat") double lat, @RequestParam("lng") double lng,
-			@RequestParam("content") String content, @RequestParam("type") String type,
-			@RequestParam("property") String property, @RequestParam("date") String date,
-			@RequestParam("image1") MultipartFile image1, @RequestParam("image2") MultipartFile image2)
+	public String 글쓰기(@RequestParam("catagory") String catagory, 
+			@RequestParam("place") String place, 
+			@RequestParam("title") String title,
+			@RequestParam("lat") double lat, @RequestParam("lng") double lng,
+			@RequestParam("content") String content,
+			@RequestParam("image1") MultipartFile image1, 
+			@RequestParam("image2") MultipartFile image2)
 			throws IllegalStateException, IOException {
 		
 		System.out.println("실종/제보 글쓰기");
@@ -67,8 +68,8 @@ public class Board1Controller {
 		
 		User principal = (User)session.getAttribute("principal");
 	
-		Board1 board1 = new Board1().builder().catagory(catagory).name(name).bread(bread).age(age).sex(sex).place(place)
-				.date(date).lat(lat).user(principal).lng(lng).type(type).property(property).content(content)
+		Board1 board1 = new Board1().builder().catagory(catagory).place(place)
+				.lat(lat).user(principal).lng(lng).content(content).title(title)
 				.image1(image1name).image2(image2name).build();
 
 		board1Repository.save(board1);
@@ -97,16 +98,11 @@ public class Board1Controller {
 		Board1 board1Entity = board1Repository.findById(board1Id).get();
 
 		board1Entity.setCatagory(board1.getCatagory());
-		board1Entity.setName(board1.getName());
-		board1Entity.setBread(board1.getBread());
-		board1Entity.setAge(board1.getAge());
-		board1Entity.setType(board1.getType());
-		board1Entity.setSex(board1.getSex());
+		board1Entity.setTitle(board1.getTitle());
 		board1Entity.setPlace(board1.getPlace());
 		board1Entity.setContent(board1.getContent());
 		board1Entity.setImage1(board1.getImage1());
 		board1Entity.setImage1(board1.getImage1());
-		board1Entity.setDate(board1.getDate());
 		board1Entity.setProperty(board1.getProperty());
 
 		return "ok";
