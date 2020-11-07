@@ -42,12 +42,14 @@ public class JwtAuthorizationFilter implements Filter {
 			jwtToken = jwtToken.replace(JwtProps.auth, "");
 			try {
 				
-				String personId = JWT.require(Algorithm.HMAC512(JwtProps.secret)).build().verify(jwtToken).getClaim("id")
-						.asString();
+				int personId = JWT.require(Algorithm.HMAC512(JwtProps.secret)).build().verify(jwtToken).getClaim("id")
+						.asInt();
 				
 				HttpSession session = req.getSession();
 				//System.out.println("session"+session);
 				System.out.println("들어옴");
+				System.out.println(jwtToken);
+				System.out.println(personId);
 				User personEntity = personRepository.findById(personId).get();
 				
 				session.setAttribute("principal", personEntity);

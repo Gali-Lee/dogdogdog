@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
+import MapContainer from '../../components/MapContainer';
 
 const FormStyle = styled.form`
   display: grid;
@@ -135,6 +136,35 @@ const Board3Modify = (props) => {
 				}
 			})
 	}
+	function setLatLng(lat, lng) {
+		console.log(30, lat);
+		console.log(30, lng);
+		setLocation({
+			lat: lat,
+			lng: lng
+		});
+	}
+	function showMap() {
+		setVisible(true);
+	}
+	function savePlace() {
+		setVisible(false);
+		console.log(1000, location);
+	}
+	const [place, setPlace] = useState("");
+	const [visible, setVisible] = useState(false);
+	const [location, setLocation] = useState({
+		title: "",
+		lat: "",
+		lng: "",
+	});
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		setPlace(board3.place);
+		console.log(1, place);
+		showMap();
+	};
 	return (
 		<div>
 			<FormStyle id="form" encType="multipart/form-data">
@@ -245,7 +275,7 @@ const Board3Modify = (props) => {
 					name="date" />
 				<br />
 				<label>당시의 장소</label>
-				{/* <InputBoxStyle>
+				<InputBoxStyle>
 					<InputStyle
 						type="text"
 						onChange={inputHandle}
@@ -259,7 +289,7 @@ const Board3Modify = (props) => {
 				<br />
 				{visible ? <button onClick={savePlace}>장소 저장</button> : null}
 				<br />
-				<br /> */}
+				<br />
 				<label>특징을 입력하세요</label>
 				<textarea
 					onChange={inputHandle}

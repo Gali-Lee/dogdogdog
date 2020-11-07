@@ -31,12 +31,7 @@ public class Board1 {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String catagory;
-	private String type;
-	private String name;
-	private String bread;
-	private String age;
-	private String sex;
-	private String date;
+	private String title;
 	private String place;
 	
 	@Column(length = 10000000)
