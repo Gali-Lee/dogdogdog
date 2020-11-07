@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { login, logout } from '../../store';
-import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../../store';
 import 'antd/dist/antd.css';
 import { Form, Input, Button, Checkbox } from 'antd';
 
 
 const Login = (props) => {
-	const isLogin = useSelector((store) => store.isLogin);
 	const dispatch = useDispatch();
 
 	//디자인
@@ -54,9 +52,6 @@ const Login = (props) => {
 			for (let header of res.headers.entries()) {
 				if (header[0] === "authorization") {
 					localStorage.setItem("Authorization", header[1]);
-
-					console.log("헤더 찍힘");
-					console.log(header);
 				} else {
 				}
 			}
@@ -64,29 +59,25 @@ const Login = (props) => {
 
 		}).then(res => {
 			if (res === "ok") {
-				console.log("2222", user.username, user.password);
 				localStorage.setItem("user", user.username);
+				localStorage.setItem("email",user.email);
 				alert("로그인 완료");
-				console.log("1111");
 				// 로그인 상태 값 리덕스 저장
 				dispatch(login());
-				props.history.push("/");
-				console.log(user);
+				props.history.push("/board3");
 			} else {
 				alert('아이디 혹은 비번을 다시 입력하세요!');
 			}
 		});
-		console.log(isLogin);
 	}
-
 
 	const changeValue = (e) => {
 		setUser({
 			...user,
 			[e.target.name]: e.target.value
 		});
-		console.log(user);
 	}
+	
 	return (
 		<div>
 

@@ -6,16 +6,12 @@ import { login } from './store';
 import { useDispatch } from 'react-redux';
 import Main from './components/Main';
 import Footer from './components/Footer';
-import Lside from './components/Lside';
-import Rside from './components/Rside';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SiderBar from './components/SiderBar';
-import SubMenu from 'antd/lib/menu/SubMenu';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu} from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import Chat from './pages/Chat/Chat';
+
 /* 건들지 마시오!
 **************************
 ***************************
@@ -27,13 +23,14 @@ import Chat from './pages/Chat/Chat';
 ***********************
 ************************
 */
+
 const MainListStyle = styled.div`
 display : grid;
   grid-template-columns: auto auto auto;
 `;
 
 
-const  AppStyle = styled.div`
+const AppStyle = styled.div`
 font-family: "62570체";
 `;
 
@@ -49,10 +46,11 @@ function App() {
     }
     console.log(jwtToken);
   });
-const { Header1, Content, Sider } = Layout;
+  const { Header1, Content, Sider } = Layout;
 
   return (
     <AppStyle>
+
   <Layout>
     <Header/>
     <Layout>
@@ -63,7 +61,7 @@ const { Header1, Content, Sider } = Layout;
           defaultOpenKeys={['sub1']}
           style={{ height: '100%', borderRight: 0 }}
         >
-            <Menu.Item key="1"  icon={<UserOutlined />}><Link to="/board1">게시판1</Link></Menu.Item>
+            <Menu.Item key="1"  icon={<UserOutlined />}><Link to="/chat">게시판1</Link></Menu.Item>
             <Menu.Item key="2" icon={<LaptopOutlined />}><Link to="/board2">게시판2</Link></Menu.Item>
             <Menu.Item key="3" icon={<NotificationOutlined />} ><Link to="/board3">게시판3</Link></Menu.Item>
             <Menu.Item key="4" icon={<NotificationOutlined />} ><Link to="/map">지도</Link></Menu.Item>
@@ -82,14 +80,13 @@ const { Header1, Content, Sider } = Layout;
           <Main/>
         </Content>
         <Sider width={200} className="site-layout-background">
-  
-      <Chat/>
       </Sider>
+          </Layout>
+        </Layout>
+
       </Layout>
-    </Layout>
-  </Layout>
-            <Footer></Footer>
-  </AppStyle>
+      <Footer></Footer>
+    </AppStyle>
   );
 }
 export default App;

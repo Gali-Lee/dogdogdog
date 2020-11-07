@@ -57,14 +57,24 @@ public class Board3Controller {
 			@RequestParam("property") String property, @RequestParam("date") String date,
 			@RequestParam("image1") MultipartFile image1, @RequestParam("image2") MultipartFile image2)
 			throws IllegalStateException, IOException {
-		
+
 		System.out.println("실종/제보 글쓰기");
+
+		String image1name="";
+		String image2name="";
 		
-		String image1name = 이미지저장(image1);
-		String image2name = 이미지저장(image2);
-		
-		User principal = (User)session.getAttribute("principal");
-	
+		if ("".equals(image1.getOriginalFilename()) == true) {
+			image2name = 이미지저장(image2);
+			image1name = image2name;
+		} else if ("".equals(image2.getOriginalFilename()) == true) {
+			image1name = 이미지저장(image1);
+			image2name = image1name;
+		} else {
+			image1name = 이미지저장(image1);
+			image2name = 이미지저장(image2);
+		}
+		User principal = (User) session.getAttribute("principal");
+
 		Board3 board3 = new Board3().builder().catagory(catagory).name(name).bread(bread).age(age).sex(sex).place(place)
 				.date(date).lat(lat).user(principal).lng(lng).type(type).property(property).content(content)
 				.image1(image1name).image2(image2name).build();
@@ -87,25 +97,48 @@ public class Board3Controller {
 	}
 
 	@Transactional
-	@PutMapping("/board3/{board3Id}")
+	@PostMapping(value = "/board3/modify/{board3Id}", consumes = { "multipart/form-data" })
 	@ResponseBody
-	public String 글수정(@PathVariable int board3Id, @RequestBody Board3 board3) {
+	public String 글수정(@PathVariable int board3Id, @RequestParam("catagory") String catagory,
+			@RequestParam("name") String name, @RequestParam("bread") String bread, @RequestParam("age") String age,
+			@RequestParam("sex") String sex, /*
+												 * @RequestParam("place") String place, @RequestParam("lat") double lat,
+												 * 
+												 * @RequestParam("lng") double lng,
+												 */ @RequestParam("content") String content,
+			@RequestParam("type") String type, @RequestParam("property") String property,
+			@RequestParam("date") String date, @RequestParam("image1") MultipartFile image1,
+			@RequestParam("image2") MultipartFile image2) throws IllegalStateException, IOException {
 
 		System.out.println("실종/제보 글 수정하기");
+
 		Board3 board3Entity = board3Repository.findById(board3Id).get();
 
-		board3Entity.setName(board3.getName());
-		board3Entity.setBread(board3.getBread());
-		board3Entity.setAge(board3.getAge());
-		board3Entity.setContent(board3.getContent());
-		board3Entity.setPlace(board3.getPlace());
-		board3Entity.setSex(board3.getSex());
+		if ("".equals(image1.getOriginalFilename()) == false) {
+			String image1name = 이미지저장(image1);
+			board3Entity.setImage1(image1name);
+		}
+		if ("".equals(image2.getOriginalFilename()) == false) {
+			String image2name = 이미지저장(image2);
+			board3Entity.setImage1(image2name);
+		}
+
+		board3Entity.setCatagory(catagory);
+		board3Entity.setName(name);
+		board3Entity.setBread(bread);
+		board3Entity.setAge(age);
+		board3Entity.setType(type);
+		board3Entity.setSex(sex);
+		// board3Entity.setPlace(place);
+		board3Entity.setContent(content);
+		board3Entity.setDate(date);
+		board3Entity.setProperty(property);
 
 		return "ok";
 	}
 
 	@Transactional
-	@DeleteMapping("/board3/{board3Id}")
+	@DeleteMapping("/board3/delete/{board3Id}")
 	@ResponseBody
 	public String 글삭제(@PathVariable int board3Id) {
 		board3Repository.deleteById(board3Id);
@@ -117,6 +150,7 @@ public class Board3Controller {
 		System.out.println("지도 목록 검색");
 		return board3Repository.findAll();
 	}
+
 	@GetMapping("/board4/{id}")
 	public Board3 지도글(@PathVariable int id) {
 		System.out.println("지도글");

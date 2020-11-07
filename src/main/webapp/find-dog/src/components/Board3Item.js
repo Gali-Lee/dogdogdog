@@ -13,8 +13,6 @@ const ItemStyle = styled.div`
 `;
 const Board3Item = (props) => {
 	const { id, catagory, name, bread, age,date, sex, place, image1, image2, content } = props.board3;
-
-	console.log("boardItem");
 	return (
 		<ItemStyle>
 			<div>{catagory}</div>

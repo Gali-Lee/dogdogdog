@@ -36,13 +36,21 @@ public class FilterConfig {
 		return bean;
 	}
 	
+	//로그인한 회원정보가 필요할때 인증하는 필터
+	//여기에 들어오는 주소는 헤더에 값을 실어줘야함! 
 	@Bean
 	public FilterRegistrationBean<JwtAuthorizationFilter> jwtAuthorizationFilter(){
 		System.out.println("JwtAuthorizationFilter 필터 등록");
 		FilterRegistrationBean<JwtAuthorizationFilter> bean = 
 				new FilterRegistrationBean<>(new JwtAuthorizationFilter(personRepository));
 		bean.addUrlPatterns("/dogJoinProc");
-		//bean.addUrlPatterns("/*");
+		bean.addUrlPatterns("/board3/write/*");
+		//bean.addUrlPatterns("/board3/modify/*");
+		//bean.addUrlPatterns("/board3/delete/*");
+		bean.addUrlPatterns("/board3/comment/write/*");
+		//bean.addUrlPatterns("/board3/comment/modify/*");
+		//bean.addUrlPatterns("/board3/comment/delete/*");
+		//bean.addUrlPatterns("/user/*");
 		bean.setOrder(2); // 낮은 번호부터 실행됨.
 		return bean;
 	}

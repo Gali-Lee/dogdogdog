@@ -39,13 +39,6 @@ const Join = (props) => {
 		console.log(values);
 	};
 
-	function check() {
-		if (user.password === user.repassword) {
-			pMessage = "일치합니다";
-		} else if (user.password !== user.repassword) {
-			pMessage = "불일치";
-		}
-	}
 
 	function inputHandle(e) {
 		setUser({ ...user, [e.target.name]: e.target.value });
@@ -85,7 +78,7 @@ const Join = (props) => {
 				console.log("22", res);
 				if (res === "ok") {
 					alert("가입 성공");
-					props.history.push("/");
+					props.history.push("/login");
 				} else {
 					alert("가입 실패");
 				}
@@ -157,6 +150,7 @@ const Join = (props) => {
 						<option name="place" value="남구">북구</option>
 						<option name="place" value="남구">수영구</option>
 						<option name="place" value="남구">동래구</option>
+						<option name="place" value="남구">금정구</option>
 					</select>
 				</Form.Item>
 
