@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import MapContainer3 from '../../components/MapContainer3'
+import { useHistory } from 'react-router-dom';
+import MapContainer from '../../components/MapContainer';
 const FormStyle = styled.form`
   display: grid;
   justify-items: auto;
@@ -38,13 +40,16 @@ const ButtonStyle = styled.button`
   cursor: pointer;
 `;
 const Board1Write = () => {
+
+	const history = useHistory();
+
 	const [board1, setBoard1] = useState({
 		id: "", //번호
 		image1: "",//이미지1
 		image2: "",//이미지2
-		title: "",//제목
-		catagory: "",//실종, 제보
-		place: "",//발견장소
+		title: "",
+		catagory: "",//카페,공원,기타
+		place: "",//장소
 		content: "",//내용
 
 	});
@@ -57,6 +62,7 @@ const Board1Write = () => {
 			};
 		});
 	}
+
 	function inputHandle(e) {
 		setBoard1((prevState) => {// 함수형으로 쓰는 이유 : setstate 두번쓸때 값을 들고오기 우ㅐㅎ서 
 			return {
@@ -73,46 +79,44 @@ const Board1Write = () => {
 			};
 		});
 	}
-
 	function submitPost(e) {
-
 		e.preventDefault();
 
 		console.log("submitPost() 실행");
 
-		const formData = new FormData();
+		let form = document.getElementById("form");
+		const formData = new FormData(form);
 
-		//formData.append("id", board3.id);
-
-		formData.append("catagory", board1.catagory);
-		formData.append("title", board1.title);
-		formData.append("place", board1.place);
-		formData.append("content", board1.content);
-		formData.append("image1", board1.image1);
-		formData.append("image2", board1.image2);
-		formData.append("user", localStorage.user);
-		formData.append("lat", location.lat);
-		formData.append("lng", location.lng);
-
-		fetch("http://localhost:8000/board1/write", {
-			method: "POST",
-			headers: {
-				"Authorization": localStorage.getItem("Authorization"),
-			},
-			body: formData
-		})
-			.then(res => res.text())
-			.then(res => {
-				if (res === "ok") {
-					alert("글이 등록되었습니다.");
-				} else {
-				};
-			});
+		if (board1.image1 === "" && board1.image2 === "") {
+			alert("사진을 한장이상 업로드 해주세요!");
+		}
+		else {
+			console.log("fetch 실행");
+			fetch("http://localhost:8000/board1/write", {
+				method: "POST",
+				headers: {
+					"Authorization": localStorage.getItem("Authorization"),
+				},
+				body: formData
+			})
+				.then(res => res.text())
+				.then(res => {
+					if (res === "ok") {
+						alert("글이 등록되었습니다.");
+						//history.push("/board1");
+					} else {
+					};
+				});
+		}
 	}
-	function setLatLng(lat, lng) {
-		console.log(30, lat);
-		console.log(30, lng);
+	function setLatLng(place,addr,lat, lng) {
+		console.log(30,place);
+		console.log(30,addr);
+		console.log(30+"lat", lat);
+		console.log(30+"lng", lng);
 		setLocation({
+			title: place,
+			addr: addr,
 			lat: lat,
 			lng: lng
 		});
@@ -128,6 +132,7 @@ const Board1Write = () => {
 	const [visible, setVisible] = useState(false);
 	const [location, setLocation] = useState({
 		title: "",
+		addr: "",
 		lat: "",
 		lng: "",
 	});
@@ -138,10 +143,9 @@ const Board1Write = () => {
 		console.log(1, place);
 		showMap();
 	};
-
 	return (
 		<div>
-			<FormStyle encType="multipart/form-data">
+			<FormStyle id="form" encType="multipart/form-data">
 				<label>사진 첨부</label>
 				<br />
 				<InputStyle
@@ -160,7 +164,7 @@ const Board1Write = () => {
 					}}
 				/>
 				<br />
-				<label>제목</label>
+				<label>품종</label>
 				<InputStyle
 					type="text"
 					onChange={inputHandle}
@@ -175,9 +179,8 @@ const Board1Write = () => {
 					value={board1.catagory}
 					onChange={selectHandle}>
 					<option selected value="선택안함">선택안함</option>
-					<option value="산책로">산책로</option>
 					<option value="카페">카페</option>
-					<option value="기타">기타</option>
+					<option value="공원">공원</option>
 				</SelectStyle>
 				<br />
 				<label>내용을 입력하세요</label>
@@ -185,8 +188,8 @@ const Board1Write = () => {
 					onChange={inputHandle}
 					name="content">{board1.content}</textarea>
 				<br />
-
-				<label>위치</label>
+				
+				<label>장소</label>
 				<InputBoxStyle>
 					<InputStyle
 						type="text"
@@ -201,7 +204,10 @@ const Board1Write = () => {
 				<br />
 				{visible ? <button onClick={savePlace}>장소 저장</button> : null}
 				<br />
-				<br />
+				<input type="hidden" name="lat" value={location.lat} />
+				<input type="hidden" name="lng" value={location.lng} />
+				<input type="hidden" name="placename" value={location.title}/>
+				<input type="hidden" name="addr" value={location.addr}/>
 
 				<ButtonStyle onClick={submitPost}>등록</ButtonStyle>
 			</FormStyle>
