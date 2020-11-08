@@ -11,50 +11,65 @@ const ListStyle = styled.div`
   //padding: 20px 250px;
 `;
 const Board1List = (props) => {
-	const addr=props.addr;
-	const board1s=props.board1s;
-	console.log(123123213123123, addr.addr);
+	const addr = props.addr;
+	const board1s = props.board1s;
 	console.log("addddr", addr);
-	console.log("sdfsdf",board1s);
+
 	const [boardParks, setBoardParks] = useState([]);
 	const [boardCafes, setBoardCafes] = useState([]);
+	const [test, setTest] = useState([]);
+	let arrayParks = [];
+	let arrayCafes = [];
+	let array
+
 
 	useEffect(() => {
-		for(let board of board1s){
-			if((board.catagory==="공원") && (board.addr===addr.addr)){
-				setBoardParks([
-					...boardParks,board
-				])
-			}
-			if((board.catagory==="카페") && (board.addr===addr.addr)){
-				setBoardCafes([
-					...boardCafes,board
-				])
+		for (let board of board1s) {
+			if (addr === "전체") {
+				if (board.catagory === "공원") {
+					arrayParks.push(board);
+				} else if (board.catagory === "카페") {
+					arrayCafes.push(board);
+				}
+			} else {
+				if ((board.catagory === "공원") && (board.addr === addr)) {
+					console.log("boardParks : ", board);
+					console.log("Username : ",board.user.username);
+					arrayParks.push(board);
+				}
+				if ((board.catagory === "카페") && (board.addr === addr)) {
+					console.log("boardCafes : ", board);
+					console.log("Username: ",board.user.username);
+					arrayCafes.push(board);
+				}
 			}
 		}
-		
+		// setBoardCafes([
+		// 			...boardCafes,board
+		// 		])
+		console.log("array : ", arrayParks);
+		console.log("array : ", arrayCafes);
+		setBoardParks(arrayParks);
+		setBoardCafes(arrayCafes);
 	}, [addr]);
-	console.log("Parks : ",boardParks);
-	console.log("Cafes :",boardCafes);
-
 
 	return (
 		<div>
-			{/* 			<h5>공원</h5>
+			<h5>공원</h5>
 			<hr />
 			<ListStyle>
-				{board1s.map((board1) => (
-					(<Board1Item key={board1.id} board1={board1} category="공원" addr={addr} />)
+				{boardParks.map((board1) => (
+					(<Board1Item key={board1.id} board1={board1} />)
 				))}
 			</ListStyle>
 			<hr />
 			<h5>카페</h5>
 			<hr />
 			<ListStyle>
-				{board1s.map((board1) => (
-					(<Board1Item key={board1.id} board1={board1} category="카페" addr={addr} />)
+				{boardCafes.map((board1) => (
+					(<Board1Item key={board1.id} board1={board1} />)
 				))}
-			</ListStyle> */}
+			</ListStyle>
 		</div>
 	);
 };

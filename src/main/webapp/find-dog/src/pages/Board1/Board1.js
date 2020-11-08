@@ -23,7 +23,7 @@ const Board1 = () => {
 	}
 	const [board1s,setBoard1s] = useState([]);
 	useEffect(() => {
-
+		console.log("board1페이지 불러옴");
 		console.log("board3 목록");
 
 		fetch("http://localhost:8000/board1", {
@@ -33,7 +33,9 @@ const Board1 = () => {
 			.then((res) => {
 				console.log("res : ", res);
 				setBoard1s(res);
+				setPlace("전체");
 			});
+		
 		
 	}, []);
 
@@ -44,6 +46,7 @@ const Board1 = () => {
 				<button>글쓰기</button>
 			</Link>
 			<select type="text" name="place" onChange={inputHandle}>
+				<option name="place" value="전체">전체</option>
 				<option name="place" value="부산진구">부산진구</option>
 				<option name="place" value="남구">남구</option>
 				<option name="place" value="강서구">강서구</option>
