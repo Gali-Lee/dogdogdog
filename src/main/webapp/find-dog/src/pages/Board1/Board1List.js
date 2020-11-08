@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Board1Item from '../../components/Board1Item';
 import styled from 'styled-components';
 import update from 'react-addons-update';
-import { Prev } from 'react-bootstrap/esm/PageItem';
 
 
 const ListStyle = styled.div`
