@@ -59,7 +59,6 @@ const ModalPage = () => {
 					onClose={closeModal}>
 					{/* =====모달 바디 시작=====*/}
 					{/* 제목(mtTitle), 모임인원(maxCount),시간(mtTime),장소(mtPlace),기타(mtContent)  */}
-					{/* <form action="http://localhost:8000/board2/" method="post"> */}
 					<form>
 						<h5>모임 개설</h5> 
 						{/* <div onChange={changeValue} value={meeting.userName} name="userName"/> */}

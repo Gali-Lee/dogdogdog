@@ -11,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Layout, Menu} from 'antd';
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import Rside from './components/Rside';
 
 /* 건들지 마시오!
 **************************
@@ -25,17 +26,20 @@ import { Link } from 'react-router-dom';
 */
 
 const MainListStyle = styled.div`
-display : grid;
-  grid-template-columns: auto auto auto;
+  display : grid;
+  grid-template-columns: 90% 10%;
 `;
 
-
 const AppStyle = styled.div`
-font-family: "62570체";
+	display: grid;
+  background-color: #FFF8E8;
+  display:grid;
+  grid-template-columns: auto;
+  padding: 50px 50px;
+  font-family: "RIDIBatang";
 `;
 
 function App() {
-
   //로그인 상태관리
   const dispatch = useDispatch();
 
@@ -46,46 +50,16 @@ function App() {
     }
     console.log(jwtToken);
   });
-  const { Header1, Content, Sider } = Layout;
 
   return (
     <AppStyle>
-
-  <Layout>
-    <Header/>
-    <Layout>
-     <Sider width={200} className="site-layout-background">
-        <Menu
-          mode="inline"
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          style={{ height: '100%', borderRight: 0 }}
-        >
-            <Menu.Item key="1"  icon={<UserOutlined />}><Link to="/board1">게시판1</Link></Menu.Item>
-            <Menu.Item key="2" icon={<LaptopOutlined />}><Link to="/board2">게시판2</Link></Menu.Item>
-            <Menu.Item key="3" icon={<NotificationOutlined />} ><Link to="/board3">게시판3</Link></Menu.Item>
-            <Menu.Item key="4" icon={<NotificationOutlined />} ><Link to="/map">지도</Link></Menu.Item>
-        </Menu>
-      </Sider>
-
-      <Layout style={{ padding: '0 24px 24px' }}>
-        <Content
-          className="site-layout-background"
-          style={{
-            padding: 24,
-            margin: 0,
-            minHeight: 280,
-          }}
-        >
+      <h1>PETPETPET</h1>
+      <Header/>
+        <MainListStyle>
           <Main/>
-        </Content>
-        <Sider width={200} className="site-layout-background">
-      </Sider>
-          </Layout>
-        </Layout>
-
-      </Layout>
-      <Footer></Footer>
+          <Rside/>
+        </MainListStyle>
+      <Footer/>
     </AppStyle>
   );
 }

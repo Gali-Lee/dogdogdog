@@ -1,15 +1,53 @@
 import React from 'react';
-import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../store';
+import styled from 'styled-components';
+
+const RsideStyle = styled.div`
+display: grid;
+grid-template-columns:auto;
+border: 2px #FA827A;
+height: 1000px;
+padding-top: 15px;
+//justify-content:end;
+align-items:initial;
+
+grid-template-columns:auto;
+//transform:  rotate(90deg);
+`;
 const Rside = () => {
+	
+	const isLogin = useSelector((store) => store.isLogin);
+	const user = localStorage.getItem("user")
+	const dispatch = useDispatch();
+	const logoutbutton = () => {
+		localStorage.removeItem("Authorization");
+		localStorage.removeItem("user");
+		dispatch(logout());
+		console.log(isLogin);
+	}
 	return (
-		<div>
-		<Nav defaultActiveKey="/home" className="flex-column">
-				<Nav><Link to="/board1">게시판1</Link></Nav>
-				<Nav.Link to="/board2">게시판2</Nav.Link>
-				<Nav.Link to="/board3">게시판3</Nav.Link>
-			</Nav>
-		</div>
+		<RsideStyle>
+		
+		{isLogin ?
+					(
+						<>
+							<Link to="joindog">강아지 등록</Link>
+							<div onClick={logoutbutton}>로그아웃</div>
+							<div><Link to={"/user/modify/"+user}>{user}님 환영합니다!</Link></div>
+						</>
+					)
+					:
+					(
+						<>
+						<div><Link to="login">로그인</Link></div>
+						<div><Link to="join">회원가입</Link></div>
+							
+						</>
+					)
+				}
+		</RsideStyle>
 	);
 };
 

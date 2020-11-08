@@ -5,8 +5,7 @@ import styled from "styled-components";
 
 const FormStyle = styled.form`
   display: grid;
-  justify-items: auto;
-  font-family: 'Sam3KRFont';
+  justify-items: left;
 `;
 const InputBoxStyle = styled.div`
 display:grid;

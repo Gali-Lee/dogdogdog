@@ -4,14 +4,16 @@ import Board3Item from '../../components/Board3Item';
 
 const ListStyle = styled.div`
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto auto;
   grid-gap: 10px;
+  justify-content:left;
   //padding: 20px 250px;
 `;
 const Board3List = () => {
 	
 	const [board3s, setBoard3s] = useState([]);
 
+	
 	useEffect(() => {
 
 		console.log("board3 목록");
@@ -27,11 +29,13 @@ const Board3List = () => {
 	}, []);
 
 	return (
+		<div>
 		<ListStyle>
 			{board3s.map((board3) => (
 				<Board3Item key={board3.id} board3={board3} />
 			))}
 		</ListStyle>
+		</div>
 	);
 };
 
