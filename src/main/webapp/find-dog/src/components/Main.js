@@ -14,11 +14,19 @@ import Board3Write from '../pages/Board3/Board3Write';
 
 import Board1Write from '../pages/Board1/Board1Write';
 import Modify from '../pages/join/Modify';
+import Home from '../pages/home/Home';
+import styled from 'styled-components';
 
+const MainStyle = styled.div`
+	display: grid;
+	grid-template-columns: auto;
+	margin: 30px;
+`;
 const Main = () => {
 	return (
-		<div>
+		<MainStyle>
 			<Switch>
+				<Route path="/" exact={true} component={Home}/>
 				<Route path="/user/modify/:username" exact={true} component={Modify} />
 				<Route path="/login" exact={true} component={Login} />
 				<Route path="/join" exact={true} component={Join} />
@@ -33,7 +41,7 @@ const Main = () => {
 				<Route path="/map" exact={true} component={Board4_1} />
 				<Route path="/board1/write" exact={true} component={Board1Write}/>
 			</Switch>
-		</div>
+		</MainStyle>
 	);
 };
 
