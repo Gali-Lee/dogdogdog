@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import TestCard from './item/TestCard.js';
 import ModalPage from './ModalPage.js';
-
+import leftImage from './img/left.png';
+import rightImage from './img/right.png';
 
 
 
@@ -48,18 +49,18 @@ const Board2 = () => {
 		}
 	}
 	// <img src="./img/left.png" />
-	let aa ={
-		color : "red",
+	let leftButton ={
+		backgroundImage: `url(${leftImage})`,
 	}
 	return (
 
 		<div>
 			<div>
 				<ModalPage />
-				<button onClick={down} style={aa} >aa</button>
+				<button onClick={down} style= {{border : 'none', marginLeft : '100px'}}><img src={leftImage} style= {{width: "50px", height : "50px"}} /></button>
 
-				<h3 style={{ display: "inline" }}>모임 목록</h3>
-				<button onClick={up} >오른쪽 이미지</button>
+				<h3 style={{ display: "inline",textAlign : "center" }}>  모임 목록 </h3>
+				<button onClick={up} style= {{border : 'none'}}><img src={rightImage} style= {{width: "50px", height : "50px"}} /></button>
 				<hr />
 			</div>
 			{meetings.map(

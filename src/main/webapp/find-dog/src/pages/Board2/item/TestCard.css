@@ -8,9 +8,9 @@
 
 	border: 0;
 
-	font-size: 100%;
+	/* font-size: 100%; */
 
-	vertical-align: baseline;
+	/* vertical-align: baseline; */
 
 }
 
@@ -103,12 +103,24 @@
 
 
 .dog-card-h1 {
-
-    font-size: 22px;
+    
+    font-size: 40px;
+    block-size: 40px;
+    
 
     font-weight: bold;
+    align-content: center;
+    align-items: center;
+
+    
 
 }
+/* 
+.dog-card-username{
+    
+        
+
+} */
 
 .dog-card-body {
     
@@ -217,7 +229,7 @@
     padding: 0 15px;
 
 }
-.dog-icon {
+/* .dog-icon {
 
     
     display: inline-block;
@@ -226,7 +238,7 @@
 
     margin-right: 2px;
 
-}
+} */
 .dog-reg_date {
 
 	float: right;

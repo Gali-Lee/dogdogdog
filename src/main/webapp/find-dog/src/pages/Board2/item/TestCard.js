@@ -13,7 +13,7 @@ const TestCard = (props) => {
 			{/* style={{ display: "inline" }} */}
 
 			<MemberList meeting ={props.meeting}/>
-			{/* <MemberList mtId={mtId} userName={userName}/> */}
+			
 			{/* 수정버튼 일단 안쓸듯 */}
 			{/* {userName === localStorage.user ? <UpdateModal key={props.meeting.mtId} meeting={props.meeting}/> : null} */}
 			<div class="dog-card-header" >
@@ -26,9 +26,9 @@ const TestCard = (props) => {
 			</div>
 			<div class="dog-card-body">
 				<div class="dog-card-body-header">
-					<h1 class="dog-card-h1">{mtTitle}</h1>
-					<p class="dog-card-body-hashtag">#태그1 #태그2 #태그3</p>
-					<p class="dog-card-body-nickname" >
+					<h1 class="dog-card-h1" >{mtTitle}</h1>
+					{/* <p class="dog-card-body-hashtag">#태그1 #태그2 #태그3</p> */}
+					<p class="dog-card-username" >
 						작성자: {userName}<br/></p>
 				</div>
 				
