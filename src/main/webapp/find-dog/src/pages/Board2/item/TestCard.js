@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './TestCard.css';
 import MemberList from './MemberList';
+import UpdateModal from './UpdateModal';
 const TestCard = (props) => {
 
 	let {mtId,mtCreateTime,mtTitle,mtContent,mtPlace,mtTime,mtDate,mtCount,maxCount,mtList,userName} = props.meeting;
@@ -11,7 +12,10 @@ const TestCard = (props) => {
 		<div class="dog-card">
 			{/* style={{ display: "inline" }} */}
 
-			<MemberList mtId={mtId} userName={userName} />
+			<MemberList meeting ={props.meeting}/>
+			{/* <MemberList mtId={mtId} userName={userName}/> */}
+			{/* 수정버튼 일단 안쓸듯 */}
+			{/* {userName === localStorage.user ? <UpdateModal key={props.meeting.mtId} meeting={props.meeting}/> : null} */}
 			<div class="dog-card-header" >
 				{/* <button class ="dog-button" onClick= {InsertModal} >aa</button>		 */}
 				<div class="dog-card-header-is_closed" >
@@ -40,8 +44,7 @@ const TestCard = (props) => {
 				</p>
 
 				<div class="dog-card-body-footer" >
-					임시자리
-				<i class="dog-reg_date" > {mtCreateTime} </i>
+					임시<i class="dog-reg_date" > {mtCreateTime} </i>
 
 				</div>
 			</div>
