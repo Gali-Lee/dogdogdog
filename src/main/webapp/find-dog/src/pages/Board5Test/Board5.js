@@ -19,12 +19,10 @@ const Board5 = () => {
 	const [boardParks, setBoardParks] = useState([]);
 	const [boardCafes, setBoardCafes] = useState([]);
 	const [place, setPlace] = useState();
-	const [center, setCenter] =useState({
+	const [center, setCenter] = useState({
 		lat: "",
 		lng: ""
 	});
-	let visible = false;
-	let visible1 = false;
 	const onChange = (e) => {
 		setInputText(e.target.value);
 	};
@@ -49,11 +47,11 @@ const Board5 = () => {
 
 		}).then((res) => res.json())
 			.then((res) => {
-				for(let board1 of res){
-					if(board1.catagory==="공원"){
+				for (let board1 of res) {
+					if (board1.catagory === "공원") {
 						arrayParks.push(board1);
 					}
-					if(board1.catagory==="카페"){
+					if (board1.catagory === "카페") {
 						arrayCafes.push(board1);
 					}
 				}
@@ -68,23 +66,31 @@ const Board5 = () => {
 		setPlace(inputText);
 		setInputText("");
 	};
-	const [category,setCategory] = useState();
+	const [category, setCategory] = useState();
 	const [update, setUpdate] = useState();
-	function parks(){
+	const [level, setLevel] = useState();
+	const [id1, setId1] = useState("");
+	const [visible, setVisible] = useState(false);
+	function set(i) {
+		setId1(i);
+		setVisible(true);
+		console.log("idididi:", id1)
+	}
+	function parks() {
 		setUpdate(2);
 		setCategory("공원");
 	}
-	function cafes(){
+	function cafes() {
 		setUpdate(3);
 		setCategory("카페");
 	}
-	function missing(){
+	function missing() {
 		setUpdate(4);
 		setCategory("실종");
 	}
-	function setLatLng(lat,lng){
-		console.log("lat : ",lat);
-		console.log("lng : ",lng);
+	function setLatLng(lat, lng) {
+		console.log("lat : ", lat);
+		console.log("lng : ", lng);
 		setCenter({
 			lat: lat,
 			lng: lng
@@ -93,25 +99,25 @@ const Board5 = () => {
 
 	return (
 		<div>
-		<MapStyle>
+			<MapStyle>
+				<div>
+					<input
+						placeholder="Search Place..."
+						onChange={onChange}
+						value={inputText}
+					/>
+					<button onClick={handleSubmit}>위치 검색</button>
+
+					<Board5MapContainer2 set={set} level={level} setLevel={setLevel} update={update} center={center} setLatLng={setLatLng} searchPlace={place} category={category} boardParks={boardParks} boardCafes={boardCafes} board3s={board3s}></Board5MapContainer2>
+				</div>
+				{visible ? <Board4Item id={id1} /> : null}
+
+			</MapStyle>
 			<div>
-				<input
-					placeholder="Search Place..."
-					onChange={onChange}
-					value={inputText}
-				/>
-				<button onClick={handleSubmit}>위치 검색</button>
-
-				<Board5MapContainer2 update={update} center={center} setLatLng={setLatLng} searchPlace={place} category={category} boardParks={boardParks} boardCafes={boardCafes} board3s={board3s}></Board5MapContainer2>
+				<Button onClick={parks}>공원</Button>
+				<Button onClick={cafes}>카페</Button>
+				<Button onClick={missing}>실종</Button>
 			</div>
-			{visible ? <Board4Item  /> : null}
-
-		</MapStyle>
-		<div>
-			<Button onClick={parks}>공원</Button>
-			<Button onClick={cafes}>카페</Button>
-			<Button onClick={missing}>실종</Button>
-		</div>
 		</div>
 	);
 };
