@@ -7,6 +7,7 @@ import styled from 'styled-components';
 const RsideStyle = styled.div`
 display: grid;
 grid-template-columns: auto auto auto;
+grid-gap: 15px;
 border: 2px #FA827A;
 justify-content: end;
 padding: 10px 10px;

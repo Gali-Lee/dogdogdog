@@ -147,7 +147,7 @@ const Board3Write = () => {
 				.then(res => {
 					if (res === "ok") {
 						alert("글이 등록되었습니다.");
-						history.push("/board3");
+						//history.push("/board3");
 					} else {
 					};
 				});

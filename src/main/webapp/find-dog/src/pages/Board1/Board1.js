@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Board1List from './Board1List';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 
 
 const Board3ListStyle = styled.div`
@@ -51,6 +52,7 @@ const SelectStyle = styled.select`
 
 const Board1 = () => {
 	const [place, setPlace] = useState("부산진구");
+	const isLogin = useSelector((store) => store.isLogin);
 	function inputHandle(e) {
 		setPlace(e.target.value);
 		console.log(place);
@@ -76,7 +78,12 @@ const Board1 = () => {
 							<option name="place" value="금정구">금정구</option>
 						</SelectStyle>
 					</div>
+					{isLogin ?
+					(
 					<ButtonBoxStyle><Link to={"/board1/write"}><ButtonStyle>글쓰기</ButtonStyle></Link>	</ButtonBoxStyle>
+					)
+					:
+					(null)}
 				</Board3IndexBoxStyle>
 				<Board1List addr={place} />
 				<hr />

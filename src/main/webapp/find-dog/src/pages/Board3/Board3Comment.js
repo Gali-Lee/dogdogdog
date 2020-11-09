@@ -9,7 +9,10 @@ const FromStyle = styled.form`
 const CommentItemStyle =styled.div`
 
 `;
-
+const ImageStyle =styled.div`
+	 width: 50px;
+  height: 100%;
+`;
 const Board3Comment = (props) => {
 
 	const id = props.id;
@@ -89,7 +92,7 @@ const Board3Comment = (props) => {
 	return (
 		<div>
 			<FromStyle>
-				<div>유저사진</div>
+				<div><ImageStyle src={"\\images\\" + localStorage.image }alt=""/></div>
 				<div>
 					<div>
 						<div>{localStorage.user}</div>

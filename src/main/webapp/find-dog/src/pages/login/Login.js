@@ -70,7 +70,7 @@ const Login = (props) => {
 
 				// 로그인 상태 값 리덕스 저장
 				dispatch(login());
-				history.push("");
+				history.push("/board1");
 			} else {
 				alert('아이디 혹은 비번을 다시 입력하세요!');
 			}

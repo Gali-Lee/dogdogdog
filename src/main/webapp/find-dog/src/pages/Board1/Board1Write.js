@@ -103,7 +103,7 @@ const Board1Write = () => {
 				.then(res => {
 					if (res === "ok") {
 						alert("글이 등록되었습니다.");
-						//history.push("/board1");
+						history.push("/board1");
 					} else {
 					};
 				});
@@ -164,7 +164,7 @@ const Board1Write = () => {
 					}}
 				/>
 				<br />
-				<label>품종</label>
+				<label>제목</label>
 				<InputStyle
 					type="text"
 					onChange={inputHandle}

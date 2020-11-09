@@ -45,7 +45,7 @@ function App() {
 
   return (
     <AppStyle>
-      <Link to="/"> <h1>PETPETPET</h1></Link>
+      <Link to="/board1"> <h1>PETPETPET</h1></Link>
       <Rside/>
       <Header/>
           <Main/>

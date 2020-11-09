@@ -27,7 +27,7 @@ const Board3CommentItem = (props) => {
 
 	return (
 		<CommentItemStyle>
-			<div>유저사진</div>
+			<div><UserImageStyle src={"\\images\\" + comment.user.image }alt=""/></div>
 			<CommentContentStyle>
 				<NameStyle>{comment.user.username}</NameStyle>
 				<div>{comment.content}</div>
