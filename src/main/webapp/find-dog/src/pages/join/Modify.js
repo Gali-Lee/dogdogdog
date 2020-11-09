@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Form, Button, Input } from 'antd';
 import 'antd/dist/antd.css';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 
 const layout = {
@@ -26,6 +27,8 @@ const validateMessages = {
 
 
 const Modify = (props) => {
+	const history = useHistory();
+
 
 	const [user, setUser] = useState({
 		username: "",
@@ -72,6 +75,7 @@ const Modify = (props) => {
 				console.log("회원정보:", res);
 				setUser(res);
 				console.log(user);
+
 			});
 	}, []);
 
@@ -92,7 +96,7 @@ const Modify = (props) => {
 				console.log("22", res);
 				if (res === "ok") {
 					alert("수정 성공");
-					props.history.push("/login");
+					history.push("/login");
 				} else {
 					alert("수정 실패");
 				}

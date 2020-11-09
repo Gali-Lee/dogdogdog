@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Board3List from './Board3List';
+import { useSelector } from 'react-redux';
 
 const Board3ListStyle= styled.div`
 	display:grid;
@@ -39,6 +40,9 @@ const ButtonStyle= styled.button`
 	cursor: pointer;
 `;
 const Board3 = () => {
+
+	
+	const isLogin = useSelector((store) => store.isLogin);
 	return (
 		<Board3ListStyle>
 			<Board3IndexBoxStyle>
@@ -46,8 +50,15 @@ const Board3 = () => {
 				<TitleStyle>실종 동물 긴급찾습니다.<br/></TitleStyle>
 				<SubtitleStyle>글을 작성하시면 전단지가 생성되며, 인쇄하여 사용하실수 있습니다.!</SubtitleStyle>
 				</div>
+				{isLogin ?
+					(
 				<ButtonBoxStyle><Link to={"/board3/write"}><ButtonStyle>글쓰기</ButtonStyle></Link>	</ButtonBoxStyle>
+					)
+					:
+					(null)
+				}
 			</Board3IndexBoxStyle>
+					
 			<Board3List/>
 			<hr/>
 		</Board3ListStyle>

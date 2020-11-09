@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Form, Input, InputNumber, Button, Select } from 'antd';
 import 'antd/dist/antd.css';
 import { useDispatch } from 'react-redux';
@@ -25,6 +25,8 @@ const validateMessages = {
 let pMessage = "";
 
 const Join = (props) => {
+		const history = useHistory();
+
 	const [user, setUser] = useState({
 		username: "",
 		password: "",
@@ -81,12 +83,13 @@ const Join = (props) => {
 				console.log("22", res);
 				if (res === "ok") {
 					alert("가입 성공");
-					props.history.push("/login");
+					history.push("/login");
 				} else {
 					alert("가입 실패");
 				}
 			});
 	}
+
 	//이미지 업로드
 	const uploadImg = async (e) => {
 		const file = e.target.files[0];
@@ -97,7 +100,6 @@ const Join = (props) => {
 			};
 		});
 	}
-
 
 	return (
 		<div>

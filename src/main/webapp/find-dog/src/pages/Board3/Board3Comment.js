@@ -3,9 +3,13 @@ import styled from 'styled-components';
 import Board3CommentItem from '../../components/Board3CommentItem';
 
 const FromStyle = styled.form`
-display : grid;
-grid-template-columns : auto auto auto;
+	display : grid;
+	grid-template-columns : auto auto auto;
 `;
+const CommentItemStyle =styled.div`
+
+`;
+
 const Board3Comment = (props) => {
 
 	const id = props.id;
@@ -28,12 +32,10 @@ const Board3Comment = (props) => {
 
 		fetch("http://localhost:8000/board3/comment/" + id, {
 			method: "GET",
-
 		}).then((res) => res.json())
 			.then((res) => {
 				setComments(res);
 			});
-
 	}, []);
 
 	function inputHandle(e) {
@@ -44,10 +46,8 @@ const Board3Comment = (props) => {
 			};
 		});
 	}
-
 	function submitCommentDelete(commentId) {
 		console.log("submitCommentDelete() 실행");
-
 		fetch("http://localhost:8000/board3/comment/delete/" + commentId, {
 			method: "DELETE",
 		})
@@ -100,12 +100,13 @@ const Board3Comment = (props) => {
 				</div>
 				</div>
 				<button onClick={submitCommentWrite}>댓글 등록</button>
+				<br/>
 			</FromStyle>
-			<div>
+			<CommentItemStyle>
 				{comments.map((comment) => (
 					<Board3CommentItem key={comment.id} comment={comment} submitCommentDelete={submitCommentDelete} />
 				))}
-			</div>
+			</CommentItemStyle>
 		</div>
 	);
 };
