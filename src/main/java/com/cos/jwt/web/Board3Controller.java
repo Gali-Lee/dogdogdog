@@ -90,6 +90,7 @@ public class Board3Controller {
 		Board3 board3 = board3Repository.findById(board3Id).get();
 		return board3;
 	}
+	
 	@Transactional
 	@PostMapping(value = "/board3/modify/{board3Id}", consumes = { "multipart/form-data" })
 	@ResponseBody

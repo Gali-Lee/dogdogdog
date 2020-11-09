@@ -11,5 +11,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class UserDTO {
 	String state;
+	int id;
+	String username;
 	String image;
+	
 }

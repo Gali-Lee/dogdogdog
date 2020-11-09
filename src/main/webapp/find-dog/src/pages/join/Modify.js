@@ -32,46 +32,47 @@ const Modify = (props) => {
 		password: "",
 		place: "",
 		email: "",
-		phoneNumber: ""
+		phoneNumber: "",
+		image: ''
 	});
 
 	const onFinish = (values) => {
 		console.log(values);
 	};
-	
+
 	function inputHandle(e) {
 		setUser({ ...user, [e.target.name]: e.target.value });
 		console.log(user);
 		Check();
 	}
 
-	function Check(){
+	function Check() {
 		console.log("check 들어옴");
 		if (user.password === user.repassword) {
-				pMessage = "일치합니다";
-				console.log(pMessage);
-			} else if (user.password !== user.repassword) {
-				pMessage = "불일치";
-				console.log(pMessage);
-			}
+			pMessage = "일치합니다";
+			console.log(pMessage);
+		} else if (user.password !== user.repassword) {
+			pMessage = "불일치";
+			console.log(pMessage);
+		}
 	}
-	let userId = props.match.params.id;
+	let name = localStorage.getItem("user");
+	console.log(name);
 	//로그인된 정보 가져오기
 	useEffect(() => {
 		console.log("userEffect 들어옴");
-		fetch("http://localhost:8000/user/" +userId , {
+		fetch("http://localhost:8000/user/" + name, {
 			method: "GET",
-			headers: {
-				"Authorization": localStorage.getItem("Authorization")
-			}
+
 		})
-		.then(res => {
-			res.json()
-		})
-		.then(res => {
-			console.log("회원정보:"+res);
-			setUser(res);
-		});
+			.then(res =>
+				res.json()
+			)
+			.then(res => {
+				console.log("회원정보:", res);
+				setUser(res);
+				console.log(user);
+			});
 	}, []);
 
 
@@ -79,12 +80,12 @@ const Modify = (props) => {
 	function join(e) {
 		e.preventDefault();
 
-		fetch("http://localhost:8000/joinProc", {
+		let form = document.getElementById("form");
+		const formData = new FormData(form);
+
+		fetch("http://localhost:8000/modifyProc/"+name, {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json; charset=utf-8",
-			},
-			body: JSON.stringify(user),
+			body: formData
 		})
 			.then((res) => res.text())
 			.then((res) => {
@@ -98,25 +99,30 @@ const Modify = (props) => {
 			});
 	}
 
+	//이미지 업로드
+	const uploadImg = async (e) => {
+		const file = e.target.files[0];
+		setUser(prevState => {
+			return {
+				...prevState,
+				[e.target.name]: file
+			};
+		});
+	}
+
 	return (
 		<div>
-			<Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+			<Form {...layout} id="form" encType="multipart/form-data" name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
 				<Form.Item
-					name="username"
 					label="이름"
-					rules={[
-						{
-							required: true,
-						},
-					]}
 				>
 					<Input type="text"
 						name="username"
 						onChange={inputHandle}
 						value={user.username} placeholder="이름 입력" />
 				</Form.Item>
+
 				<Form.Item
-					name={['user', 'password']}
 					label="비밀번호"
 
 				>
@@ -127,7 +133,6 @@ const Modify = (props) => {
 				</Form.Item>
 
 				<Form.Item
-					name={['user', 'repassword']}
 					label="비밀번호 확인"
 
 				>
@@ -142,7 +147,6 @@ const Modify = (props) => {
 
 
 				<Form.Item
-					name={['user', 'phoneNumber']}
 					label="폰번호"
 				>
 					<Input type="text"
@@ -166,7 +170,6 @@ const Modify = (props) => {
 				</Form.Item>
 
 				<Form.Item
-					name={['user', 'email']}
 					label="이메일"
 				>
 					<Input type="email"
@@ -174,6 +177,17 @@ const Modify = (props) => {
 						onChange={inputHandle}
 						value={user.email}
 						placeholder="메일 입력" />
+				</Form.Item>
+
+				<Form.Item
+					name={['user', 'image']}
+					label="프로필사진"
+				>
+					<Input type="file"
+						name="image"
+						onChange={uploadImg}
+						value={user.image}
+						placeholder="프로필 사진 입력" />
 				</Form.Item>
 
 				<Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
