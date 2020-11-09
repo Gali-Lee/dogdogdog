@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Form, Button, Input } from 'antd';
 import 'antd/dist/antd.css';
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 
 const layout = {
@@ -26,6 +27,8 @@ const validateMessages = {
 
 
 const Modify = (props) => {
+	const history = useHistory();
+
 
 	const [user, setUser] = useState({
 		username: "",
@@ -38,40 +41,40 @@ const Modify = (props) => {
 	const onFinish = (values) => {
 		console.log(values);
 	};
-	
+
 	function inputHandle(e) {
 		setUser({ ...user, [e.target.name]: e.target.value });
 		console.log(user);
 		Check();
 	}
 
-	function Check(){
+	function Check() {
 		console.log("check 들어옴");
 		if (user.password === user.repassword) {
-				pMessage = "일치합니다";
-				console.log(pMessage);
-			} else if (user.password !== user.repassword) {
-				pMessage = "불일치";
-				console.log(pMessage);
-			}
+			pMessage = "일치합니다";
+			console.log(pMessage);
+		} else if (user.password !== user.repassword) {
+			pMessage = "불일치";
+			console.log(pMessage);
+		}
 	}
 	let userId = props.match.params.id;
 	//로그인된 정보 가져오기
 	useEffect(() => {
 		console.log("userEffect 들어옴");
-		fetch("http://localhost:8000/user/" +userId , {
+		fetch("http://localhost:8000/user/" + userId, {
 			method: "GET",
 			headers: {
 				"Authorization": localStorage.getItem("Authorization")
 			}
 		})
-		.then(res => {
-			res.json()
-		})
-		.then(res => {
-			console.log("회원정보:"+res);
-			setUser(res);
-		});
+			.then(res => {
+				res.json()
+			})
+			.then(res => {
+				console.log("회원정보:" + res);
+				setUser(res);
+			});
 	}, []);
 
 
@@ -91,7 +94,7 @@ const Modify = (props) => {
 				console.log("22", res);
 				if (res === "ok") {
 					alert("수정 성공");
-					props.history.push("/login");
+					history.push("/login");
 				} else {
 					alert("수정 실패");
 				}

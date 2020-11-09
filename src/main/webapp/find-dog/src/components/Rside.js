@@ -6,14 +6,11 @@ import styled from 'styled-components';
 
 const RsideStyle = styled.div`
 display: grid;
-grid-template-columns:auto;
+grid-template-columns: auto auto auto;
 border: 2px #FA827A;
-height: 1000px;
-padding-top: 15px;
+justify-content: end;
+padding: 10px 10px;
 //justify-content:end;
-align-items:initial;
-
-grid-template-columns:auto;
 //transform:  rotate(90deg);
 `;
 const Rside = () => {

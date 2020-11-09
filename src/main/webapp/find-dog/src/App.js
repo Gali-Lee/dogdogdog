@@ -8,10 +8,8 @@ import Main from './components/Main';
 import Footer from './components/Footer';
 import styled from 'styled-components';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Layout, Menu} from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
 import Rside from './components/Rside';
+import { Link } from 'react-router-dom';
 
 /* 건들지 마시오!
 **************************
@@ -24,12 +22,6 @@ import Rside from './components/Rside';
 ***********************
 ************************
 */
-
-const MainListStyle = styled.div`
-  display : grid;
-  grid-template-columns: 90% 10%;
-`;
-
 const AppStyle = styled.div`
 	display: grid;
   background-color: #FFF8E8;
@@ -53,12 +45,11 @@ function App() {
 
   return (
     <AppStyle>
-      <h1>PETPETPET</h1>
+      <Link to="/"> <h1>PETPETPET</h1></Link>
+      <Rside/>
       <Header/>
-        <MainListStyle>
           <Main/>
-          <Rside/>
-        </MainListStyle>
+
       <Footer/>
     </AppStyle>
   );
