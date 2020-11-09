@@ -4,15 +4,15 @@ import Board3Item from '../../components/Board3Item';
 
 const ListStyle = styled.div`
   display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-gap: 10px;
+  grid-template-columns: auto auto auto auto auto;
+  grid-gap: 30px;
   justify-content:left;
-  //padding: 20px 250px;
+	padding: 20px;
+  	padding-left: 30px;
 `;
 const Board3List = () => {
 	
-	const [board3s, setBoard3s] = useState([]);
-
+	const [board3s, setBoard3s] = useState([])
 	
 	useEffect(() => {
 

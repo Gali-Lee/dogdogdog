@@ -11,14 +11,10 @@ const HeaderStyle = styled.div`
 	//border: 2px solid skyblue;
 `;
 const LinkStyle = styled.a`
-color: white;
-width:300px;
+	color: white;
+	width:300px;
 	height:30px;
 	color: white;
-`;
-const HomeStyle = styled.div`
-display:grid;
-justify-content:right;
 `;
 const Header = () => {
 	return (
@@ -30,7 +26,7 @@ const Header = () => {
 				<Link to="/map"><LinkStyle>지도로 찾기</LinkStyle></Link>
 				<Link to="/board5"><LinkStyle>테스트</LinkStyle></Link>
 				<div></div>
-				<HomeStyle><Link to="/"><LinkStyle>홈</LinkStyle></Link></HomeStyle>
+				<div></div>
 				<div></div>
 		</HeaderStyle>
 	);

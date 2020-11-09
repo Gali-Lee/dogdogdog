@@ -22,6 +22,7 @@ const MainStyle = styled.div`
 	display: grid;
 	grid-template-columns: auto;
 	margin: 30px;
+	//width: 1000px;
 `;
 const Main = () => {
 	return (

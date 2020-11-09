@@ -28,11 +28,14 @@ const ButtonStyle= styled.button`
 	border: 0px;
 	cursor: pointer;
 `;
+const CategoryStyle =styled.div`
+
+`;
 const Board3Item = (props) => {
 	const { id, catagory, name, bread, age,date, sex, place, image1, image2, content } = props.board3;
 	return (
 		<ItemStyle>
-			<div>{catagory}</div>
+			<CategoryStyle>{catagory}</CategoryStyle>
 			<ImgStyle src={"\\images\\"+image1} alt="" height="200px" />
 			<div>동물 종류 : {bread}</div>
 			<div>장소 : {place}</div>
