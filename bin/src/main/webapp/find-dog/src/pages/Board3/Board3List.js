@@ -9,7 +9,7 @@ const ListStyle = styled.div`
   //padding: 20px 250px;
 `;
 const Board3List = () => {
-
+	
 	const [board3s, setBoard3s] = useState([]);
 
 	useEffect(() => {

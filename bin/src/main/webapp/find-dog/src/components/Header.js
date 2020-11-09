@@ -10,12 +10,17 @@ import 'antd/dist/antd.css';
 const { Title } = Typography;
 const Header = () => {
 	const isLogin = useSelector((store) => store.isLogin);
-	const user = localStorage.getItem("user")
+	const user = localStorage.getItem("username")
 	const dispatch = useDispatch();
 	const { SubMenu } = Menu;
 	const logoutbutton = () => {
 		localStorage.removeItem("Authorization");
-		localStorage.removeItem("user");
+		localStorage.removeItem("username");
+		localStorage.removeItem("email");
+		localStorage.removeItem("place");
+		localStorage.removeItem("id");
+		localStorage.removeItem("phoneNumber");
+		localStorage.removeItem("userImage");
 		dispatch(logout());
 		console.log(isLogin);
 	}
@@ -33,7 +38,7 @@ const Header = () => {
 						
 							<Menu.Item key="6"><Link to="joindog">강아지 등록</Link></Menu.Item>
 							<Menu.Item key="7" onClick={logoutbutton}>로그아웃</Menu.Item>
-							<Menu.Item key="1">{user}님 환영합니다!</Menu.Item>
+							<Menu.Item key="1"><Link to="modify">{user}님 환영합니다!</Link></Menu.Item>
 						</>
 					)
 					:
