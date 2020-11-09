@@ -12,7 +12,7 @@ const layout = {
 };
 
 const DogJoin = (props) => {
-	const username = useSelector((Join) => Join.username);
+	const username = localStorage.getItem("user");
 
 	const [dog, setDog] = useState({
 		name: "",
@@ -20,6 +20,7 @@ const DogJoin = (props) => {
 		age: "",
 		sex: "",
 		image: "",
+		username:'',
 	});
 
 	const onFinish = (values) => {

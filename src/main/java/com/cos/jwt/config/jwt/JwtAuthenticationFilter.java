@@ -73,7 +73,7 @@ public class JwtAuthenticationFilter implements Filter{
 					System.out.println(jwtToken);
 					resp.addHeader(JwtProps.header, JwtProps.auth+jwtToken);
 					
-					UserDTO userDTO= new UserDTO("ok",personEntity.getEmail());
+					UserDTO userDTO= new UserDTO("ok",personEntity.getId(),personEntity.getUsername(),personEntity.getImage());
 					String userJson = om.writeValueAsString(userDTO);
 					System.out.println("userJson"+userJson);
 					

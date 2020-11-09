@@ -61,9 +61,11 @@ const Login = (props) => {
 		}).then(res => {
 			
 			if (res.state === "ok") {
-
 				localStorage.setItem("user", user.username);
-				localStorage.setItem("email",res.image);
+				localStorage.setItem("email",res.email);
+				localStorage.setItem("place",res.place);
+				localStorage.setItem("phoneNumber",res.phoneNumber);
+				localStorage.setItem("image",res.image);
 				alert("로그인 완료");
 
 				// 로그인 상태 값 리덕스 저장

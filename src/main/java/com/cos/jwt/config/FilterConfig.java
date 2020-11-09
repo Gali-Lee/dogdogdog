@@ -43,7 +43,7 @@ public class FilterConfig {
 		System.out.println("JwtAuthorizationFilter 필터 등록");
 		FilterRegistrationBean<JwtAuthorizationFilter> bean = 
 				new FilterRegistrationBean<>(new JwtAuthorizationFilter(personRepository));
-		bean.addUrlPatterns("/dogJoinProc");
+		//bean.addUrlPatterns("/dogJoinProc");
 		bean.addUrlPatterns("/board3/write/*");
 		//bean.addUrlPatterns("/board3/modify/*");
 		//bean.addUrlPatterns("/board3/delete/*");
