@@ -3,10 +3,12 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../store';
 import 'antd/dist/antd.css';
 import { Form, Input, Button, Checkbox } from 'antd';
-
+import { useHistory } from 'react-router-dom';
 
 const Login = (props) => {
+
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	//디자인
 	const layout = {
@@ -60,12 +62,15 @@ const Login = (props) => {
 			
 			if (res.state === "ok") {
 				localStorage.setItem("user", user.username);
-				localStorage.setItem("email",res.image);
+				localStorage.setItem("email",res.email);
+				localStorage.setItem("place",res.place);
+				localStorage.setItem("phoneNumber",res.phoneNumber);
+				localStorage.setItem("image",res.image);
 				alert("로그인 완료");
 
 				// 로그인 상태 값 리덕스 저장
 				dispatch(login());
-				props.history.push("/board3");
+				history.push("");
 			} else {
 				alert('아이디 혹은 비번을 다시 입력하세요!');
 			}

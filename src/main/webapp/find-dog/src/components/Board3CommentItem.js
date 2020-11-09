@@ -5,6 +5,8 @@ const CommentItemStyle = styled.div`
 	display: grid;
 	grid-template-columns: 20% 80%;
 	border: 2px solid #003458;
+	border-radius: 6px;
+	margin: 5px 5px;
 `;
 const UserImageStyle = styled.img`
 	 width: 100%;

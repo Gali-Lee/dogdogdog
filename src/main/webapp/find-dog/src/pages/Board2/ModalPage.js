@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ModalSetting from './item/ModalSetting';
 
+
 const ModalPage = () => {
 	
 	
@@ -49,7 +50,7 @@ const ModalPage = () => {
 
 	return (
 		<div>
-			<button onClick={openModal}>신규개설</button>
+			<button onClick={openModal} className="box-b" style={{backgroundColor : "GrayText"}}>신규개설</button>
 			{
 				//모달 default 셋팅
 				modalVisible && <ModalSetting
@@ -60,6 +61,7 @@ const ModalPage = () => {
 					{/* =====모달 바디 시작=====*/}
 					{/* 제목(mtTitle), 모임인원(maxCount),시간(mtTime),장소(mtPlace),기타(mtContent)  */}
 					<form>
+						<div className="box">
 						<h5>모임 개설</h5> 
 						{/* <div onChange={changeValue} value={meeting.userName} name="userName"/> */}
 						제목 : <input onChange={changeValue} value={meeting.mtTitle} name="mtTitle"/><br />
@@ -68,8 +70,8 @@ const ModalPage = () => {
 						날짜 : <input type ="date"onChange={changeValue} value={meeting.mtDate} name="mtDate"/><br />
 						시간 : <input type ="time"onChange={changeValue} value={meeting.mtTime} name="mtTime"/><br />
 						<textarea onChange={changeValue} value={meeting.mtContent} name="mtContent"></textarea><br />
-						<button onClick={submitInsert}>등록</button>
-						
+						<button onClick={submitInsert} className="box-b">등록</button>
+						</div>
 					</form>
 
 

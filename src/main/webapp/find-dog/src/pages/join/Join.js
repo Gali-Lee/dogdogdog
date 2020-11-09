@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Form, Input, InputNumber, Button, Select } from 'antd';
 import 'antd/dist/antd.css';
 import { useDispatch } from 'react-redux';
@@ -25,13 +25,16 @@ const validateMessages = {
 let pMessage = "";
 
 const Join = (props) => {
+		const history = useHistory();
+
 	const [user, setUser] = useState({
 		username: "",
 		password: "",
 		repassword: "",
 		place: "",
 		email: "",
-		phoneNumber: ""
+		phoneNumber: "",
+		image: "",
 	});
 
 
@@ -48,15 +51,15 @@ const Join = (props) => {
 		// if (e.target.name !== 'name') {
 		// }
 	}
-	function Check(){
+	function Check() {
 		console.log("check 들어옴");
 		if (user.password === user.repassword) {
-				pMessage = "일치합니다";
-				console.log(pMessage);
-			} else if (user.password !== user.repassword) {
-				pMessage = "불일치";
-				console.log(pMessage);
-			}
+			pMessage = "일치합니다";
+			console.log(pMessage);
+		} else if (user.password !== user.repassword) {
+			pMessage = "불일치";
+			console.log(pMessage);
+		}
 	}
 
 
@@ -66,30 +69,41 @@ const Join = (props) => {
 	function join(e) {
 		e.preventDefault();
 
+		let form = document.getElementById("form");
+		const formData = new FormData(form);
+
 		fetch("http://localhost:8000/joinProc", {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json; charset=utf-8",
 			},
-			body: JSON.stringify(user),
+			body: formData
 		})
 			.then((res) => res.text())
 			.then((res) => {
 				console.log("22", res);
 				if (res === "ok") {
 					alert("가입 성공");
-					props.history.push("/login");
+					history.push("/login");
 				} else {
 					alert("가입 실패");
 				}
 			});
 	}
 
-
+	//이미지 업로드
+	const uploadImg = async (e) => {
+		const file = e.target.files[0];
+		setUser(prevState => {
+			return {
+				...prevState,
+				[e.target.name]: file
+			};
+		});
+	}
 
 	return (
 		<div>
-			<Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+			<Form {...layout} id="form" encType="multipart/form-data" name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
 				<Form.Item
 					name="username"
 					label="이름"
@@ -175,6 +189,17 @@ const Join = (props) => {
 						onChange={inputHandle}
 						value={user.email}
 						placeholder="메일 입력" />
+				</Form.Item>
+
+				<Form.Item
+					name={['user', 'image']}
+					label="프로필사진"
+				>
+					<Input type="file"
+						name="image"
+						onChange={uploadImg}
+						value={user.image}
+						placeholder="프로필 사진 입력" />
 				</Form.Item>
 
 				<Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>

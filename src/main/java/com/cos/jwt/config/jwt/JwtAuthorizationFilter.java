@@ -58,7 +58,7 @@ public class JwtAuthorizationFilter implements Filter {
 			} catch (Exception e) {
 				System.out.println("헉");
 				PrintWriter out = resp.getWriter();
-				out.print("JWTAUTHORIZATION");
+				out.print("JWTAUTHORIZATION ");
 				out.print("verify fail");
 				out.flush();
 			}
