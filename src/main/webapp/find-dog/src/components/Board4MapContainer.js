@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { InfoWindow } from 'google-maps-react';
 
 const { kakao } = window;
-const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, list, markerIdx, now }) => {
+const Board4MapContainer = ({ id, set, searchPlace, setLatLng, setMarkerIdx, setId, list, markerIdx, now }) => {
 
 	const [place, setPlace] = useState({
 		lat: "",
@@ -31,7 +31,7 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, list, marker
 
 
 		//지도 위치 옮길 때마다 지도 중심좌표 place에 저장
-		kakao.maps.event.addListener(map, 'center_changed', function () {
+		kakao.maps.event.addListener(map, 'dragend', function () {
 			let level = map.getLevel();
 			let latLng = map.getCenter();
 			console.log(10, level);
@@ -59,9 +59,12 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, list, marker
 
 			kakao.maps.event.addListener(marker, 'click', function () {
 				console.log("여기도", place.image1);
-				infowindow.setContent('<div><img src=\\src\\images\\' + place.image1 + ' height="200px" /></div>');
-				//	<div><img src={"\\src\\images\\"+place.image1} alt="" height="200px" /></div>
 
+				set(place.id);
+				console.log("place.id:" + place.id);
+				console.log("idid:", id);
+				// infowindow.setContent('<div><img src=\\images\\' + place.image1 + ' height="200px" /></div>');
+				infowindow.setContent(place.name);
 				infowindow.open(map, marker);
 			});
 
@@ -101,8 +104,8 @@ const Board4MapContainer = ({ searchPlace, setLatLng, setMarkerIdx, list, marker
 	return (
 		<div>
 			<div id='myMap' style={{
-				width: '500px',
-				height: '500px'
+				width: '400px',
+				height: '400px'
 			}}>
 				{}
 			</div>

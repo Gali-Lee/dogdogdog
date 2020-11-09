@@ -1,36 +1,21 @@
 import React, { useState } from 'react';
 import './TestCard.css';
 import MemberList from './MemberList';
+import UpdateModal from './UpdateModal';
 const TestCard = (props) => {
 
 	let {mtId,mtCreateTime,mtTitle,mtContent,mtPlace,mtTime,mtDate,mtCount,maxCount,mtList,userName} = props.meeting;
 
-	const mtm = {
-			mtName : userName,
-			mt : mtId,
-		};
-
-
-	const submitInsert = (e) => {
-		e.preventDefault();
-		fetch("http://localhost:8000/board2/mList", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json; charset=utf-8"
-			},
-			body: JSON.stringify(mtm)
-		}).then(res => res.text()).then(
-			res => alert(res)
-
-		);
-		// window.location.reload(); //페이지 새로고침
-	}
+	
 
 	return (
 		<div class="dog-card">
 			{/* style={{ display: "inline" }} */}
 
-			<MemberList mtId={mtId} userName={userName} /><button onClick={submitInsert}>참가</button>
+			<MemberList meeting ={props.meeting}/>
+			{/* <MemberList mtId={mtId} userName={userName}/> */}
+			{/* 수정버튼 일단 안쓸듯 */}
+			{/* {userName === localStorage.user ? <UpdateModal key={props.meeting.mtId} meeting={props.meeting}/> : null} */}
 			<div class="dog-card-header" >
 				{/* <button class ="dog-button" onClick= {InsertModal} >aa</button>		 */}
 				<div class="dog-card-header-is_closed" >
@@ -59,8 +44,7 @@ const TestCard = (props) => {
 				</p>
 
 				<div class="dog-card-body-footer" >
-					임시자리
-				<i class="dog-reg_date" > {mtCreateTime} </i>
+					임시<i class="dog-reg_date" > {mtCreateTime} </i>
 
 				</div>
 			</div>

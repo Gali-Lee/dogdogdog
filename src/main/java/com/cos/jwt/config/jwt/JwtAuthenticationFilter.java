@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.cos.jwt.domain.DTO.UserDTO;
 import com.cos.jwt.domain.user.User;
 import com.cos.jwt.domain.user.UserRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -38,18 +39,19 @@ public class JwtAuthenticationFilter implements Filter{
 		
 		String method = req.getMethod();
 		System.out.println(method);
+		
+		
+		
 		if(!method.equals("POST")) {
 			System.out.println("post 요청이 아니기 때문에 거절");
 			out.print("required post method");
 			out.flush();
 		}else {
-			System.out.println("post 요청이 맞습니다.");
-			
+			System.out.println("post 요청이 맞습니다.");	
 			try {
-				ObjectMapper om = new ObjectMapper();
+				ObjectMapper om = new ObjectMapper();//객체를 제이슨 데이터로 바꿔줌 개대박
 				User person = om.readValue(req.getInputStream(), User.class);
 				System.out.println("person 값 : "+person); 
-				
 				// 1번 username, password를 DB에 던짐
 				User personEntity = 
 				personRepository.findByUsernameAndPassword(person.getUsername(), person.getPassword());
@@ -59,8 +61,8 @@ public class JwtAuthenticationFilter implements Filter{
 					out.print("fail");
 					out.flush();
 				}else {
-					System.out.println("인증되었습니다.");
-					
+					System.out.println("인증되었습니다.");		
+					personEntity= personRepository.mFindByUsername(person.getUsername());
 					String jwtToken = 
 							JWT.create()
 							.withSubject("토큰제목")
@@ -70,7 +72,13 @@ public class JwtAuthenticationFilter implements Filter{
 							.sign(Algorithm.HMAC512(JwtProps.secret));
 					System.out.println(jwtToken);
 					resp.addHeader(JwtProps.header, JwtProps.auth+jwtToken);
-					out.print("ok");
+					
+					UserDTO userDTO= new UserDTO("ok",personEntity.getEmail());
+					String userJson = om.writeValueAsString(userDTO);
+					System.out.println("userJson"+userJson);
+					
+					out.print(userJson);
+					//out.print("{image:"+personEntity.getEmail()+", state:"+);
 					out.flush();
 				}
 			} catch (Exception e) {

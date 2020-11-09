@@ -5,8 +5,6 @@ const { kakao } = window;
 const MapContainer = ({ searchPlace,latLng }) => {
 	console.log(5, { searchPlace });
 
-
-
 	useEffect(() => {
 		console.log(5, "MapContainer");
 
@@ -65,7 +63,6 @@ const MapContainer = ({ searchPlace,latLng }) => {
 			});
 		} */
 	}, [searchPlace]);
-
 
 	return (
 		<div id='myMap' style={{
