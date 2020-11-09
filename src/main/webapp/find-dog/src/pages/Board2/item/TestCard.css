@@ -6,7 +6,9 @@
 
 	padding: 0;
 
-	border: 0;
+    border: 0;
+    
+
 
 	/* font-size: 100%; */
 
@@ -34,7 +36,10 @@
 
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-	overflow: hidden;
+    overflow: hidden;
+    
+    /* background-color: #e5dfd0 */
+    
 
 }
 
@@ -59,11 +64,12 @@
 
 	border-radius: 15px 15px 0 0;
 
-	/* background-image: url("images/korea.jpeg"); */
+	/* background-image: url("../img/t1.jpg"); */
 
 	background-size: 100% 280px;
 
-	background-repeat: no-repeat;	
+    background-repeat: no-repeat;	
+    
 
 }
 
@@ -75,7 +81,7 @@
     
 }
 
-
+/* 동그란 원 */
 .dog-card-header-is_closed{
 
     background-color: #EF5A31 ;
@@ -88,7 +94,7 @@
 
     float: right;
 
-    margin: 15px 15px 0 0;
+    margin: 0px 15px 0 0;
 
     border-radius: 50%;
 
@@ -97,6 +103,7 @@
     padding: 10px 10px;
 
     line-height: 20px;
+    
 
 }
 
@@ -124,6 +131,7 @@
 
 .dog-card-body {
     
+    
 }
 
 
@@ -146,6 +154,8 @@
 
 .dog-card-body-description  {
 
+    
+    
     opacity: 0;
 
     color: #757B82;
@@ -167,7 +177,8 @@
 
 	height: 130px;
 
-	margin: 5px 20px;
+    margin: 5px 20px;
+    
 
 }
 
@@ -178,7 +189,11 @@
 
 /* 호버시 나타날 하단 */
 .dog-card:hover .dog-card-body-description {
-
+    
+    border: 2px solid #FFF;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
     opacity: 1;
 
     
@@ -207,7 +222,8 @@
 
 	color: #2478FF;
 
-	font-style: italic;
+    font-style: italic;
+    
 
 }
 .dog-card-body-footer {
@@ -227,6 +243,8 @@
     color: #9FA5A8;
 
     padding: 0 15px;
+    
+    
 
 }
 /* .dog-icon {
@@ -241,6 +259,7 @@
 } */
 .dog-reg_date {
 
+    color: black;
 	float: right;
 
 }

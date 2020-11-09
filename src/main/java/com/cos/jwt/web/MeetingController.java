@@ -52,10 +52,12 @@ public class MeetingController {
 		}
 	}
 
-	@PutMapping("/board2/{id}")
-	public void mtmInsert(@PathVariable int id, String name) {
-		mtmRepository.mInsertMember(name, id);
-	}
+	
+	
+//	@PutMapping("/board2/{id}")
+//	public void mtmInsert(@PathVariable int id, String name) {
+//		mtmRepository.mInsertMember(name, id);
+//	}
 
 	// 게시글 삭제
 	@DeleteMapping("/board2")
@@ -95,7 +97,7 @@ public class MeetingController {
 			for (MeetingMember mtmT : mt.getMtList()) {
 				if(mtmT.getUserName() == mtm.getUserName()) {
 //					mtmRepository.deleteById(mtmT.getMtmId());
-					mtmRepository.delete(mtmT);
+					mtmRepository.deleteById(mtm.getMtId());
 					mt.countDown();
 					mtRepository.save(mt);
 				return "취소완료";

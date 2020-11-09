@@ -6,12 +6,13 @@ const TestCard = (props) => {
 
 	let {mtId,mtCreateTime,mtTitle,mtContent,mtPlace,mtTime,mtDate,mtCount,maxCount,mtList,userName} = props.meeting;
 
+	// new Date().toISOString().replace(/T\w.=/g,'');
 	
 
 	return (
 		<div class="dog-card">
 			{/* style={{ display: "inline" }} */}
-
+		
 			<MemberList meeting ={props.meeting}/>
 			
 			{/* 수정버튼 일단 안쓸듯 */}
@@ -35,7 +36,9 @@ const TestCard = (props) => {
 				<p class="dog-card-body-description">
 					장소 : {mtPlace}<br/>
 					일시 : {mtDate} / {mtTime}<br/>
+					<div className="dog-text">
 					기타 : {mtContent}<br/>
+					</div>
 					
 					{/* <button className="dog-button">참가</button> */}
 					{/* <button className="dog-button" >참가목록</button> */}
@@ -44,7 +47,7 @@ const TestCard = (props) => {
 				</p>
 
 				<div class="dog-card-body-footer" >
-					임시<i class="dog-reg_date" > {mtCreateTime} </i>
+					<i class="dog-reg_date" > {toString().replace(mtCreateTime)} </i>
 
 				</div>
 			</div>
