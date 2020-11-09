@@ -6,8 +6,9 @@ import update from 'react-addons-update';
 
 const ListStyle = styled.div`
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: auto auto auto auto;
   grid-gap: 10px;
+  justify-content:left;
   //padding: 20px 250px;
 `;
 const Board1List = (props) => {
@@ -20,38 +21,36 @@ const Board1List = (props) => {
 	const [test, setTest] = useState([]);
 	let arrayParks = [];
 	let arrayCafes = [];
-	let array
 
 
 	useEffect(() => {
-		for (let board of board1s) {
-			if (addr === "전체") {
-				if (board.catagory === "공원") {
-					arrayParks.push(board);
-				} else if (board.catagory === "카페") {
-					arrayCafes.push(board);
-				}
-			} else {
-				if ((board.catagory === "공원") && (board.addr === addr)) {
-					console.log("boardParks : ", board);
-					console.log("Username : ",board.user.username);
-					arrayParks.push(board);
-				}
-				if ((board.catagory === "카페") && (board.addr === addr)) {
-					console.log("boardCafes : ", board);
-					console.log("Username: ",board.user.username);
-					arrayCafes.push(board);
-				}
-			}
-		}
-		// setBoardCafes([
-		// 			...boardCafes,board
-		// 		])
-		console.log("array : ", arrayParks);
-		console.log("array : ", arrayCafes);
-		setBoardParks(arrayParks);
-		setBoardCafes(arrayCafes);
-	}, [addr]);
+		fetch("http://localhost:8000/board1/공원/"+addr, {
+			method: "POST",
+
+		})
+		.then((res) => {
+			return res.json()
+		})
+		.then((res) =>{
+			console.log("rrreeesss : ",res);
+			setBoardParks(res);
+		});
+		fetch("http://localhost:8000/board1/카페/"+addr, {
+			method: "POST",
+
+		})
+		.then((res) => {
+
+			return res.json()
+		})
+		.then((res) =>{
+			console.log("rrreeesss : ",res);
+			setBoardCafes(res);
+		});
+	},[addr])
+	console.log("boardParks : ",boardParks);
+	console.log("boardCafes : ",boardCafes);
+
 
 	return (
 		<div>

@@ -12,13 +12,16 @@ const Board5MapContainer2 = (props) => {
 	const setCenter = props.setCenter;
 	const update = props.update;
 	const setLatLng = props.setLatLng;
+	const level = props.level;
+	const setLevel = props.setLevel;
+	const set = props.set;
 	const [place, setPlace] = useState({
 		lat: "",
 		lng: "",
 	})
-	console.log("Parks : ",boardParks);
-	console.log("Board1s : ",board3s);
-	console.log("Cafes : ",boardCafes);
+	console.log("Parks : ", boardParks);
+	console.log("Board1s : ", board3s);
+	console.log("Cafes : ", boardCafes);
 	const [idx, setIdx] = useState(1);
 	console.log("center초기값 : ", center);
 	//console.log("category 값",update);
@@ -43,16 +46,18 @@ const Board5MapContainer2 = (props) => {
 			let latLng = map.getCenter();
 			console.log(10, level);
 			console.log(11, latLng);
-			setLatLng(latLng.Ja,latLng.Ia);
+			setLevel(level);
+			setLatLng(latLng.Ja, latLng.Ia);
 		});
-		var moveLatLon = new kakao.maps.LatLng(center.lat,center.lng);
-		console.log("moveLatLon : ",moveLatLon);
+		var moveLatLon = new kakao.maps.LatLng(center.lat, center.lng);
+		console.log("moveLatLon : ", moveLatLon);
 		if (update === 1) { // 검색어 입력시
 			console.log("검색 if문까지");
 			ps.keywordSearch(searchPlace, placesSearchCB);
 		}
 		else if (update === 2) { //공원 클릭시
 			console.log("공원클릭시");
+			map.setLevel(level);
 			map.setCenter(moveLatLon);
 			for (let board of boardParks) {
 				displayMarker(board);
@@ -60,6 +65,7 @@ const Board5MapContainer2 = (props) => {
 		}
 		else if (update === 3) { //카페 클릭시
 			console.log("카페 클릭시");
+			map.setLevel(level);
 			map.setCenter(moveLatLon);
 			for (let board of boardCafes) {
 				displayMarker(board);
@@ -68,6 +74,8 @@ const Board5MapContainer2 = (props) => {
 		// }
 		else if (update === 4) { //실종 클릭시
 			console.log("실종클릭시");
+			map.setLevel(level);
+			map.setCenter(moveLatLon);
 			for (let board of board3s) {
 				displayMarker(board);
 			}
@@ -84,17 +92,17 @@ const Board5MapContainer2 = (props) => {
 				image: markerImage
 
 			});
+			if (update === 4) {
+				kakao.maps.event.addListener(marker, 'click', function () {
+					console.log("여기도", place.image1);
 
-			// kakao.maps.event.addListener(marker, 'click', function () {
-			// 	console.log("여기도", place.image1);
-
-			// 	set(place.id);
-			// 	console.log("place.id:" + place.id);
-			// 	console.log("idid:", id);
-			// 	// infowindow.setContent('<div><img src=\\images\\' + place.image1 + ' height="200px" /></div>');
-			// 	infowindow.setContent(place.name);
-			// 	infowindow.open(map, marker);
-			// });
+					set(place.id);
+					console.log("place.id:" + place.id);
+					// infowindow.setContent('<div><img src=\\images\\' + place.image1 + ' height="200px" /></div>');
+					infowindow.setContent(place.name);
+					infowindow.open(map, marker);
+				});
+			}
 
 		}
 
@@ -112,7 +120,13 @@ const Board5MapContainer2 = (props) => {
 				for (let board of boardParks) {
 					displayMarker(board);
 				}
+
 				map.setBounds(bounds);
+				let level = map.getLevel();
+				let latLng = map.getCenter();
+				setLevel(level);
+				setLatLng(latLng.Ja, latLng.Ia);
+				console.log("여기", latLng);
 
 
 			}

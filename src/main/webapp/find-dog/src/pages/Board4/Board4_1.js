@@ -14,7 +14,6 @@ const Board4_1 = () => {
 	const [place, setPlace] = useState("");
 	const [now, setNow] = useState("");
 	const [list, setList] = useState([]);
-	const [id, setId] = useState(0);
 	const [id1, setId1] = useState("");
 	const [visible,setVisible] = useState(false);
 	//marker ox
@@ -75,7 +74,7 @@ const Board4_1 = () => {
 				/>
 				<button onClick={handleSubmit}>위치 검색</button>
 
-				<Board4MapContainer id={id} set={set} searchPlace={place} list={list} now={now} setLatLng={setLatLng}></Board4MapContainer>
+				<Board4MapContainer set={set} searchPlace={place} list={list} now={now} setLatLng={setLatLng}></Board4MapContainer>
 			</div>
 			{visible ? <Board4Item id={id1} /> : null }
 

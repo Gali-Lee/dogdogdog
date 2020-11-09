@@ -87,6 +87,14 @@ public class Board1Controller {
 		System.out.println("실종/제보 글목록");
 		return board1Repository.findAll();
 	}
+	
+	@PostMapping("/board1/{catagory}/{addr}")
+	public List<Board1> 글목록1(@PathVariable String catagory, @PathVariable String addr) {
+		System.out.println("실종/제보 글목록111");
+		System.out.println(catagory+"/"+addr);
+		List<Board1> listBoard1 = board1Repository.mList(catagory,addr);
+		return listBoard1;
+	}
 
 	@GetMapping("/board1/{board1Id}")
 	public Board1 글상세(@PathVariable int board3Id) {
