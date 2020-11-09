@@ -52,6 +52,8 @@ public class FilterConfig {
 		//bean.addUrlPatterns("/board3/comment/delete/*");
 		//bean.addUrlPatterns("/user/*");
 		bean.addUrlPatterns("/board3/comment/write/*");
+		bean.addUrlPatterns("/board1/write/*");
+		
 		bean.setOrder(2); // 낮은 번호부터 실행됨.
 		return bean;
 	}

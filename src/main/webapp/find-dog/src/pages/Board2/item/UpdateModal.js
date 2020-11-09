@@ -1,22 +1,23 @@
 import React, { useState } from 'react';
-import ModalSetting from './item/ModalSetting';
+import ModalSetting from './ModalSetting';
 
-const ModalPage = () => {
-	
-	
-		//기본값
-		const [meeting,setMeeting] =useState({
-			mtTitle : "",
-			maxCount :"",
-			mtPlace : "",
-			mtTime : "",
-			mtContent : "",
-			mtDate : "",
-			userName: localStorage.user,
-		});
+const UpdateModal = (props) => {
 
-		//등록전송 함수
-		const submitInsert = (e) => {
+	let {mtId,mtTitle,mtContent,mtPlace,mtTime,mtDate,maxCount,userName} = props.meeting;
+	
+	const [meeting, setMeeting] = useState({
+		mtId : mtId,
+		mtTitle: mtTitle,
+		maxCount: maxCount,
+		mtPlace: mtPlace,
+		mtTime: mtTime,
+		mtContent: mtContent,
+		mtDate: mtDate,
+		userName: userName,
+	});
+
+	//수정 함수
+		const submitUpdate = (e) => {
 			e.preventDefault();
 			fetch("http://localhost:8000/board2",{
 				method : "POST",
@@ -32,8 +33,8 @@ const ModalPage = () => {
 			window.location.reload(); //페이지 새로고침
 		}
 
-		//form에있는  
-		const changeValue = (e) => {
+
+	const changeValue = (e) => {
 		setMeeting({
 			...meeting,
 			[e.target.name]: e.target.value
@@ -41,15 +42,15 @@ const ModalPage = () => {
 	}
 
 
-	//아래는 모달 설정들.
 	const [modalVisible, setModalVisible] = useState(false)
 	const openModal = () => { setModalVisible(true) }
 	const closeModal = () => { setModalVisible(false) }
 
 
+
 	return (
 		<div>
-			<button onClick={openModal}>신규개설</button>
+			<button onClick={openModal} className="box-b" >수정</button>
 			{
 				//모달 default 셋팅
 				modalVisible && <ModalSetting
@@ -58,9 +59,8 @@ const ModalPage = () => {
 					maskClosable={true}
 					onClose={closeModal}>
 					{/* =====모달 바디 시작=====*/}
-					{/* 제목(mtTitle), 모임인원(maxCount),시간(mtTime),장소(mtPlace),기타(mtContent)  */}
 					<form>
-						<h5>모임 개설</h5> 
+						<h5>내용 수정</h5> 
 						{/* <div onChange={changeValue} value={meeting.userName} name="userName"/> */}
 						제목 : <input onChange={changeValue} value={meeting.mtTitle} name="mtTitle"/><br />
 						최대인원 : <input onChange={changeValue} value={meeting.maxCount} name="maxCount"/>명<br />
@@ -68,7 +68,7 @@ const ModalPage = () => {
 						날짜 : <input type ="date"onChange={changeValue} value={meeting.mtDate} name="mtDate"/><br />
 						시간 : <input type ="time"onChange={changeValue} value={meeting.mtTime} name="mtTime"/><br />
 						<textarea onChange={changeValue} value={meeting.mtContent} name="mtContent"></textarea><br />
-						<button onClick={submitInsert}>등록</button>
+						<button onClick={submitUpdate}>수정완료</button>
 						
 					</form>
 
@@ -79,4 +79,4 @@ const ModalPage = () => {
 	);
 };
 
-export default ModalPage;
+export default UpdateModal;

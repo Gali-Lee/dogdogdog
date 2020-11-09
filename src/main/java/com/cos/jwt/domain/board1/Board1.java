@@ -33,10 +33,9 @@ public class Board1 {
 	private String catagory;
 	private String title;
 	private String place;
-	
+	private String addr;
 	@Column(length = 10000000)
 	private String content;
-	private String property;
 	private double lat;
 	private double lng;
 
