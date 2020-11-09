@@ -1,36 +1,24 @@
 import React, { useState } from 'react';
 import './TestCard.css';
 import MemberList from './MemberList';
+import UpdateModal from './UpdateModal';
 const TestCard = (props) => {
 
 	let {mtId,mtCreateTime,mtTitle,mtContent,mtPlace,mtTime,mtDate,mtCount,maxCount,mtList,userName} = props.meeting;
 
-	const mtm = {
-			mtName : userName,
-			mt : mtId,
-		};
+	let aa = new Date(mtCreateTime).toISOString().replace(/T\w.+/g,'');
 
-
-	const submitInsert = (e) => {
-		e.preventDefault();
-		fetch("http://localhost:8000/board2/mList", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json; charset=utf-8"
-			},
-			body: JSON.stringify(mtm)
-		}).then(res => res.text()).then(
-			res => alert(res)
-
-		);
-		// window.location.reload(); //페이지 새로고침
-	}
+	// new Date().toISOString().replace(/T\w.=/g,'');
+	
 
 	return (
 		<div class="dog-card">
 			{/* style={{ display: "inline" }} */}
-
-			<MemberList mtId={mtId} userName={userName} /><button onClick={submitInsert}>참가</button>
+		
+			<MemberList meeting ={props.meeting}/>
+			
+			{/* 수정버튼 일단 안쓸듯 */}
+			{/* {userName === localStorage.user ? <UpdateModal key={props.meeting.mtId} meeting={props.meeting}/> : null} */}
 			<div class="dog-card-header" >
 				{/* <button class ="dog-button" onClick= {InsertModal} >aa</button>		 */}
 				<div class="dog-card-header-is_closed" >
@@ -41,16 +29,18 @@ const TestCard = (props) => {
 			</div>
 			<div class="dog-card-body">
 				<div class="dog-card-body-header">
-					<h1 class="dog-card-h1">{mtTitle}</h1>
-					<p class="dog-card-body-hashtag">#태그1 #태그2 #태그3</p>
-					<p class="dog-card-body-nickname" >
+					<h1 class="dog-card-h1" >{mtTitle}</h1>
+					{/* <p class="dog-card-body-hashtag">#태그1 #태그2 #태그3</p> */}
+					<p class="dog-card-username" >
 						작성자: {userName}<br/></p>
 				</div>
 				
 				<p class="dog-card-body-description">
 					장소 : {mtPlace}<br/>
 					일시 : {mtDate} / {mtTime}<br/>
+					<div className="dog-text">
 					기타 : {mtContent}<br/>
+					</div>
 					
 					{/* <button className="dog-button">참가</button> */}
 					{/* <button className="dog-button" >참가목록</button> */}
@@ -59,8 +49,7 @@ const TestCard = (props) => {
 				</p>
 
 				<div class="dog-card-body-footer" >
-					임시자리
-				<i class="dog-reg_date" > {mtCreateTime} </i>
+					<i class="dog-reg_date" > {toString().replace(aa)} </i>
 
 				</div>
 			</div>

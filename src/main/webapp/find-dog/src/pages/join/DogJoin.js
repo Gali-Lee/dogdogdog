@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Form, Input, InputNumber, Button, Select } from 'antd';
-const { Option } = Select;
 
 const layout = {
 	labelCol: {
@@ -13,7 +12,7 @@ const layout = {
 };
 
 const DogJoin = (props) => {
-	const username = useSelector((Join) => Join.username);
+	const username = localStorage.getItem("user");
 
 	const [dog, setDog] = useState({
 		name: "",
@@ -21,6 +20,7 @@ const DogJoin = (props) => {
 		age: "",
 		sex: "",
 		image: "",
+		username:'',
 	});
 
 	const onFinish = (values) => {
@@ -30,7 +30,6 @@ const DogJoin = (props) => {
 
 	function inputHandle(e) {
 		setDog({ ...dog, [e.target.name]: e.target.value });
-		console.log(dog)
 	}
 
 	function dogJoin(e) {
