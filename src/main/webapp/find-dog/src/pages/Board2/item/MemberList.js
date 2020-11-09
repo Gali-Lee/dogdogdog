@@ -92,7 +92,7 @@ const MemberList = (props) => {
 	return (
 		<div>
 			<button onClick={openModal} className="box-b">참가현황</button>
-			{console.log("콘솔 확인 : ",mtmList.indexOf(localStorage.user))}
+
 			{mtmList.indexOf(localStorage.user) ? <button onClick={submitInsert} className="box-b">참가</button> :
 			<button onClick={submitCancel} className="box-b" style={{ backgroundColor: "red" }}>취소</button>
 			}
