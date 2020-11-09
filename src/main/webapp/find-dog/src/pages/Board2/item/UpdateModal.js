@@ -49,9 +49,12 @@ const UpdateModal = (props) => {
 
 
 	return (
+		
 		<div>
+			
 			<button onClick={openModal} className="box-b" >수정</button>
 			{
+				
 				//모달 default 셋팅
 				modalVisible && <ModalSetting
 					visible={modalVisible}
@@ -60,6 +63,7 @@ const UpdateModal = (props) => {
 					onClose={closeModal}>
 					{/* =====모달 바디 시작=====*/}
 					<form>
+						<div className="box">
 						<h5>내용 수정</h5> 
 						{/* <div onChange={changeValue} value={meeting.userName} name="userName"/> */}
 						제목 : <input onChange={changeValue} value={meeting.mtTitle} name="mtTitle"/><br />
@@ -68,11 +72,9 @@ const UpdateModal = (props) => {
 						날짜 : <input type ="date"onChange={changeValue} value={meeting.mtDate} name="mtDate"/><br />
 						시간 : <input type ="time"onChange={changeValue} value={meeting.mtTime} name="mtTime"/><br />
 						<textarea onChange={changeValue} value={meeting.mtContent} name="mtContent"></textarea><br />
-						<button onClick={submitUpdate}>수정완료</button>
-						
+						<button onClick={submitUpdate} className="box-b">수정완료</button>
+						</div>
 					</form>
-
-
 				</ModalSetting>
 			}
 		</div>

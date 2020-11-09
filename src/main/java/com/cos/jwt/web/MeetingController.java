@@ -27,22 +27,17 @@ public class MeetingController {
 	private final MeetingRepository mtRepository;
 	private final MeetingMemberRepository mtmRepository;
 
-	// 리스트출력 추후 페이징추가해서 그걸로 바꿀거.
+	// 특정 페이지 출력
 	@GetMapping("/board2/{page}")
-//	public List<Meeting> mtList() {
 	public List<Meeting> mtList(@PathVariable int page) {
 		int page2 = 6;
 		page = (page - 1) * 6;
 		return mtRepository.mPageList(page, page2);
-//		return mtRepository.mList();
 	}
 
+//	전체게시글 확인용
 	@GetMapping("/board2/count")
 	public int mtPageCount() {
-//		List<Meeting> page = mtRepository.mList();
-//		System.out.println("이게 있는거 " + mtRepository.count());
-//		System.out.println("이게 내가 만든거 " + page.size());
-//		return page.size();
 		return (int) mtRepository.count();
 	}
 
@@ -57,16 +52,16 @@ public class MeetingController {
 		}
 	}
 
-	// id로 해당게시글값 받아 찾고 참여 인원 추가
-	// 로그인완료되면 닉네임값도 받아오게추가할것.
-	@PutMapping("/board2/{id}")
-	public void mtmInsert(@PathVariable int id, String name) {
-		mtmRepository.mInsertMember(name, id);
-	}
+	
+	
+//	@PutMapping("/board2/{id}")
+//	public void mtmInsert(@PathVariable int id, String name) {
+//		mtmRepository.mInsertMember(name, id);
+//	}
 
-	// member 삭제
+	// 게시글 삭제
 	@DeleteMapping("/board2")
-	public String mtmDelete(@RequestBody Meeting mt) {
+	public String mtDelete(@RequestBody Meeting mt) {
 		try {
 			mtRepository.deleteById(mt.getMtId());
 			return "삭제 성공";
@@ -79,16 +74,40 @@ public class MeetingController {
 	// 참가
 	@PostMapping("/board2/mList")
 	public String mtmInsert(@RequestBody Meeting mtm) {
-		Meeting mt = mtRepository.findById(mtm.getMtId()).get();
+		Meeting mt = mtRepository.findById(mtm.getMtId()).get();		
 		MeetingMember mtm2 = MeetingMember.builder().userName(mtm.getUserName()).mt(mt).build();
-		mt.countUp();
-		mtRepository.save(mt);
-		mtmRepository.save(mtm2);
-		return "참가완료";
+		int count = mt.countUp();
+		if (count == 1) {
+			mtRepository.save(mt);
+			mtmRepository.save(mtm2);
+			return "참가완료";
+		} else if (count == 2)
+			return "인원만석";
+		else
+			return "문제발생";
 	}
-	//참가취소
-	
 
+//	참가취소
+	@DeleteMapping("/board2/mList")
+	public String mtmDelete(@RequestBody Meeting mtm) {
+		Meeting mt = mtRepository.findById(mtm.getMtId()).get();
+//			mtmRepository.mCancelMember(mtm.getUserName(), mtm.getMtId());
+			
+			
+			for (MeetingMember mtmT : mt.getMtList()) {
+				if(mtmT.getUserName() == mtm.getUserName()) {
+//					mtmRepository.deleteById(mtmT.getMtmId());
+					mtmRepository.deleteById(mtm.getMtId());
+					mt.countDown();
+					mtRepository.save(mt);
+				return "취소완료";
+				}
+			}
+//			MeetingMember mtm3 = mtm2.indexOf(mtm.getUserName());
+				return "취소실패";
+	}
+
+	// 게시글 id 기준 참가인원 출력
 	@GetMapping("/board2/mList/{id}")
 	public List<String> mtmList(@PathVariable int id) {
 		return mtmRepository.mList(id);

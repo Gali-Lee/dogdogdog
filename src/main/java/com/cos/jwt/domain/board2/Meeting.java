@@ -49,9 +49,15 @@ public class Meeting { //Board2 테이블 객체.
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<MeetingMember> mtList; 
 	
-	public void countUp() {
+	public int countUp() {
+		if(mtCount < maxCount) {
 		mtCount += 1;
-//		mtList.add(name);
+		return 1;
+		}else
+		return 2;
+	}
+	public void countDown() {
+		mtCount -= 1;
 	}
 	
 	
