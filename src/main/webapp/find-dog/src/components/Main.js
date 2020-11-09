@@ -16,6 +16,7 @@ import Board1Write from '../pages/Board1/Board1Write';
 import Modify from '../pages/join/Modify';
 import Home from '../pages/home/Home';
 import styled from 'styled-components';
+import Board5 from '../pages/Board5Test/Board5';
 
 const MainStyle = styled.div`
 	display: grid;
@@ -40,6 +41,7 @@ const Main = () => {
 				<Route path="/board3/write" exact={true} component={Board3Write} />
 				<Route path="/map" exact={true} component={Board4_1} />
 				<Route path="/board1/write" exact={true} component={Board1Write}/>
+				<Route path="/board5" exact={true} component={Board5}/>
 			</Switch>
 		</MainStyle>
 	);

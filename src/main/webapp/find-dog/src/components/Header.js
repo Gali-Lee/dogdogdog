@@ -28,6 +28,7 @@ const Header = () => {
 				<Link to="/board2"><LinkStyle>갱얼쥐칭구들아 만나자</LinkStyle></Link>
 				<Link to="/board3"><LinkStyle>가족을 찾습니다.</LinkStyle></Link>
 				<Link to="/map"><LinkStyle>지도로 찾기</LinkStyle></Link>
+				<Link to="/board5"><LinkStyle>테스트</LinkStyle></Link>
 				<div></div>
 				<HomeStyle><Link to="/"><LinkStyle>홈</LinkStyle></Link></HomeStyle>
 				<div></div>
