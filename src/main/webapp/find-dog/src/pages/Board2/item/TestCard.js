@@ -6,7 +6,7 @@ const TestCard = (props) => {
 
 	let {mtId,mtCreateTime,mtTitle,mtContent,mtPlace,mtTime,mtDate,mtCount,maxCount,mtList,userName} = props.meeting;
 
-	// new Date().toISOString().replace(/T\w.=/g,'');
+	let aa = new Date(mtCreateTime).toISOString().replace(/T\w.+/g,'');
 	
 
 	return (
@@ -47,7 +47,7 @@ const TestCard = (props) => {
 				</p>
 
 				<div class="dog-card-body-footer" >
-					<i class="dog-reg_date" > {toString().replace(mtCreateTime)} </i>
+					<i class="dog-reg_date" > {aa} </i>
 
 				</div>
 			</div>

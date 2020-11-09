@@ -7,7 +7,7 @@ import UpdateModal from './UpdateModal';
 const MemberList = (props) => {
 	let { mtId, userName } = props.meeting;
 	const [mtmList, setMtmList] = useState([]);
-	// @GetMapping("/board2/mList/{id}")
+
 
 
 
@@ -29,7 +29,7 @@ const MemberList = (props) => {
 
 	//참가 버튼
 	const submitInsert = () => {
-		
+
 		// e.preventDefault();
 		fetch("http://localhost:8000/board2/mList", {
 			method: "POST",
@@ -46,7 +46,7 @@ const MemberList = (props) => {
 
 	//참가 취소버튼
 	const submitCancel = () => {
-		
+
 		// e.preventDefault();
 		fetch("http://localhost:8000/board2/mList", {
 			method: "DELETE",
@@ -84,17 +84,22 @@ const MemberList = (props) => {
 	const closeModal = () => { setModalVisible(false) }
 
 
-	// const [type, settype] = useState(
-	// 	1
-	// );
+	const [type, settype] = useState(
+		1
+	);
 
 
 	return (
 		<div>
 			<button onClick={openModal} className="box-b">참가현황</button>
-			<button onClick={submitInsert} className="box-b">참가</button>
-			<button onClick={submitCancel} className="box-b" style={{backgroundColor : "red"}}>취소</button>
+			{console.log("콘솔 확인 : ",mtmList.indexOf(localStorage.user))}
+			{mtmList.indexOf(localStorage.user) ? <button onClick={submitInsert} className="box-b">참가</button> :
+			<button onClick={submitCancel} className="box-b" style={{ backgroundColor: "red" }}>취소</button>
+			}
 			
+
+			
+
 
 			{
 				//모달 default 셋팅
@@ -112,7 +117,7 @@ const MemberList = (props) => {
 									<li><span>1</span>{member}</li>
 							)}
 						</ul>
-						{userName === localStorage.user ?  <UpdateModal key={props.meeting.mtId} meeting={props.meeting} /> : null}
+						{userName === localStorage.user ? <UpdateModal key={props.meeting.mtId} meeting={props.meeting} /> : null}
 						{userName === localStorage.user ? <button className="box-b" onClick={submitDelete}>삭제</button> : null}
 					</div>
 
